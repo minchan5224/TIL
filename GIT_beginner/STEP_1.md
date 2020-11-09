@@ -22,6 +22,7 @@ git push -u origin main
 git remote -v    : 연결되어있는 저장소 주소 확인
 git remote remove origin    : 이전 remote 삭제시 사용
 git clone [your git url]    : git저장소 내용 복사
+git pull    : 로컬과 원격 저장소의 상태가 다르다면 동기화할때 사용 ex)push에서 오류 발생시 사용
 ```
 >리눅스 명령어
 ```C
