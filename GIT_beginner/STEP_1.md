@@ -25,3 +25,6 @@ git clone [your git url]    : git저장소 내용 복사<br>
 cd ..    :하위 디렉토리로 이동<br>
 rm -r    :삭제 명령어<br>
 '''
+- 안녕
+  - Hello
+    - hi
