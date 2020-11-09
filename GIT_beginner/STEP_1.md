@@ -1,6 +1,7 @@
 #GIT Beginner<br>
 ------------
 *가장 처음 시작할때
+'''C
   *git config --global user.name "[your name]"
   *git config --global user.email "[your email]"
   *git init
@@ -9,7 +10,7 @@
   *git branch -M main
   *git remote add origin [your git url]
   *git push -u origin main
-<br>
+'''
 -처음 사용 이후 사용시
   -git add [file name]
   -git commit -m "[commit messge]"
