@@ -1,4 +1,5 @@
-#GIT Beginner
+# GIT Beginner
+## DATE 2020/11/09
 ------------
 >가장 처음 시작할때
 ```C
