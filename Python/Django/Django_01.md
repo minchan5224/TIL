@@ -78,7 +78,7 @@
 >> (venv1) ~/pysrc/myweb $ ./manage.py startapp home
 >> ```
 > 위의 명령을 실행하면 home라는 서브폴더가 생성되고 내부에 Django App에 필요한 기본 파일이 생성된다.
-> ![Django_01_1](./image/Django_01_1.png)수정해라.
+> ![Django_01_3](./image/Django_01_3.png)
 >
 ### 3. Django App 사용
 > 간단한 웹페이지를 만들어 보기 위해 home/views.py 파일에 다음과 같은 index 함수를 추가한다.
@@ -93,8 +93,31 @@
 >
 > 웹 브라우저에서 http://127.0.0.1:8000 를 실행하면 위의 index 함수를 호출하게 만들기 위해 웹 프로젝트의 (myweb 폴더 안의) settings.py와 urls.py에 아래와 같은 두 가지 셋팅을 추가해 주어야 한다.
 > 01. settings.py : INSTALLED_APPS 리스트에 Django App명 (home) 추가
+> ![Django_01_4](./image/Django_01_4.png)
 >
 > 02. urls.py : urlpatterns 리스트에 사용할 URL 패턴 추가. url()의 첫번째 파라미터는 [정규표현식(Regular Expression 혹은 RegEx)](http://pythonstudy.xyz/python/article/401)으로 ^$ 은 빈 문자열 즉 루트를 가리킨다.
+> ![Django_01_5](./image/Django_01_5.png)
+>
+>위의 셋팅들을 변경하고 웹 서버를 시작하여 접속하면 Hello World 가 정상적으로 표시될 것이다.
+>
+### 4. PyCharm에서 가상환경 사용하기
+> PyCharm에서 위의 Django 프로젝트를 오픈했을 때, 처음에는 django 패키지들을 인식하지 못할 수 있다.
+> PyCharm 프로젝트가 가상환경을 사용하고 있지 않기 때문인데, 셋팅을 변경하면 정상적으로 인식한다.
+>> #### Mac OS X
+>> PyCharm에서 해당 Django 프로젝트를 오픈하고, PyCharm 메뉴 - Preferences 를 선택
+>>
+>> Project - Project Interpreter에서 콤보 박스 안에서 가상환경 venv1 을 찾아 선택하고 OK를 누른다.
+>>
+>> 만약 해당 가상환경이 보이지 않으면, 콤보 박스 뒤의 설정 아이콘을 누르고 Add Local을 선택하여 추가
+> ![Django_01_6](./image/Django_01_6.png)
+>
+>> #### Windows
+>> PyCharm에서 해당 Django 프로젝트를 오픈하고, File - Settings 메뉴를 선택
+>>
+>> Project - Project Interpreter에서 콤보 박스 뒤의 설정 아이콘을 누르고 Add Local을 선택
+>>
+>> 가상환경 venv1 디렉토리 밑의 scripts/python.exe 을 찾아 선택하고 OK를 누른다.
+> ![Django_01_7](./image/Django_01_7.png)
 >
 > # 끝!
 
