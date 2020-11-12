@@ -49,7 +49,7 @@
 >
 > 웹 브라우저에 표시되는 웹페이지는 Django프레임워크 에서 기본적으로 보여주는 웹 페이지다.
 >
-> ![Django_01_223](./image/Django_01_2.png)
+> ![Django_01_2](./image/Django_01_2.png)
 >
 > 혹시라도 8000번 포트가 사용중이면 runserver 뒤에 원하는 [다른 포트 번호](https://webdir.tistory.com/124)를 지정하여 사용하여도 된다.
 >> ```
