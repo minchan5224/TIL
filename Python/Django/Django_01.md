@@ -56,6 +56,5 @@
 >> python manage.py runserver [원하는 포트 번호]
 >> ```
 > 웹서버를 정지 하기 위해선 "**manage.py runserver**" 하였던 **터미널** 혹은 **CMD** 창에서 **Ctrl + C**를 누른다.
-
-> # 끝!
 >
+> # 끝!
