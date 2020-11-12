@@ -45,15 +45,15 @@
 >
 > 명령들로 Django Development Server가 시작되면 아래와 같은 메시지가 풀력된다.
 >
-> 메시지의 중간에서 웹 서버의 URL주소(http://127.0.0.1:8000)를 찾을 수 있으며 웹 브라우저에 해당 주소(localhost)를 이용해 접속하면 웹 페이지를 볼 수 있다.
+> 메시지의 중간에서 웹 서버의 URL주소(```"http://127.0.0.1:8000"```)를 찾을 수 있으며 웹 브라우저에 해당 주소(localhost)를 이용해 접속하면 웹 페이지를 볼 수 있다.
 >
 > 웹 브라우저에 표시되는 웹페이지는 Django프레임워크 에서 기본적으로 보여주는 웹 페이지다.
 >
 > ![이미지이름](./이미지가 있는 폴더/이미지이름.형식)
 >
-> 혹시라도 8000번 포트가 사용중이면 runserver 뒤에 원하는 다른 포트 번호를 지정하여 사용하여도 된다.
+> 혹시라도 8000번 포트가 사용중이면 runserver 뒤에 원하는 [다른 포트 번호](https://webdir.tistory.com/124)를 지정하여 사용하여도 된다.
 >> ```
->> python manage.py runserver [[u want port number]](https://webdir.tistory.com/124)
+>> python manage.py runserver [원하는 포트 번호]
 >> ```
 > 웹서버를 정지 하기 위해선 "**manage.py runserver**" 하였던 **터미널** 혹은 **CMD** 창에서 **Ctrl + C**를 누른다.
 
