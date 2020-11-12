@@ -91,7 +91,7 @@
 >>     return HttpResponse("Hello, World!")
 >> ```
 >
-> 웹 브라우저에서 http://127.0.0.1:8000 를 실행하면 위의 index 함수를 호출하게 만들기 위해 웹 프로젝트의 (myweb 폴더 안의) settings.py와 urls.py에 아래와 같은 두 가지 셋팅을 추가해 주어야 한다.
+> 웹 브라우저에서 ```http://127.0.0.1:8000``` 를 실행하면 위의 index 함수를 호출하게 만들기 위해 웹 프로젝트의 (myweb 폴더 안의) settings.py와 urls.py에 아래와 같은 두 가지 셋팅을 추가해 주어야 한다.
 > 01. settings.py : INSTALLED_APPS 리스트에 Django App명 (home) 추가
 >
 > ![settings-for-app](./image/Django_01_4.png)
