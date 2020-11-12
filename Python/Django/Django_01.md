@@ -1,4 +1,4 @@
-# Django 프로젝트
+# [Django 프로젝트](http://pythonstudy.xyz/python/article/304-Django-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8)
 ##### Date 2020_11_12
 ---
  ### 1. Django 프로젝트
@@ -49,7 +49,7 @@
 >
 > 웹 브라우저에 표시되는 웹페이지는 Django프레임워크 에서 기본적으로 보여주는 웹 페이지다.
 >
-> ![Django_01_2](./image/Django_01_2.png))
+> ![Django_01_2](./image/Django_01_2.png)
 >
 > 혹시라도 8000번 포트가 사용중이면 runserver 뒤에 원하는 [다른 포트 번호](https://webdir.tistory.com/124)를 지정하여 사용하여도 된다.
 >> ```
@@ -57,4 +57,39 @@
 >> ```
 > 웹서버를 정지 하기 위해선 "**manage.py runserver**" 하였던 **터미널** 혹은 **CMD** 창에서 **Ctrl + C**를 누른다.
 >
+---
+# [Django App](http://pythonstudy.xyz/python/article/305-Django-App)
+---
+### 1. Django App이란?
+> Django App은 Django에서 사용하는 파이썬 패키지 이다.
+>
+> Django App 패키지는 내부에 자신의 모델, 뷰, 템플릿, URL매핑등을 독자적으로 가지고 있다.
+>
+> 일반적으로 하나의 Django프로젝트는 하나 이상의 Django App으로 구성되어 있다.
+>
+> 규모가 큰 Django프로젝트는 보통 여러 개의 Django App들을 모듈화 하여 구성한다.
+> - 모듈화된 App들로 구성하면 개발, 유지 보수가 효율적이다.
+> - 잘 모듈화된 App는 여러 웹 프로젝트에서 쉽게 재사용 할 수도 있다.
+>
+### 2. Django App생성
+> Django App을 생성하기 위해서는 "**manage.py startapp App명**" 를 실행하면 된다.
+> 아래 예제는 아래는 **home** 이라는 **App명**을 사용하여 새로운 **Django App을 생성**하는 명령이다.
+>> ```
+>> (venv1) ~/pysrc/myweb $ ./manage.py startapp home
+>> ```
+> 위의 명령을 실행하면 home라는 서브폴더가 생성되고 내부에 Django App에 필요한 기본 파일이 생성된다.
+> ![Django_01_1](./image/Django_01_1.png)수정해라.
+>
+### 3. Django App 사용
+> 간단한 웹페이지를 만들어 보기 위해 home/views.py 파일에 다음과 같은 index 함수를 추가한다.
+>> ```Python
+>> from django.shortcuts import render
+>> from django.http import HttpResponse
+>> 
+>> # Create your views here.
+>> def index(request):
+>>     return HttpResponse("Hello, World!")
+>> ```
+
 > # 끝!
+
