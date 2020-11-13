@@ -61,16 +61,55 @@
 >> Django 개발 가이드라인은 "App폴더/templates/App명/템플릿파일" 처럼, 각 App 폴더 밑에 templates 서브폴더를 만들고 다시 그 안에 App명을 사용하여 서브폴더를 만든 후 템플릿 파일을 그 안에 넣기를 권장한다.
 >>
 >> ex:```/home/templates/home/index.html``` 
-> 
+>>
+>> 만약의 경우 여러 App들이 동일한 이름의 Template을 가진 경우, View에서 잘못된 Template을 가져올 수 있기 때문에 위 방법을 권장한다.
 >
-### 2. Django App생성
-> Django App을 생성하기 위해서는 "**manage.py startapp App명**" 를 실행하면 된다.
-> 아래 예제는 아래는 **home** 이라는 **App명**을 사용하여 새로운 **Django App을 생성**하는 명령이다.
->> ```
->> (venv1) ~/pysrc/myweb $ ./manage.py startapp home
->> ```
-> 위의 명령을 실행하면 home라는 서브폴더가 생성되고 내부에 Django App에 필요한 기본 파일이 생성된다.
-> ![django-create-app](./image/Django_01_3.png)
+> Template은 HTML로만 작성된 정적인 HTML파일인 경우도 있지만 대부분의 경우 View로 부터 데이터를 전달받아 HTMLTemplate안에 동적으로 치환하여 사용한다.
+> 
+> index 뷰에서 message 라는 데이터를 index.html 이라는 Template에 전달하고 그 Template 안에서 이를 사용하기 위해서 아래와 같이 사용 할 수 있다.
+>
+> ```Python
+> from django.shortcuts import render
+> 
+> def index(request):
+>   msg = 'My Message'
+>     return render(request, 'index.html', {'message': msg})
+> ```
+>
+> 1. View(home/views.py)에서 index()를 정의한다.
+>> render는 django.shortcuts 패키지에 있는 함수이며 첫번째 파라미터로 request를, 그리고 두번째 파라미터로 Template을 받아들인다.
+>>
+>> Template은 index.html으로 지정되어 있으며 이는 home/templates/index.html을 가리킨다.
+>>
+>> 세번째 파라미터는 Optional이며 View에서 Template에 전달한 데이타를 Dictionary로 전달한다. (Dictionary=>{ key : Data }
+>>
+>> Dictionary의 Key는 템플릿에서 사용할 키(혹은 변수명)이며 Value는 전달하는 데이터의 내용을 담는다. 여기서는 키 : message , 데이터 : "my Message"
+>>
+>> 만약 Template파일을 home/templates/home/index.html 에 저장했다면, 두번째 파라미터의 내용을 '**home/index.html**'로 변경한다.
+>
+> ```HTML
+> <!DOCTYPE html>
+> <html lang="en">
+> <head>
+>     <meta charset="UTF-8">
+>     <title>Title</title>
+> </head>
+> <body>
+>     <h1>{{message}}</h1>
+> </body>
+> </html>
+> ```
+>
+> 2. Template (home/templates/index.html)에 HTML 문서를 작성한다.
+>> body 태그 안에 message를 보면 {{변수명}} 으로 둘러싸인 것은 해당 변수의 값을 그 자리에 치환하라는 의미이다.
+>>
+>> Django Template은 또한 View로 부터 전달된 다양한 데이터들을 Template에 편리하게 넣을 수 있도록 여러 Template 태그( {% Template태그 %} 와 같은 형태)들을 제공한다.
+>
+### 2. Template 셋팅
+> Django에서는 여러 템플릿 엔진을 선택하여 사용할 수 있다.
+>
+> 셋팅은 Django 프로젝트의 settings.py 에서 할 수 있다.
+> - 기본 Django 템플릿 엔진을 사용하기 위해서는 settings.py 파일의 TEMPLATES 섹션에서 BACKEND를 django.template.backends.django.DjangoTemplates 로 설정한다.(기본 설정 되어있다.)
 >
 ### 3. Django App 사용
 > 간단한 웹페이지를 만들어 보기 위해 home/views.py 파일에 다음과 같은 index 함수를 추가한다.
