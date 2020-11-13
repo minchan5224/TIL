@@ -106,54 +106,86 @@
 >> Django Template은 또한 View로 부터 전달된 다양한 데이터들을 Template에 편리하게 넣을 수 있도록 여러 Template 태그( {% Template태그 %} 와 같은 형태)들을 제공한다.
 >
 ### 2. Template 셋팅
-> Django에서는 여러 템플릿 엔진을 선택하여 사용할 수 있다.
+> Django에서는 여러 Template 엔진을 선택하여 사용할 수 있다.
 >
 > 셋팅은 Django 프로젝트의 settings.py 에서 할 수 있다.
-> - 기본 Django 템플릿 엔진을 사용하기 위해서는 settings.py 파일의 TEMPLATES 섹션에서 BACKEND를 django.template.backends.django.DjangoTemplates 로 설정한다.(기본 설정 되어있다.)
+> - 기본 Django Template 엔진을 사용하기 위해서는 settings.py 파일의 TEMPLATES 섹션에서 BACKEND를 django.template.backends.django.DjangoTemplates 로 설정한다.(기본 설정 되어있다.)
 >
-### 3. Django App 사용
-> 간단한 웹페이지를 만들어 보기 위해 home/views.py 파일에 다음과 같은 index 함수를 추가한다.
->> ```Python
->> from django.shortcuts import render
->> from django.http import HttpResponse
->> 
->> # Create your views here.
->> def index(request):
->>     return HttpResponse("Hello, World!")
->> ```
+### 3. Django Template 언어
+> Django Template에서 사용하는 특별한 태크 및 문법을 Django Template 언어 (Django Template Language)라 부른다.
 >
-> 웹 브라우저에서 ```http://127.0.0.1:8000``` 를 실행하면 위의 index 함수를 호출하게 만들기 위해 웹 프로젝트의 (myweb 폴더 안의) settings.py와 urls.py에 아래와 같은 두 가지 셋팅을 추가해 주어야 한다.
-> 01. settings.py : INSTALLED_APPS 리스트에 Django App명 (home) 추가
+> Template 언어는 크게 Template 변수, Template 태그, Template 필터, 코멘트 등으로 나눌 수 있다.
 >
-> ![settings-for-app](./image/Django_01_4.png)
+> ##### Template 변수
+> Template 변수는 {{''}} 으로 둘러 싸여 있는 변수로서 그 변수의 값이 해당 위치에 치환된다.
+> 변수에는 Primitive 데이타를 갖는 변수 혹은 객체의 속성 등을 넣을 수 있다.
+> ```HTML
+> <h4>
+>   Name : {{ name }}
+>   Type : {{ vip.key }}
+> </h4>
+> ```
 >
-> 02. urls.py : urlpatterns 리스트에 사용할 URL 패턴 추가. url()의 첫번째 파라미터는 [정규표현식(Regular Expression 혹은 RegEx)](http://pythonstudy.xyz/python/article/401)으로 ^$ 은 빈 문자열 즉 루트를 가리킨다.
+> ##### Template 태그
+> 템플릿 태크는 {% 와 %} 으로 둘러 싸여 있다. 이 태그 안에는 if, for 루프 같은 Flow Control 문장에서부터 웹 컨트롤 처럼 내부 처리 결과를 직접 덤프하는 등등 여러 용도로 쓰일 수 있다.
+> 아래 처음 부분은 if 와 for 태크를 사용한 예이고, 마지막은 CSRF 해킹 공격에 대응하여 토큰을 넣어주는 csrf_token 태그를 사용한 예이다.
+> ```HTML
+> {% if count > 0 %}
+>     Data Count = {{ count }}
+> {% else %}
+>     No Data
+> {% endif %}
+> 
+> {% for item in dataList %}
+>   <li>{{ item.name }}</li>
+> {% endfor %}
+> 
+> {% csrf_token %}
+> ```
+> [태그에 대한 자세한 설명](https://docs.djangoproject.com/en/1.11/ref/templates/builtins/#ref-templates-builtins-tags)
 >
-> ![urls-for-app](./image/Django_01_5.png)
+> ##### Template 필터
+> Template 필터는 변수의 값을 특정한 포맷으로 변형하는 기능을 한다.
+> ```HTML
+> #날짜 포맷 지정
+> {{ createDate|date:"Y-m-d" }}
+> 
+> #소문자로 변경
+> {{ lastName|lower }}
+> ```
 >
->위의 셋팅들을 변경하고 웹 서버를 시작하여 접속하면 Hello World 가 정상적으로 표시될 것이다.
+> ##### 코멘트
+> 코멘트를 넣는 방법
+> -  한 라인에 코멘트를 적용할 땐 코멘트를 {# 과 #} 으로 둘러싼다.
+> ```{# 1 라인 코멘트 #}```
+> - 복수 라인 문장을 코멘트할 경우는 문장들을 {% comment %} 태그와 {% endcomment %}로 둘러싼다.
+> ```
+> {% comment %}  
+>   <div>
+>       <p>
+>           불필요한 블럭
+>       </p>
+>       <span></span>
+>   </div>
+> {% endcomment %}
+> ```
 >
-### 4. PyCharm에서 가상환경 사용하기
-> PyCharm에서 위의 Django 프로젝트를 오픈했을 때, 처음에는 django 패키지들을 인식하지 못할 수 있다.
-> PyCharm 프로젝트가 가상환경을 사용하고 있지 않기 때문인데, 셋팅을 변경하면 정상적으로 인식한다.
->> #### Mac OS X
->> PyCharm에서 해당 Django 프로젝트를 오픈하고, PyCharm 메뉴 - Preferences 를 선택
->>
->> Project - Project Interpreter에서 콤보 박스 안에서 가상환경 venv1 을 찾아 선택하고 OK를 누른다.
->>
->> 만약 해당 가상환경이 보이지 않으면, 콤보 박스 뒤의 설정 아이콘을 누르고 Add Local을 선택하여 추가
+> ##### HTML Escape
+> TML 내용 중에 <, >, ', ", & 등과 같은 문자들이 있을 경우 이를 그 문자에 대응하는 HTML Entity로 변환해야 한다.
 >
-> ![pycharm-venv-setting-mac](./image/Django_01_6.png)
+> Django Template에서 이러한 작업을 자동으로 처리하기위해 {% autoescape on %} 템플릿 태그나 escape 라는 필터를 사용한다.
+> ```
+> {% autoescape on %}     # autoescape 태그
+>     {{ content }}
+> {% endautoescape %}
+>  
+> {{ content|escape }}    # escape 필터
+> ```
+> content라는 변수에 인용부호가 들어 있을때 위 예제와 같이 autoescape 태그나 escape 필터를 이용하 자동으로 변환하게 할 수 있다.
 >
->> #### Windows
->> PyCharm에서 해당 Django 프로젝트를 오픈하고, File - Settings 메뉴를 선택
->>
->> Project - Project Interpreter에서 콤보 박스 뒤의 설정 아이콘을 누르고 Add Local을 선택
->>
->> 가상환경 venv1 디렉토리 밑의 scripts/python.exe 을 찾아 선택하고 OK를 누른다.
+> 이러한 변환을 거치지 않는다면 HTML이 중간에 깨지게 된다.
 >
-> ![pycharm-venv-setting-win](./image/Django_01_7.png)
->
+> 변환을 거치치 않고 사용하기 위해서는 각 문자를 미리 HTML Entity로 변환해야한다.
 >
 > # 끝!
-Django View / Django Template
+> [참고한 블로그](http://pythonstudy.xyz/)
