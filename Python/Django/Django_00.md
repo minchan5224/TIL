@@ -1,4 +1,4 @@
-# Django 훑어보기
+# [Django 훑어보기](https://docs.djangoproject.com/ko/3.1/intro/overview/)
 ##### Date 2020_11_10
 ---
 > ### 모델 설계
@@ -206,4 +206,4 @@
 > - 자동생성 관리자 기능
 >
 > # 끝!
->
+> # 참고한 곳 : [Django 시작하기](https://docs.djangoproject.com/ko/3.1/intro/), [Django 훑어보기](https://docs.djangoproject.com/ko/3.1/intro/overview/)
