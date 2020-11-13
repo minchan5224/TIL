@@ -188,4 +188,4 @@
 > 변환을 거치치 않고 사용하기 위해서는 각 문자를 미리 HTML Entity로 변환해야한다.
 >
 > # 끝!
-> [참고한 블로그](http://pythonstudy.xyz/)
+> > # 참고한 블로그 : [예제로 배우는 파이썬 프로그래밍](http://pythonstudy.xyz/)
