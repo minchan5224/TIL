@@ -114,7 +114,7 @@
 ### 3. Django Template 언어
 > Django Template에서 사용하는 특별한 태크 및 문법을 Django Template 언어 (Django Template Language)라 부른다.
 >
-> Template 언어는 크게 Template 변수, Template 태그, Template 필터, 코멘트 등으로 나눌 수 있다.
+> Template 언어는 크게 [Template 변수](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_02.md#template-%EB%B3%80%EC%88%98), [Template 태그](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_02.md#template-%ED%83%9C%EA%B7%B8), [Template 필터](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_02.md#template-%ED%95%84%ED%84%B0), [코멘트](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_02.md#%EC%BD%94%EB%A9%98%ED%8A%B8) 등으로 나눌 수 있다.
 >
 > ##### Template 변수
 > Template 변수는 {{''}} 으로 둘러 싸여 있는 변수로서 그 변수의 값이 해당 위치에 치환된다.
