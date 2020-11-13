@@ -125,4 +125,5 @@
 >
 >
 > # 끝!
+> [참고한 블로그](http://pythonstudy.xyz/)
 
