@@ -1,5 +1,5 @@
 # [Django View](http://pythonstudy.xyz/python/article/306-Django-%EB%B7%B0-View)
-##### Date 2020_11_13 Django View / Django Template
+##### Date 2020_11_13
 ---
  ### 1. Django View
 > Django에서의 View는 다은 일반 MVC Framework에서 말하는 컨트롤러(Controller)와 비슷한 역활을 한다.
@@ -117,4 +117,4 @@
 >
 >
 > # 끝!
-
+Django View / Django Template
