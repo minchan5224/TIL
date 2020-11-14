@@ -9,9 +9,10 @@
 >
 > - 하나의 오델 클래스는 DB에서 하나의 테이블에 해당된다.
 >
->> 아래의 그림에선 feedback라는 새로운 Django App을 생성 하였다.
+> 아래의 그림에선 feedback라는 새로운 Django App을 생성 하였다.
 >>
 >> feedback App 폴더 안에 있는 models.py 파일에 새로운 모델 클래스를 추가 하였다.
+>>
 >> ![create-model](./image/Django_03_2.png)
 >>
 >> Django 모델은 "django.db.models.Model"에서 파생된 클래스이며 모델의 필드는 클래스의 Attribute로 표현되며 테이블의 컬럼에 해당한다.
@@ -19,7 +20,28 @@
 >> 위의 그림에서 Feedback라는 클래스가 models.Model의 파생클래스 이며 클래스 안에 4개의 클래스 변수(혹 Class Attribute)가 있다.
 >>
 >> 만약 Primary Key가 지정되지 않는다면 모델에 Primary Key 역할을 하는 id필드가 자동으로 추가되고 DB테이블 생성시 자동으로 id 컬럼이 생성된다.
+>
+> 모델 클래스는 필드를 정의하기 위해 인스턴스 변수가 아닌 클래스 변수를 사용한다.
+>
+> - 변수가 테이블 컬럼의 내용을 갖는 것이 아닌 테이블의 컬럼 메타 데이터를 정의하기 떄문에
+>
+> 필드를 정의하는 각각의 클래스 변수
 >>
+>> - **models.CharField()**
+>>
+>> - **models.IntegerField()**
+>>
+>> - **models.DateTimeField()**
+>>
+>> - **models.TextField()**
+>>
+>> **각 필드 타입에 맞는 Field 클래스 객체를 생성하여 할당한다.**
+>
+> Field 클래스는 여러 종류가 있으며 생성자 호출시 필요한 옵션을 지정할 수 있다.
+>
+> 각 Field 클래스 마다 반드시 지정해야하는 옵션또한 존재한다.
+>
+> - **예** : CharField와 서브클래스들은 필드의 최대 길이를 나타내는 max_length를 항상 지정해야 한다.
 >
 ### 2. 필드 타입
 > 
