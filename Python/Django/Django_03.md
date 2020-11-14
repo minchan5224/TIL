@@ -13,7 +13,7 @@
 >>
 >> feedback App 폴더 안에 있는 models.py 파일에 새로운 모델 클래스를 추가 하였다.
 >>
->> ![create-model](./image/Django03/Django_03_2.png)
+>> ![create-model](./image/Django03/Django_03_1.png)
 >>
 >> Django 모델은 "django.db.models.Model"에서 파생된 클래스이며 모델의 필드는 클래스의 Attribute로 표현되며 테이블의 컬럼에 해당한다.
 >>
