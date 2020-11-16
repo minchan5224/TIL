@@ -28,7 +28,7 @@
 >
 > ~~- Alter Table기능이 없었다.~~
 >
-> ~~- 모델이 수정된 경우 테이블을 Drop한뒤 새로 Create해야 했다.~~🤮
+> ~~- 모델이 수정된 경우 테이블을 Drop한뒤 새로 Create해야 했다.~~
 >
 ### 2. DB 관리 Shell
 > DB관리를 위해 ```manage.py dbshell``` 명령을 사용할 수 있다.
