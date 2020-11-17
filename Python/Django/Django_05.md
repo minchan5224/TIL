@@ -105,7 +105,7 @@
 >> ```Python
 >> # id가 1인 Feedback 객체에 이름을 변경하는 코드
 >> fb = Feedback.objects.get(pk=1)
->> fb.name = 'Park'
+>> fb.name = '꿩'
 >> fb.save()
 >> ```
 >
