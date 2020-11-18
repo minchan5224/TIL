@@ -1,5 +1,5 @@
-# [URL 매핑](http://pythonstudy.xyz/python/article/310-Django-%EB%AA%A8%EB%8D%B8-API)
-##### Date 2020_11_17
+# [URL 매핑](http://pythonstudy.xyz/python/article/311-URL-%EB%A7%A4%ED%95%91)
+##### Date 2020_11_18
 ---
 ### 1. Django App URL 매핑
 > 하나의 프로젝트 내에 여러 Django App이 있다면
@@ -101,6 +101,11 @@
 >     return HttpResponse(s)
 > ```
 > <int:id> 표현은 URL에서 파라미터를 캡쳐(Capture)하는 표현으로 콜론(:) 뒤에 있는 id는 View에 전달되는 파라미터명, 콜론 앞에 있는 것(int)은 Path Converter라고 부르는 것이며 View에 값을 전달하기 전에 콜론 앞의 타입으로 적절하게 변환한 후 파라미터로 전달한다.
->
->
+> |Converter|설명|정규표현식 표현|
+> |:---|:---|:---|
+> |str|문자열을 리턴, 빈 문자열과 경로를 표시하는 "/" 문자는 포함되지 않는다. 만약 별도의 path converter를 지정하지 않으면, 이 str 컨버터를 디폴트로 사용한다.|[^/]+|
+> |int|0 이상의 정수. Integer를 리턴한다|[0-9]+|
+> |slug|영문 대소문자와 숫자, 그리고 하이폰(-)과 밑줄(_)을 갖는 문자열을 리턴한다.|[-a-zA-Z0-9_]+|
+> |uuid|UUID를 가리키며 모든 문자가 소문자이어야 하고 대시(-)가 포함되어야 한다. 이 Converter는 uuid.UUID 객체를 리턴한다.|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|
+> |path|경로에 사용되는 슬래쉬(/)를 포함하는 문자열을 리턴한다.|'.+'|
 > # 참고한 블로그 : [예제로 배우는 파이썬 프로그래밍](http://pythonstudy.xyz/)
