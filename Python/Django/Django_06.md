@@ -108,4 +108,65 @@
 > |slug|영문 대소문자와 숫자, 그리고 하이폰(-)과 밑줄(_)을 갖는 문자열을 리턴한다.|[-a-zA-Z0-9_]+|
 > |uuid|UUID를 가리키며 모든 문자가 소문자이어야 하고 대시(-)가 포함되어야 한다. 이 Converter는 uuid.UUID 객체를 리턴한다.|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|
 > |path|경로에 사용되는 슬래쉬(/)를 포함하는 문자열을 리턴한다.|'.+'|
+> 
+> 내장된 Converter가 부족한 경우, 커스텀 Converter를 등록하여 사용할 수 있으며! 혹은 re_path() 함수를 사용하여 정규표현식을 사용하면 된다!
+>
+> re_path() 함수는 첫번째 파라미터에 정규표현식(RegEx)을 받아들인다.
+> - 0이 들어가면 안된다고 가정하면, 다음과 같이 re_path()를 사용할 수 있다. ```re_path(r'feedback/(?P<id>[1-9]+)/$', feedback.views.display)```
+>
+> - 이 경우 Id에 0을 포함하면, URL 매칭을 하지 못해 에러가 발생..
+>
+>> 복수 개의 파라미터를 넣은 패턴의 예시
+>> ```Python
+>> urlpatterns = [
+>>   path('articles/<slug:title>/<int:section>/', views.section),
+>> ] 
+>> ```
+>> title과 section 이라는 2개의 파라미터가 View에 전달되는데, title은 영문/숫자를 갖는 문자열이고, section은 숫자를 갖는 파라미터다.
+>
+> **url() 함수**
+>
+> Django 2.0 이전까지는 URL 라우팅을 위해 정규표현식(RegEx)을 사용하는 django.conf.urls.url() 함수를 사용했다.
+>
+> url() 함수의 첫번째 파라미터는 매핑 URL 패턴을 가리킨다.
+>
+> - 매핑 URL 패턴은 Regular Expression (RegEx)을 사용하며, r'정규표현식'과 같이 앞에 r (raw) Prefix를 붙인다.(RegEx는 매우 다양한 기능을 가진다.)
+>  
+>  
+> - **RegEx에서 ^은 시작을 나타내고, $은 마지막을 나타낸다. 따라서 ^$ 은 Empty string을 표현하는데, / 혹은 현재위치에 해당된다. ```url(r'^$', views.index)```**
+>  
+>> ```Pytonh
+>> url(r'^$', views.index)
+>> ```
+>  
+>  
+> - **URL 중 일부 문자열을 뽑아내기 (이를 Capture라 부른다) 위해서 괄호 ( )를 사용**
+>>  
+>> 아래 예제는 4자리의 숫자와 2 자리의 숫자 두개를 Capture하는 표현 (모든 Capture는 문자열 이므로 결과는 실제는 숫자로 된 문자열)
+>>  
+>> ```Python
+>> url(r'^blogs/([0-9]{4})/([0-9]{2})/$', views.blogs_month),
+>> ```
+>>  
+>> [0-9]는 0부터 9까지 숫자를 의미하며 {4}는 숫자가 네자리라는 의미이다. 만약 입력 URL이 "/blogs/2015/12" 이면, 이 URL은 views.blogs_month(request, '2015', '12') 과 같이 함수를 호출
+>  
+>  
+> - **위의 예처럼 괄호를 통해 일부 문자열을 뽑아내는 것을 RegEx에서 Group이라 부르는데, Group에 이름을 붙여 사용하는 것을 Named Group이라 부른다.**
+>>  
+>> (?P<그룹이름>pattern) 와 같이 패턴 앞에 Group이름을 붙일 수 있다.
+>>   
+>>  
+>> Capture된 데이타를 파라미터로 전달할 때, 이름이 없는 Group의 경우 위치에 따라 순서대로 전달되며, Named Group의 경우는 이름과 함께 값이 전달된다.
+>>  
+>>  
+>> 아래와 같은 패턴의 경우 입력 URL이 "/blogs/2015/12" 이면, 이 URL은 views.blogs_month(request, year='2015', month='12') 과 같이 함수를 호출된다.
+>>  
+>> ```Python
+>> url(r'^blogs/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/$', views.blogs_month),
+>> ```
+>>  
+>  
+> [RegEx 아티클](http://pythonstudy.xyz/python/article/401)
+>  
+> # 끝	
 > # 참고한 블로그 : [예제로 배우는 파이썬 프로그래밍](http://pythonstudy.xyz/)
