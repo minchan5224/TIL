@@ -34,11 +34,41 @@
 >>
 >> 만약 Base 템플릿에 여러 {% block %} 블럭이 있다면 확장 템플릿에서 각 블럭의 이름별로 여러 블럭들을 추가할 수 있다.
 >
-> Base템플릿이 정상적으로 동작하기 위해선 [템플릿 위치]()와 관련된 셋팅을 추가로 해야한다.
+> Base템플릿이 정상적으로 동작하기 위해선 [템플릿 위치](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_07.md#2-%ED%85%9C%ED%94%8C%EB%A6%BF-%EC%9C%84%EC%B9%98-%EC%85%8B%ED%8C%85)와 관련된 셋팅을 추가로 해야한다.
 >
 ### 2. 템플릿 위치 셋팅
-> 기본적으로 생성된 웹 프로젝트(myweb)를 먼저 실행해 본다.
->
+> 두가지의 중요한 셋팅이 있다.
+>> Django 프로젝트의 settings.py 안의 TEMPLATES 셋팅 중 
+>> 1. **DIRS 옵션**
+>> 2. **APP_DIRS 옵션**
+>>
+>> ```Python
+>> TEMPLATES = [
+>>     {
+>>         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+>>         'DIRS': [ os.path.join(BASE_DIR, 'templates') ],  # 추가
+>>         'APP_DIRS': True,
+>>         'OPTIONS': {
+>>             'context_processors': [
+>>                 'django.template.context_processors.debug',
+>>                 'django.template.context_processors.request',
+>>                 'django.contrib.auth.context_processors.auth',
+>>                 'django.contrib.messages.context_processors.messages',
+>>             ],
+>>         },
+>>     },
+>> ]
+>> ```
+>> #### DIRS 옵션
+>>> Django가 템플릿들을 찾는 디렉토리 경로를 지정하는 것
+>>>
+>>> 원래는 비어있다. 위는 **사용할 경로**(Base디렉토리(BASE_DIR) 밑의 templates폴더 경로)를 추가한것.
+>>>
+>>> BASE_DIR\templates를 경로에 추가해야base.html 템플릿을 찾을 수 있다. 만약 DIRS에 여러 경로가 추가되면, Django는 경로 순서대로 검색하면서 템플릿을 찾는다.
+>>>
+>> #### APP_DIRS 옵션
+>>> Django가 Django App 안의 templates 폴더에서 템플릿들을 찾을 것인지의 여부를 설정하는 것
+>>> 디폴트로 True가 설정되어 있어서 기본적으로 App안의 templates 폴더를 검색하여 템플릿을 찾게 된다.
 >
 > # 끝!
 > # 참고한 블로그 : [예제로 배우는 파이썬 프로그래밍](http://pythonstudy.xyz/)
