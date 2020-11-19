@@ -68,6 +68,7 @@
 >>>
 >> #### APP_DIRS 옵션
 >>> Django가 Django App 안의 templates 폴더에서 템플릿들을 찾을 것인지의 여부를 설정하는 것
+>>>
 >>> 디폴트로 True가 설정되어 있어서 기본적으로 App안의 templates 폴더를 검색하여 템플릿을 찾게 된다.
 >
 > # 끝!
