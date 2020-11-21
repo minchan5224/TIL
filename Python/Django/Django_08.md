@@ -54,7 +54,7 @@
 >  
 >     return render(request, 'feedback.html', {'form': form})
 > ```
-> 위는 ```./feedback/views.py``` 에 추가된 함수로서 새로운 Feedback 데이타를 추가하기 위한 폼을 핸들링하는 함수다.
+> 위는 ```./feedback/views.py``` 에 추가된 함수로서 새로운 Feedback 데이터를 추가하기 위한 폼을 핸들링하는 함수다.
 > 
 > 크게 두 부분으로 나눌 수 있다.
 >> #### 1. 데이터를 입력 받는 폼을 보여 주는 부분
@@ -100,8 +100,25 @@
 >>> - HTML FORM 안에 {% csrf_token %} 를 넣어 준 것(CSRF를 방지하기 위한 기능을 기본적으로 제공, Django에서 HTTP POST, PUT, DELETE을 할 경우 이 태그를 넣어 주어야 한다.)
 >>
 >> #### 2. 사용자가 데이터를 입력하여 저장버튼을 눌렀을 때 이를 DB에 저장하는 부분
+>> views.py 에 있는 코드 중 request.method 가 POST 인 부분이 저장부분에 해당한다.
 >>
->> 
+>> ```Python
+>> def create(request):
+>>     if request.method=='POST':
+>>         form = FeedbackForm(request.POST) #request.POST는 Dictionary로서 포스트된 데이터를 갖고 있다
+>>         if form.is_valid():
+>>             form.save()
+>>         return redirect('/feedback/list')
+>> ```
+>> - 저장 버튼이 눌려저 HTTP POST가 전달된다.
+>>
+>> - 사용자 정의 폼 FeedbackFrom()생성자의 파라미터로 POST body 데이터를 패스하여 폼 객체를 생성한다.
+>>
+>> - 이 시점에 FeedbackFrom객체는 POST로부터 전달된 데이터를 객체의 필드에 갖게 된다.
+>>
+>> - is_valid() 매서드를 사용하여 POST 데이터에 잘못된 데이터가 전달되었는지를 체크
+>>
+>> - 정상이면 save() 메서드를 호출하여 DB에 데이터를 저장다.
 > 
 >
 > # 끝!
