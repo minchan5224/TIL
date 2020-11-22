@@ -63,6 +63,14 @@
 > ```
 >
 ### 4. collectstatic
+> Django프로젝트를 Deploy할 때 흩어져 있는 Static파일들을 모아 특정 디렉토리로 옮기는 작업을<br>
+> ```./manage.py collectstatic```명령을 이용하여 할 수 있다.
+>
+> collectstatic 명령은 Django 프로젝트와 각 Django App 안에 있는 Static 파일들을 settings.py 파일 안에 정의되어 있는 STATIC_ROOT 디렉토리로 옮기는 작업을 수행한다.
+>
+>> ```STATIC_ROOT = '/var/www/myweb_static'```로 STATIC_ROOT 가 설정되어 있다면.
+>>
+>> ```(venv1) /var/www/myweb $ ./manage.py collectstatic``` collectstatic 명령을 통해 모든 정적 파일들을 /var/www/myweb_static 디렉토리에 복사한다.
 >
 > # 끝!
 > # 참고한 블로그 : [예제로 배우는 파이썬 프로그래밍](http://pythonstudy.xyz/)
