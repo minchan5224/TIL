@@ -27,4 +27,5 @@
 > 9. [Static 파일](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_09.md)
 >
 ## Pandas 파일
-> 아직 없음..
+> 0. [Pandas 란](https://github.com/minchan5224/TIL/blob/main/Python/Pandas/Pandas_00.md)
+>
