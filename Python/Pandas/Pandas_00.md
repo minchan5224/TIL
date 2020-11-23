@@ -6,7 +6,7 @@
 >
 > 아나콘다에선 pandas를 기본적으로 라이브러리로 제공 한다. 하지만 아나콘다를 사용하지 않는다면 따로 설치 해야한다(pip install pandas)
 >
-### 1. pandas 사용법
+### 2. pandas 사용법
 > pandas는 라이브러리 임으로 사용하기 위해선 ```import```해야한다. 주로 ```import pandas as pd```형식을 사용한다.
 >
 > pandas는 크게 3가지의 자료구조를 지원한다. 1차원의 Series 2차원의 DataFrame 3차원의 Panel이다.
