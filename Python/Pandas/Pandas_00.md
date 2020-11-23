@@ -19,6 +19,7 @@
 >> data = [1, 3, 5, 7, 9]
 >> s = pd.Series(data)
 >> ```
+>> ![pandas-series](./image/Pandas_00/Pandas_00_1.png)
 >
 > #### DataFrame
 >> 2차원 구조인 DataFrame은 행과 열이 테이블(표)데이터를 받아들인다.
@@ -33,6 +34,7 @@
 >> 
 >> df = pd.DataFrame(data)
 >> ```
+>> ![pandas-dataframe](./image/Pandas_00/Pandas_00_2.png)
 >
 > #### Panel
 >> Axis 0 (items), Axis 1 (major_axis), Axis 2 (minor_axis) 등 3개의 축을 가지고 있다.
@@ -50,9 +52,10 @@
 >
 > 위에서 생성한 DataFrame인 df을 이용
 >> ```df['year']``` 혹은 ```df.year``` DB에서 select year과 동일.
->> 
+>> ![pandas-data-access_1](./image/Pandas_00/Pandas_00_3.png)
 >>
 >> ```df[df['year'] > 2016]``` 2016보다 큰 년도만 고른다.
+>> ![pandas-data-access_2](./image/Pandas_00/Pandas_00_4.png)
 >> 
 >> ```Python
 >> sum = df['GDP rate'].sum()
@@ -60,8 +63,10 @@
 >> print(sun, avg)
 >> # GDP rate의 합을 sum에 GDP rate의 평균을 avg에 담아서 출력.
 >> ```
+>> ![pandas-data-access_2](./image/Pandas_00/Pandas_00_5.png)
 >>
 >> ```df.describe()``` 기본적인 통계치 모두 표시
+>> ![pandas-data-access_2](./image/Pandas_00/Pandas_00_6.png)
 >
 > 
 ### 4. 외부 데이타 읽고 쓰기
