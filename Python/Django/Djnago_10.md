@@ -10,7 +10,7 @@
 >
 ### 2. accountapp 생성.
 > python manage.py startapp accountapp 실행
-> ![srtarapp_accountapp](./image/Django10/Django_10_1.JPG)
+>> ![srtarapp_accountapp](./image/Django10/Django_10_1.JPG)
 >
 > 그후 main이 되는 프로젝트(backend_study)의 하위폴더에있는 settings.py에 들어가서
 >
@@ -65,7 +65,7 @@
 >
 ### 2. template 사용. (8강)
 > templates 폴더를 생성한다. 그후 폴더 내부에 base.html 생성한다.(탬플릿 생성)
-> ![Create_Templates](./image/Django10/Django_10_2.JPG)
+>> ![Create_Templates](./image/Django10/Django_10_2.JPG)
 > 
 > 후에 연결하고자 하는 views에서(여기서는 accountapp의 views.py) 연결한다.
 > 
