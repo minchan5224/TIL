@@ -210,13 +210,13 @@
 >
 > 들어간 곳에서 원하는 폰트를 선택한다.
 > 
-> 그림에 있는 select this style버튼을 클릭한다.
+> 그림에 있는 select this style버튼을 클릭한다.(오른쪽 아래에 파란박스랄까...)
 >> ![google_font](./image/Django10/Django_10_3.png)
 >
-> 아래 그림에 있는 link를 CSS링크를 담아준 head.html에 기입한다.
+> 아래 그림에 있는 link를 CSS링크를 담아준 head.html에 기입한다.(붉은 사각형)
 >> ![google_font_2](./image/Django10/Django_10_4.png)
 >
-> 사용하고자 하는 위치에서 CSS rules to specify families에 적힌 스타일을 적어서 사용한다.
+> 사용하고자 하는 위치에서 CSS rules to specify families에 적힌 스타일을 적어서 사용한다.(파란 사각형)
 > 
 > 내가 지금 사용한 곳은 header, footer이다.
 >
