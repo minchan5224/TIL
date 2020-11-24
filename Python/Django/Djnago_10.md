@@ -1,4 +1,4 @@
-# Djnago 실습
+# Django 실습
 ##### Date 2020_11_24
 ---
 ### 1. 기본적인 환경 설정
@@ -222,6 +222,10 @@
 >
 ### 5. 결과물
 > ![retult](./image/Django10/Django_10_5.png)
+>
+> [구경하기](https://study-min-223.run.goorm.io/account/hello_world/)
+>
+> 접속이 된다면 아마 공부중일 것이라 생각합니다.
 >
 > # 끝! 오늘은 [10강](https://www.youtube.com/watch?v=0AFchbdiQ5E&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=10) 까지 학습을 진행 하였다.
 > # 참고한 영상 : [실용주의 프로그래머의 작정하고 장고](https://www.youtube.com/playlist?list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo)
