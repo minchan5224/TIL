@@ -9,7 +9,8 @@
 > 난 구름IDE를 통해 실습을 진행하였다.
 >
 ### 2. accountapp 생성.
-> python manage.py startapp accountapp 실행 (startapp accountapp 사진 처럼 생성됨.)
+> python manage.py startapp accountapp 실행
+> ![srtarapp_accountapp](./image/Django10/Django_10_1.jpg)
 >
 > 그후 main이 되는 프로젝트(backend_study)의 하위폴더에있는 settings.py에 들어가서
 >
@@ -64,6 +65,7 @@
 >
 ### 2. template 사용. (8강)
 > templates 폴더를 생성한다. 그후 폴더 내부에 base.html 생성한다.(탬플릿 생성)
+> ![Create_Templates](./image/Django10/Django_10_2.jpg)
 > 
 > 후에 연결하고자 하는 views에서(여기서는 accountapp의 views.py) 연결한다.
 > 
@@ -209,12 +211,10 @@
 > 들어간 곳에서 원하는 폰트를 선택한다.
 > 
 > 그림에 있는 select this style버튼을 클릭한다.
->
->> ![]()
+>> ![google_font](./image/Django10/Django_10_3.jpg)
 >
 > 아래 그림에 있는 link를 CSS링크를 담아준 head.html에 기입한다.
->
->>
+>> ![google_font_2](./image/Django10/Django_10_4.jpg)
 >
 > 사용하고자 하는 위치에서 CSS rules to specify families에 적힌 스타일을 적어서 사용한다.
 > 
