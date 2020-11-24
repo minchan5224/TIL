@@ -10,7 +10,7 @@
 >
 ### 2. accountapp 생성.
 > python manage.py startapp accountapp 실행
->> ![srtarapp_accountapp](./image/Django10/Django_10_1.JPG)
+>> ![srtarapp_accountapp](./image/Django10/Django_10_1.png)
 >
 > 그후 main이 되는 프로젝트(backend_study)의 하위폴더에있는 settings.py에 들어가서
 >
@@ -63,9 +63,9 @@
 >> ```
 >> 로 작성하여 연결 시켜준다.
 >
-### 2. template 사용. (8강)
+### 3. template 사용. (8강)
 > templates 폴더를 생성한다. 그후 폴더 내부에 base.html 생성한다.(탬플릿 생성)
->> ![Create_Templates](./image/Django10/Django_10_2.JPG)
+>> ![Create_Templates](./image/Django10/Django_10_2.png)
 > 
 > 후에 연결하고자 하는 views에서(여기서는 accountapp의 views.py) 연결한다.
 > 
@@ -185,7 +185,7 @@
 >> {% endblock %}
 >> ```
 >
-### 2. 부트스트랩, 구글폰트 사용. (10강)
+### 4. 부트스트랩, 구글폰트 사용. (10강)
 > #### - 부트스랩 사용.
 > 부트스트랩은 웹사이트를 쉽게 만들 수 있게 도와주는 HTML, CSS, JS 프레임워크이며 하나의 CSS 로 휴대폰, 태블릿, 데스크탑까지 다양한 기기에서 작동한다.
 >
@@ -211,14 +211,17 @@
 > 들어간 곳에서 원하는 폰트를 선택한다.
 > 
 > 그림에 있는 select this style버튼을 클릭한다.
->> ![google_font](./image/Django10/Django_10_3.JPG)
+>> ![google_font](./image/Django10/Django_10_3.png)
 >
 > 아래 그림에 있는 link를 CSS링크를 담아준 head.html에 기입한다.
->> ![google_font_2](./image/Django10/Django_10_4.JPG)
+>> ![google_font_2](./image/Django10/Django_10_4.png)
 >
 > 사용하고자 하는 위치에서 CSS rules to specify families에 적힌 스타일을 적어서 사용한다.
 > 
 > 내가 지금 사용한 곳은 header, footer이다.
+>
+### 5. 결과물
+> ![retult](./image/Django10/Django_10_5.png)
 >
 > # 끝! 오늘은 [10강](https://www.youtube.com/watch?v=0AFchbdiQ5E&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=10) 까지 학습을 진행 하였다.
 > # 참고한 영상 : [실용주의 프로그래머의 작정하고 장고](https://www.youtube.com/playlist?list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo)
