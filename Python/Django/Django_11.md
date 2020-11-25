@@ -175,7 +175,7 @@
 >> 
 >> ![inline](./image/Django11/Django_11_5.png)
 >> 
->> 수평 방향으로 채워진다.
+>> 수평으로 채워진다.
 >
 >> ```<div class="testing" style="display: inline-block;">inline-block</div>```의 갯수 증가
 >> 
