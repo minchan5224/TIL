@@ -23,10 +23,11 @@
 >     os.path.join(BASE_DIR, "static"), #이걸로 바꿈
 > ]
 > ```
+>> ![settings_set](./image/Django11/Django_11_1.png)
 > 를 추가한다.
 > 
 > 앱에 종속되어 있지 않은(프로젝트 전체에서 관리가 가능한.) static폴더 생성한다. (사진참고)
->> ![srtarapp_accountapp](./image/Django10/Django_10_1.png)
+>> ![create_static_folder](./image/Django11/Django_11_2.png)
 > 
 > 그 후 내부에 base.css 파일을 생성한다.
 >
@@ -52,7 +53,7 @@
 >
 > ```href="{% static 'base.css' %}"```이 부분을 통해 base.css에 해당하는 경로를 장고가 알아서 랜더링 하여 실제 브라우저에 넘겨줘 css파일을 템플릿에서 사용이 가능하게 해준다.
 >
-> 최종 base.css내용
+> - 최종 base.css내용
 > ```Python
 > .BS_logo{
 >     font-family: 'Indie Flower', cursive;
@@ -72,7 +73,7 @@
 >     margin: 2rem 0;
 > }
 > ```
-> footer.html내용
+> - footer.html내용
 > ```Python
 >     <hr>
 >     <div class="BS_footer">
@@ -88,7 +89,7 @@
 >         </div>
 >     </div>
 > ```
-> header.html내용
+> - header.html내용
 > ```
 >     <div class="BS_header">
 >         <div>
@@ -159,6 +160,26 @@
 >     </div>
 > {% endblock %}
 > ```
+>> 위의 코드 실행시
+>> 
+>> ![testing](./image/Django11/Django_11_3.png)
+>
+>> ```<div class="testing" style="display: block;">block</div>```의 갯수 증가
+>> 
+>> ![block](./image/Django11/Django_11_4.png)
+>
+>> ```<div class="testing" style="display: inline;">inline</div>```의 갯수 증가
+>> 
+>> ![inline](./image/Django11/Django_11_5.png)
+>
+>> ```<div class="testing" style="display: inline-block;">inline-block</div>```의 갯수 증가
+>> 
+>> ![inline_block](./image/Django11/Django_11_6.png)
+>
+>> ```<div class="testing">default</div>```의 갯수증가
+>> 
+>> ![default](./image/Django11/Django_11_7.png)
+>
 > # 끝! 
 > 오늘은 [13강](https://www.youtube.com/watch?v=D3DMvHsn9Ss&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=13) 까지 학습을 진행 하였다.
 > # 참고한 영상 : [실용주의 프로그래머의 작정하고 장고](https://www.youtube.com/playlist?list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo)
