@@ -23,11 +23,11 @@
 >     os.path.join(BASE_DIR, "static"), #이걸로 바꿈
 > ]
 > ```
->> ![settings_set](./image/Django11/Django_11_1.png)
+>> ![settings_set](./image/Django11/Django_11_1.PNG)
 > 를 추가한다.
 > 
 > 앱에 종속되어 있지 않은(프로젝트 전체에서 관리가 가능한.) static폴더 생성한다. (사진참고)
->> ![create_static_folder](./image/Django11/Django_11_2.png)
+>> ![create_static_folder](./image/Django11/Django_11_2.PNG)
 > 
 > 그 후 내부에 base.css 파일을 생성한다.
 >
