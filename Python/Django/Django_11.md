@@ -24,9 +24,10 @@
 > ]
 > ```
 >> ![settings_set](./image/Django11/Django_11_1.PNG)
+>
 > 를 추가한다.
 > 
-> 앱에 종속되어 있지 않은(프로젝트 전체에서 관리가 가능한.) static폴더 생성한다. (사진참고)
+> 앱에 종속되어 있지 않은(프로젝트 전체에서 관리가 가능한.) static폴더를 생성한다.
 >> ![create_static_folder](./image/Django11/Django_11_2.PNG)
 > 
 > 그 후 내부에 base.css 파일을 생성한다.
@@ -36,7 +37,7 @@
 >     font-family: 'Indie Flower', cursive;
 > }
 > ```
-> 위의 내용으로 base.css를 작성한뒤. footer.html의 내용을 아래와 같이 수정한다.(영상 8분쯤)
+> 위의 내용으로 base.css를 작성한뒤. footer.html의 내용을 아래와 같이 수정한다.<!--(영상 8분쯤)-->
 > ```
 >             <h6 class="BS_footer_logo"> <!--여기 내용만 변경됨.-->
 >                 Backend Study
@@ -167,18 +168,26 @@
 >> ```<div class="testing" style="display: block;">block</div>```의 갯수 증가
 >> 
 >> ![block](./image/Django11/Django_11_4.png)
+>> 
+>> 수직으로 채워진다.
 >
 >> ```<div class="testing" style="display: inline;">inline</div>```의 갯수 증가
 >> 
 >> ![inline](./image/Django11/Django_11_5.png)
+>> 
+>> 수평 방향으로 채워진다.
 >
 >> ```<div class="testing" style="display: inline-block;">inline-block</div>```의 갯수 증가
 >> 
 >> ![inline_block](./image/Django11/Django_11_6.png)
+>> 
+>> 수평으로 채워진다.
 >
 >> ```<div class="testing">default</div>```의 갯수증가
 >> 
 >> ![default](./image/Django11/Django_11_7.png)
+>> 
+>> 수직으로 채워진다.(default는 따로 지정하지 않으면 block속성을 따른다.)
 >
 > # 끝! 
 > 오늘은 [13강](https://www.youtube.com/watch?v=D3DMvHsn9Ss&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=13) 까지 학습을 진행 하였다.
