@@ -130,34 +130,35 @@
 >> 
 >> - % : 가끔씀
 >
-12강 끝
-
-13강
-CSS 디스플레이 속성, rem 단위 실습.
-
-default는 따로 지정하지 않으면 block속성을 따른다.
-잠시 accountapp/templates/accountapp/hello_world.html의 내용을 다음과 같이 수정하여 실습을 진행 하였다.
-```Python
-{% block content %}
-    <style>
-        .testing {
-            background-color: white;
-            height: 3rem;
-            width: 3rem;
-            margin: 1rem;
-        }
-    </style>
-
-    <div style="height: 20rem; background-color: #38df81; border-radius: 2rem;  margin: 2rem;">
-        <h1 style="text-align:center; margin: 2rem 0;">
-            오늘은 11~13강 까지 학습을 진행 하였습니다.
-        </h1>
-        <div class="testing" style="display: block;">block</div>
-        <div class="testing" style="display: inline;">inline</div>
-        <div class="testing" style="display: None;">None</div>
-        <div class="testing" style="display: inline-block;">inline-block</div>
-        <div class="testing">default</div>
-        
-    </div>
-{% endblock %}
-```
+### 3. CSS 디스플레이 속성, rem 단위 실습.
+> 
+> default는 따로 지정하지 않으면 block속성을 따른다.
+> 
+> 잠시 accountapp/templates/accountapp/hello_world.html의 내용을 다음과 같이 수정하여 실습을 진행 하였다.
+> ```Python
+> {% block content %}
+>     <style>
+>         .testing {
+>             background-color: white;
+>             height: 3rem;
+>             width: 3rem;
+>             margin: 1rem;
+>         }
+>     </style>
+> 
+>     <div style="height: 20rem; background-color: #38df81; border-radius: 2rem;  margin: 2rem;">
+>         <h1 style="text-align:center; margin: 2rem 0;">
+>             오늘은 11~13강 까지 학습을 진행 하였습니다.
+>         </h1>
+>         <div class="testing" style="display: block;">block</div>
+>         <div class="testing" style="display: inline;">inline</div>
+>         <div class="testing" style="display: None;">None</div>
+>         <div class="testing" style="display: inline-block;">inline-block</div>
+>         <div class="testing">default</div>
+>         
+>     </div>
+> {% endblock %}
+> ```
+> # 끝! 
+> 오늘은 [13강](https://www.youtube.com/watch?v=D3DMvHsn9Ss&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=13) 까지 학습을 진행 하였다.
+> # 참고한 영상 : [실용주의 프로그래머의 작정하고 장고](https://www.youtube.com/playlist?list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo)
