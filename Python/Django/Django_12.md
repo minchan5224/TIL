@@ -117,7 +117,7 @@
 >>         return render(request, 'accountapp/hello_world.html', context={'text': 'GET METHOD!!!'})
 >> ```
 >
->![get_post_testing](./image/Django12/Django_11_3.PNG)
+>![get_post_testing](./image/Django12/Django_11_3.png)
 >
 ### 4. POST 통신을 이용한 DB 데이터 저장 실습
 > 1. Send POST data
@@ -234,5 +234,5 @@
 >> ```
 > [HttpResponseRedirect](https://valuefactory.tistory.com/605)자세히 알아보기.
 >
-> ![hello_world_list](./image/Django12/Django_11_4.PNG)
+> ![hello_world_list](./image/Django12/Django_11_4.png)
 >
