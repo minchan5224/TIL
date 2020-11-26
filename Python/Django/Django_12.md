@@ -1,5 +1,5 @@
 # Django 실습
-##### Date 2020_11_24
+##### Date 2020_11_26
 ---
 ### 1. Model, DB 연동 - makemigrations, migrate
 > 1. makemigrations
