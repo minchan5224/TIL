@@ -22,7 +22,7 @@
 >>     #null 이 텍스트/ 에트리뷰트가 없어도 되는지 설정을 해주는것. 있어야 하니까 False로 한것.
 >> ```
 >> 그 후 터미널에서 ```python manage.py makemigrations``` 명령어 사용
->> ![makemigrations](./image/Django12/Django_11_1.PNG)
+>> ![makemigrations](./image/Django12/Django_12_1.PNG)
 >
 > 2. [migrate](https://www.youtube.com/watch?v=fz6hYVOer2Y&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=14&t=323)
 >> 
@@ -32,7 +32,7 @@
 >> 
 >> 많은 내용이 나옴 -> 처음 연동한 것이기 때문에 장고에서 기본으로 제공해주는 DB들 또한 함께 연동됨.
 >>
->> ![migrate](./image/Django12/Django_11_2.PNG)
+>> ![migrate](./image/Django12/Django_12_2.PNG)
 >> 
 >> 엑셀로 비교하자면 새로운 시트를 생성하여 안의 내용을 채워주는 기본작업을 하는 것이라 생각하면 된다.
 >> 
@@ -117,7 +117,7 @@
 >>         return render(request, 'accountapp/hello_world.html', context={'text': 'GET METHOD!!!'})
 >> ```
 >
->![get_post_testing](./image/Django12/Django_11_3.png)
+>![get_post_testing](./image/Django12/Django_12_3.png)
 >
 ### 4. POST 통신을 이용한 DB 데이터 저장 실습
 > 1. Send POST data
@@ -234,5 +234,5 @@
 >> ```
 > [HttpResponseRedirect](https://valuefactory.tistory.com/605)자세히 알아보기.
 >
-> ![hello_world_list](./image/Django12/Django_11_4.png)
+> ![hello_world_list](./image/Django12/Django_12_4.png)
 >
