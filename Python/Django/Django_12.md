@@ -28,12 +28,12 @@
 >> 
 >> 지금은 연동이 된 상태가 아니기 때문에 다시 연동시켜주는 명령어를 사용해야한다.
 >> 
->> ```python manage.py migrate``` 명령어를 통해 연동 시켜준다.(사진 : migrate)
+>> ```python manage.py migrate``` 명령어를 통해 연동 시켜준다.
+>> 
+>> ![migrate](./image/Django12/Django_12_2.PNG)
 >> 
 >> 많은 내용이 나옴 -> 처음 연동한 것이기 때문에 장고에서 기본으로 제공해주는 DB들 또한 함께 연동됨.
 >>
->> ![migrate](./image/Django12/Django_12_2.PNG)
->> 
 >> 엑셀로 비교하자면 새로운 시트를 생성하여 안의 내용을 채워주는 기본작업을 하는 것이라 생각하면 된다.
 >> 
 >> main인 경로 즉 나의 경우는 backend_study에서 settings.py파일로 들어가면 DB에 대한 정보를 볼 수 있다.
@@ -116,6 +116,8 @@
 >>     else :
 >>         return render(request, 'accountapp/hello_world.html', context={'text': 'GET METHOD!!!'})
 >> ```
+>
+> ### 실행 화면.
 >
 >![get_post_testing](./image/Django12/Django_12_3.png)
 >
@@ -233,6 +235,10 @@
 >>         return render(request, 'accountapp/hello_world.html', context={'hello_world_list': hello_world_list})
 >> ```
 > [HttpResponseRedirect](https://valuefactory.tistory.com/605)자세히 알아보기.
+> ### 실행 화면.
 >
 > ![hello_world_list](./image/Django12/Django_12_4.png)
 >
+> # 끝! 
+> 오늘은 [18강](https://www.youtube.com/watch?v=D3DMvHsn9Ss&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=18) 까지 학습을 진행 하였다.
+> # 참고한 영상 : [실용주의 프로그래머의 작정하고 장고](https://www.youtube.com/playlist?list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo)
