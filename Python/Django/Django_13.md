@@ -213,6 +213,8 @@
 >> mt-3은 margin-top의 3배라는 뜻
 >>
 >> mb-4는 margin-bottom의 4배.
+>> 
+>> ![login](./image/Django13/Django_13_1.png)
 >>
 > #### ps.
 >>
@@ -254,6 +256,9 @@
 >>         <div style="text-align: center; max-width: 500px; margin: 4rem auto;">
 >>             <p>
 >>                 {{ user.date_joiner }}<!--언제 가입했는지.-->
+>>             </p>
+>>             <p>
+>>                 {{ request.get_full_path }}<!--현재 url 주소 반환. detail에서 로그아웃했을때 처리 위해-->
 >>             </p>
 >>             <h2>
 >>                 {{ user.username }}
@@ -309,6 +314,13 @@
 >>                 {% endif %}
 >>             {% endif %}
 >> ```
+>>
+>>
+>> ![login](./image/Django13/Django_13_1.png)
+>>
+>> 그림의 빨간 사각형에 있는 text는 {{ request.get_full_path }}를 이용해 출력했다.
+>>
+>> 여러 곳에 응용할 수 있을것같다
 >
 > # 끝! 
 > 오늘은 [24강](https://www.youtube.com/watch?v=D3DMvHsn9Ss&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=24) 까지 학습을 진행 하였다.
