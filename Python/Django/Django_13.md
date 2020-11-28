@@ -19,65 +19,69 @@
 >
 > CRUD는 거의 모든것에 적용가능(여러 종류의 게시판, 회원가입 등등.)
 >> 즉 CBV와 CRUD를 적극적으로 사용해야한다.
-
-21강 - Class Based View, 장고의 CRUD(https://www.youtube.com/watch?v=6P74EFfGdJE&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=21)
-CreateView를 통한 회원가입 구현
-
-1. views.py 파일 작성.
-```from django,views.generic import CreateView```를 통해 CreateView를 상속받는다.
-- 대부분의 CRUD View는 다 generic 안에 있다.
-그 뒤 accountapp의 views.py 맨 아래에 ```class AccountCreateView(CreateView)``` 생성 
-```Python
-class AccountCreateView(CreateView):
-    # 주요한 파라미터 입력.
-    model = User
-    # 장고에서 기본 제공하는 모델.
-    # from django,contrib.auth.models import User
-    form_class = UserCreationForm
-    # 장고가 기본적으로 제공해주는 회원가입 form
-    # from django.contrib.auth.forms import UserCreationForm
-    success_url = reverse_lazy('accountapp:hello_world')
-    # 회원가입 성공시 어느 경로를 재연결 할것인가.
-    # from django.urls import reverse_lazy
-    # reverse는 함수형 뷰에서 사용하고 reverse_lazy는 클래스형 뷰에서 사용한다.
-    template_name = 'accountapp/create.html'
-    # 어떤 템플릿을 사용할 것인가.(어느 html파일을 사용할 것인가.)
-```
-사실상 4줄 만으로 끝난다.
-
-2. 경로 지정을 위한 urls.py 작성,
-경로를 지정해 주기 위해 accountapp의 urls.py의 내용을 수정한다.
-수정한 내용만 아래에 첨부 하였다.
-```Python
-from accountapp.views import hello_world, AccountCreateView # class를 import한다.
-
-#...
-
-urlpatterns = [
-    path('hello_world/', hello_world, name='hello_world'),
-
-    path('create/', AccountCreateView.as_view(), name='create'), #함수형 뷰와 달리 클래스 내임 뒤에 .as_view()를 붙여줘야한다.
-]
-```
-3. create.html파일 생성 및 작성
-accountapp의 templates안의 accountapp폴더에 create.html 파일을 생성하고 작성한다.
-```html
-{% extends 'base.html' %}
-
-{% block content %}
-
-    <div style="text-align: center">
-        <form action="{% url 'accountapp:create' %}" method="post">
-            <!--action 내부엔 요청을 보내는 url이 필요하다. 여기서는 일원화(어떤 앱에서:어떤 라우팅으로 가라.) 할것이다.-->
-            {% csrf_token %}
-            {{ form }}<!-- views.py 에서 이용한 form_class = UserCreationForm 을 통해 자동으로 만들어준다. -->
-              <input type="submit" class="btn btn-primary">
-        </form>
-    </div>
-
-{% endblock %}
-```
-
+>
+### 2. CreateView를 통한 회원가입 구현
+> 1. views.py 파일 작성.
+>> ```from django,views.generic import CreateView```를 통해 CreateView를 상속받는다.
+>> 
+>> - 대부분의 CRUD View는 다 generic 안에 있다.
+>> 
+>> 그 뒤 accountapp의 views.py 맨 아래에 ```class AccountCreateView(CreateView)``` 생성 
+>> 
+>> ```Python
+>> class AccountCreateView(CreateView):
+>>         # 주요한 파라미터 입력.
+>>     model = User
+>>         # 장고에서 기본 제공하는 모델.
+>>         # from django,contrib.auth.models import User
+>>     form_class = UserCreationForm
+>>         # 장고가 기본적으로 제공해주는 회원가입 form
+>>         # from django.contrib.auth.forms import UserCreationForm
+>>     success_url = reverse_lazy('accountapp:hello_world')
+>>         # 회원가입 성공시 어느 경로를 재연결 할것인가.
+>>         # from django.urls import reverse_lazy
+>>         # reverse는 함수형 뷰에서 사용하고 reverse_lazy는 클래스형 뷰에서 사용한다.
+>>     template_name = 'accountapp/create.html'
+>>         # 어떤 템플릿을 사용할 것인가.(어느 html파일을 사용할 것인가.)
+>> ```
+>> 사실상 4줄 만으로 끝난다.
+>
+> 2. 경로 지정을 위한 urls.py 작성,
+>> 경로를 지정해 주기 위해 accountapp의 urls.py의 내용을 수정한다.
+>> 
+>> 수정한 내용만 아래에 첨부 하였다.
+>> ```Python
+>> from accountapp.views import hello_world, AccountCreateView # class를 import한다.
+>> 
+>> #...
+>> 
+>> urlpatterns = [
+>>     path('hello_world/', hello_world, name='hello_world'),
+>> 
+>>     path('create/', AccountCreateView.as_view(), name='create'), #함수형 뷰와 달리 클래스 내임 뒤에 .as_view()를 붙여줘야한다.
+>> ]
+>> ```
+>
+> 3. create.html파일 생성 및 작성
+>> accountapp의 templates안의 accountapp폴더에 create.html 파일을 생성하고 작성한다.
+>> 
+>> ```html
+>> {% extends 'base.html' %}
+>> 
+>> {% block content %}
+>> 
+>>     <div style="text-align: center">
+>>         <form action="{% url 'accountapp:create' %}" method="post">
+>>             <!--action 내부엔 요청을 보내는 url이 필요하다. 여기서는 일원화(어떤 앱에서:어떤 라우팅으로 가라.) 할것이다.-->
+>>             {% csrf_token %}
+>>             {{ form }}<!-- views.py 에서 이용한 form_class = UserCreationForm 을 통해 자동으로 만들어준다. -->
+>>               <input type="submit" class="btn btn-primary">
+>>         </form>
+>>     </div>
+>> 
+>> {% endblock %}
+>> ```
+> 
 22강 - Login / Logout 구현
 Login view, Logout View를 이용해 구현을 진행한다.
 1. urls.py에 경로 추가.
