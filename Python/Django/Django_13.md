@@ -150,14 +150,14 @@
 >>         </div>
 >> ```
 >> 
->> 중간의 <div>부분만 위와 같이 수정하였다.
+>> 중간의 ```<div>```부분만 위와 같이 수정하였다.
 >
->4. Redirect의 메커니즘
->>  1. next
+> 4. Redirect의 메커니즘
+>> 1. next
 >> 
 >> 2. Login_Redirect_URL
 >> 
->>  3. Default
+>> 3. Default
 >> 
 >> 순서이며 각각 지정된 값이 없다면 다음 값으로 간다.
 >> 
@@ -179,40 +179,55 @@
 >
 ### 4. Bootstrap 을 이용한 Form 디자인 정리
 >>
-[django-bootstrap4](https://django-bootstrap4.readthedocs.io/en/latest/installation.html)를 이용해 form들을 일괄적으로 부트스트랩을 적용시킨 디자인을 만들수 있다.
-1. 설치및 셋팅
-pip install django-bootstrap4 를 통해 설치
-설치후 settings.py파일의 INSTALLED_APPS부분에 아래와 같이 추가해준다.
-```Python
-INSTALLED_APPS = [
-    '...',
-    'bootstrap4',
-    '...',
-]
-```
-2. [사용하기](https://django-bootstrap4.readthedocs.io/en/latest/quickstart.html)
-login.html에 먼저 사용하겠다.
-맨 위의 ```{% extends 'base.html' %}``` 바로 아래에 ```{% load bootstrap4 %}```를 추가하여 사용한다.
-또한 중간의 ```{{ form }}``` 대신 부트스트랩은 ```{% bootstrap_form form %}```를 통하여 사용한다.
-이후 세부적인 너비, 마진 등을 설정한다. login.html, create.html
-
-rounded-pill는 버튼의 외형을 동글동글한 걸로 바꿈(클래스)
-col-6 은 부모의 크기의 절반(12가 최대이며 100%를 뜻함)
-mt-3은 margin-top의 3배라는 뜻
-mb-4는 margin-bottom의 4배.
-
-ps.
-settings.py 수정..
-```Pythom
-# LANGUAGE_CODE = 'en-us'
-LANGUAGE_CODE = 'ko-KR'
-# TIME_ZONE = 'UTC'
-TIME_ZONE = 'Asia/Seoul'
-```
-를 통해 각각 영어에서 한국어 협정세계시에서 한국표준시로 변경하였다.
-
-
-24강 - DetailView를 이용한 개인 페이지 구현
+>> [django-bootstrap4](https://django-bootstrap4.readthedocs.io/en/latest/installation.html)를 이용해 form들을 일괄적으로 부트스트랩을 적용시킨 디자인을 만들수 있다.
+>> 
+>> 1. 설치및 셋팅
+>> 
+>> pip install django-bootstrap4 를 통해 설치
+>> 
+>> 설치후 settings.py파일의 INSTALLED_APPS부분에 아래와 같이 추가해준다.
+>> 
+>> ```Python
+>> INSTALLED_APPS = [
+>>     '...',
+>>     'bootstrap4',
+>>     '...',
+>> ]
+>> ```
+>> 
+>> 2. [사용하기](https://django-bootstrap4.readthedocs.io/en/latest/quickstart.html)
+>> 
+>>
+>> login.html에 먼저 사용하겠다.
+>>
+>> 맨 위의 ```{% extends 'base.html' %}``` 바로 아래에 ```{% load bootstrap4 %}```를 추가하여 사용한다.
+>>
+>> 또한 중간의 ```{{ form }}``` 대신 부트스트랩은 ```{% bootstrap_form form %}```를 통하여 사용한다.
+>>
+>> 이후 세부적인 너비, 마진 등을 설정한다. (login.html, create.html를 수정했음.)
+>>
+>> rounded-pill는 버튼의 외형을 동글동글한 걸로 바꿈(클래스)
+>>
+>> col-6 은 부모의 크기의 절반(12가 최대이며 100%를 뜻함)
+>>
+>> mt-3은 margin-top의 3배라는 뜻
+>>
+>> mb-4는 margin-bottom의 4배.
+>>
+> #### ps.
+>>
+>> settings.py 수정..
+>>
+>> ```Pythom
+>> # LANGUAGE_CODE = 'en-us'
+>> LANGUAGE_CODE = 'ko-KR'
+>> # TIME_ZONE = 'UTC'
+>> TIME_ZONE = 'Asia/Seoul'
+>> ```
+>>
+>> 를 통해 각각 영어에서 한국어 협정세계시에서 한국표준시로 변경하였다.
+>
+### 5. DetailView를 이용한 개인 페이지 구현
 이번엔 Read view쪽을 다룬다.
 but. 장고에서 정확하게 제공하는 이름은 Read가 아닌 Detail View이다.
 
