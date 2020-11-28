@@ -228,74 +228,88 @@
 >> 를 통해 각각 영어에서 한국어 협정세계시에서 한국표준시로 변경하였다.
 >
 ### 5. DetailView를 이용한 개인 페이지 구현
-이번엔 Read view쪽을 다룬다.
-but. 장고에서 정확하게 제공하는 이름은 Read가 아닌 Detail View이다.
-
-1. Views.py AccountDetailView 클래스 생성
-```Python
-class AccountDetailView(DetailView):
-    model = User
-    template_name = 'accountapp/detail.html'
-```
-
-2. detail.html파일 생성 및 작성.
-경로 : accountapp/templates/accountapp/detail.html
-```html
-{% extends 'base.html' %}
-{% load bootstrap4 %}
-
-{% block content %}
-
-    <div>
-        <div style="text-align: center; max-width: 500px; margin: 4rem auto;">
-            <p>
-                {{ user.date_joiner }}<!--언제 가입했는지.-->
-            </p>
-            <h2>
-                {{ user.username }}
-            </h2>
-        </div>
-    </div>
-
-{% endblock %}
-```
-
-3. urls.py에 경로 등록
-```Python
-urlpatterns = [
-    
-    ...
-    
-    path('detail/<int:pk>', AccountDetailView.as_view(), name='detail'),
-    # detail은 특정 유저의 정보를 보는것 이다. 따라서 parmary_key(ID)가 필요해서 <int:pk> 사용
-    # AccountDetailView 꼭 import해야함.
-]
-```
-
-4. header.html 수정.
-22강에서 수정한 내용에 추가로 수정 하였다.
-실습과 내용이 조금 다르다.
-MyPage에서 로그아웃을 하면 ?next={{ request.path }} 구문으로 인해 MyPage를 계속해서 반환하는 모습을 보인다.
-이를 막기위해 {% if "detail" in request.get_full_path %}사용해 url에 detail이 포함되어있을때 로그아웃을 한다면 login으로 이동하게 하였다.
-```
-{% if not user.is_authenticated %}<!--이 유저가 로그인이 되어있지 않다면. Login을 보여준다.-->
-            <a href="{% url 'accountapp:login' %}?next={{ request.path }}">
-                <span>Login</span>
-            </a>
-            {% else %}
-            <a href="{% url 'accountapp:detail' pk=user.pk %}">
-                <!--urls.py에서 detail/<int:pk> 하였기 때문에 pk=user.pk를 통해 pk를 넘겨준다.-->
-                <span>MyPage</span>
-            </a>
-             | 
-                {% if "detail" in request.get_full_path %}<!--현재 url에 detail이 있을때 -->
-                <a href="{% url 'accountapp:logout' %}?next={% url 'accountapp:login' %}"><!--로그아웃을 하면 로그인 창으로 이동 시키고-->
-                    <span>Logout</span>
-                </a>
-                {% else %}<!--현재 url에 detail이 없다면 -->
-                <a href="{% url 'accountapp:logout' %}?next={{ request.path }}"><!--그대로-->
-                    <span>Logout</span>
-                </a>
-                {% endif %}
-            {% endif %}
-```
+>>
+>> 이번엔 Read view쪽을 다룬다.
+>>
+>> but. 장고에서 정확하게 제공하는 이름은 Read가 아닌 Detail View이다.
+>>
+>> 1. Views.py AccountDetailView 클래스 생성
+>> ```Python
+>> class AccountDetailView(DetailView):
+>>     model = User
+>>     template_name = 'accountapp/detail.html'
+>> ```
+>>
+>> 2. detail.html파일 생성 및 작성.
+>>
+>> 경로 : accountapp/templates/accountapp/detail.html
+>>
+>> ```html
+>> {% extends 'base.html' %}
+>> {% load bootstrap4 %}
+>> 
+>> {% block content %}
+>>
+>>     <div>
+>>         <div style="text-align: center; max-width: 500px; margin: 4rem auto;">
+>>             <p>
+>>                 {{ user.date_joiner }}<!--언제 가입했는지.-->
+>>             </p>
+>>             <h2>
+>>                 {{ user.username }}
+>>             </h2>
+>>         </div>
+>>     </div>
+>>
+>> {% endblock %}
+>> ```
+>>
+>> 3. urls.py에 경로 등록
+>>
+>> ```Python
+>> urlpatterns = [
+>>     
+>>     ...
+>>     
+>>     path('detail/<int:pk>', AccountDetailView.as_view(), name='detail'),
+>>     # detail은 특정 유저의 정보를 보는것 이다. 따라서 parmary_key(ID)가 필요해서 <int:pk> 사용
+>>     # AccountDetailView 꼭 import해야함.
+>> ]
+>> ```
+>>
+>> 4. header.html 수정.
+>>
+>> 22강에서 수정한 내용에 추가로 수정 하였다.
+>>
+>> 실습과 내용이 조금 다르다.
+>>
+>> MyPage에서 로그아웃을 하면 ?next={{ request.path }} 구문으로 인해 MyPage를 계속해서 반환하는 모습을 보인다.
+>>
+>> 이를 막기위해 {% if "detail" in request.get_full_path %}사용해 url에 detail이 포함되어있을때 로그아웃을 한다면 login으로 이동하게 하였다.
+>> 
+>> ```
+>> {% if not user.is_authenticated %}<!--이 유저가 로그인이 되어있지 않다면. Login을 보여준다.-->
+>>             <a href="{% url 'accountapp:login' %}?next={{ request.path }}">
+>>                 <span>Login</span>
+>>             </a>
+>>             {% else %}
+>>             <a href="{% url 'accountapp:detail' pk=user.pk %}">
+>>                 <!--urls.py에서 detail/<int:pk> 하였기 때문에 pk=user.pk를 통해 pk를 넘겨준다.-->
+>>                 <span>MyPage</span>
+>>             </a>
+>>              | 
+>>                 {% if "detail" in request.get_full_path %}<!--현재 url에 detail이 있을때 -->
+>>                 <a href="{% url 'accountapp:logout' %}?next={% url 'accountapp:login' %}"><!--로그아웃을 하면 로그인 창으로 이동 시키고-->
+>>                     <span>Logout</span>
+>>                 </a>
+>>                 {% else %}<!--현재 url에 detail이 없다면 -->
+>>                 <a href="{% url 'accountapp:logout' %}?next={{ request.path }}"><!--그대로-->
+>>                     <span>Logout</span>
+>>                 </a>
+>>                 {% endif %}
+>>             {% endif %}
+>> ```
+>
+> # 끝! 
+> 오늘은 [24강](https://www.youtube.com/watch?v=D3DMvHsn9Ss&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=24) 까지 학습을 진행 하였다.
+> # 참고한 영상 : [실용주의 프로그래머의 작정하고 장고](https://www.youtube.com/playlist?list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo)
