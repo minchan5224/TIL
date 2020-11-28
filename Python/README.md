@@ -5,7 +5,7 @@
 > ### 2. Pandas 파일
 >> ###### [세부항목 보기](https://github.com/minchan5224/TIL/tree/main/Python#pandas-%ED%8C%8C%EC%9D%BC)
 > ---
-## Django 파일
+## Django
 > ---
 > 0. [Django 훑어보기](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_00.md)
 >
@@ -34,7 +34,7 @@
 > 12. [Django실습 (14~18강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_12.md)
 >
 > ---
-## Pandas 파일
+## Pandas
 > ---
 > 0. [Pandas 란](https://github.com/minchan5224/TIL/blob/main/Python/Pandas/Pandas_00.md)
 >
