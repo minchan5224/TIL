@@ -214,7 +214,7 @@
 >>
 >> mb-4는 margin-bottom의 4배.
 >> 
->> ![login](./image/Django13/Django_13_1.png)
+>> ![login](./image/Django13/Django_13_1.PNG)
 >>
 > #### ps.
 >>
@@ -316,7 +316,7 @@
 >> ```
 >>
 >>
->> ![login](./image/Django13/Django_13_1.png)
+>> ![mypage](./image/Django13/Django_13_1.PNG)
 >>
 >> 그림의 빨간 사각형에 있는 text는 {{ request.get_full_path }}를 이용해 출력했다.
 >>
