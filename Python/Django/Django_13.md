@@ -46,7 +46,7 @@
 >> ```
 >> 사실상 4줄 만으로 끝난다.
 >
-> 2. 경로 지정을 위한 urls.py 작성,
+> 2. 경로 지정을 위한 urls.py 작성
 >> 경로를 지정해 주기 위해 accountapp의 urls.py의 내용을 수정한다.
 >> 
 >> 수정한 내용만 아래에 첨부 하였다.
@@ -82,75 +82,103 @@
 >> {% endblock %}
 >> ```
 > 
-22강 - Login / Logout 구현
-Login view, Logout View를 이용해 구현을 진행한다.
-1. urls.py에 경로 추가.
-```Python
-
-...
-
-from django.contrib.auth.views import LoginView, LogoutView
-# LoginView와 LogoutView사용하기 위해
-
-...
-
-urlpatterns = [
-
-    ...
-    
-    path('login/', LoginView.as_view(template_name='accountapp/login.html'), name='login'),
-    # LoginView 같은 경우는 템플릿을 지정해줘야 한다.(직접 만들것임.)
-    path('logout/', LogoutView.as_view(), name='logout'),
-    # LoginView와 LogoutView 둘다 import 필요.
-]
-```
-
-2.  login.html 파일 생성 및 작성
-accountapp의 templates안의 accountapp폴더에 login.html 파일을 생성하고 작성한다.
-```html
-
-```
-
-3. header.html파일을 수정하여 로그인 버튼과 로그아웃 버튼 생성한다.
-가장 외부의 templates폴더의 header.html파일 수정
-```html
-        <div>
-            <span>nav1</span> | 
-            <span>nav2</span> | 
-            <span>nav3</span> | 
-            {% if not user.is_authenticated %}<!--이 유저가 로그인이 되어있지 않다면. Login을 보여준다.-->
-            <a href="{% url 'accountapp:login' %}?next={{ request.path }}">
-                <span>Login</span>
-            </a>
-            {% else %}
-            <a href="{% url 'accountapp:logout' %}?next={{ request.path }}">
-                <span>Logout</span>
-            </a>
-            {% endif %}
-        </div>
-```
-중간의 <div>부분만 위와 같이 수정하였다.
-4. Redirect의 메커니즘
-> 1. next
-> 2. Login_Redirect_URL
-> 3. Default
-순이며 각각 지정된 값이 없다면 다음 값으로 간다.
-
-next 설정.
-header.html파일에서 ```<a href="{% url 'accountapp:login' %}?next={{ request.path }}">```의
-```?next={{ request.path }}```를 통해 next값을 지정해 주었다 (원래 있던 위치로 돌아오도록)
-
-Login_Redirect_URL설정.
-메인인 폴더(backend_study)내부의 settings.py파일을 수정한다. 
-```Python
-LOGIN_REDIRECT_URL = reverse_lazy('accountapp:hello_world')
-LOGOUT_REDIRECT_URL = reverse_lazy('accountapp:login')
-```
-위의 코드를 맨 아래에 추가한 뒤 reverse_lazy를 사용하기 위해 import 해준다.
-
-
-23강 - Bootstrap 을 이용한 Form 디자인 정리
-
+### 3. Login / Logout 구현
+> Login view, Logout View를 이용해 구현을 진행한다.
+>
+> 1. urls.py에 경로 추가.
+>> ```Python
+>> 
+>> ...
+>> 
+>> from django.contrib.auth.views import LoginView, LogoutView
+>> # LoginView와 LogoutView사용하기 위해
+>> 
+>> ...
+>> 
+>> urlpatterns = [
+>> 
+>>     ...
+>>     
+>>     path('login/', LoginView.as_view(template_name='accountapp/login.html'), name='login'),
+>>     # LoginView 같은 경우는 템플릿을 지정해줘야 한다.(직접 만들것임.)
+>>     path('logout/', LogoutView.as_view(), name='logout'),
+>>     # LoginView와 LogoutView 둘다 import 필요.
+>> ]
+>> ```
+>
+> 2.  login.html 파일 생성 및 작성
+>>
+>> accountapp의 templates안의 accountapp폴더에 login.html 파일을 생성하고 작성한다.
+>> 
+>> ```html
+>> {% extends 'base.html' %}
+>> 
+>> {% block content %}
+>> 
+>>     <div style="text-align: center;">
+>>         <div>
+>>             <h4>Login</h4>
+>>         </div>
+>>         <form action="" method="post">
+>>             {% csrf_token %}
+>>             {% form %}
+>>               <input type="submit" class="btn btn-primary">
+>>             
+>>         </form>
+>>     </div>
+>> 
+>> {% endblock %}
+>> ```
+>
+> 3. header.html파일을 수정하여 로그인 버튼과 로그아웃 버튼 생성한다.
+>>
+>> 가장 외부의 templates폴더의 header.html파일 수정
+>> ```html
+>>         <div>
+>>             <span>nav1</span> | 
+>>             <span>nav2</span> | 
+>>             <span>nav3</span> | 
+>>             {% if not user.is_authenticated %}<!--이 유저가 로그인이 되어있지 않다면. Login을 보여준다.-->
+>>             <a href="{% url 'accountapp:login' %}?next={{ request.path }}">
+>>                 <span>Login</span>
+>>             </a>
+>>             {% else %}
+>>             <a href="{% url 'accountapp:logout' %}?next={{ request.path }}">
+>>                 <span>Logout</span>
+>>             </a>
+>>             {% endif %}
+>>         </div>
+>> ```
+>> 
+>> 중간의 <div>부분만 위와 같이 수정하였다.
+>
+>4. Redirect의 메커니즘
+>>  1. next
+>> 
+>> 2. Login_Redirect_URL
+>> 
+>>  3. Default
+>> 
+>> 순서이며 각각 지정된 값이 없다면 다음 값으로 간다.
+>> 
+>> - next 설정.
+>>> header.html파일에서 ```<a href="{% url 'accountapp:login' %}?next={{ request.path }}">```의
+>>> 
+>>> ```?next={{ request.path }}```를 통해 next값을 지정해 주었다 (원래 있던 위치로 돌아오도록)
+>>> 
+>> - Login_Redirect_URL설정.
+>>> 메인인 폴더(backend_study)내부의 settings.py파일을 수정한다. 
+>>> 
+>>> ```Python
+>>> LOGIN_REDIRECT_URL = reverse_lazy('accountapp:hello_world')
+>>> LOGOUT_REDIRECT_URL = reverse_lazy('accountapp:login')
+>>> ```
+>>> 
+>>> 위의 코드를 맨 아래에 추가한 뒤 reverse_lazy를 사용하기 위해 import 해준다.
+>>
+>
+### 4. Bootstrap 을 이용한 Form 디자인 정리
+>>
 [django-bootstrap4](https://django-bootstrap4.readthedocs.io/en/latest/installation.html)를 이용해 form들을 일괄적으로 부트스트랩을 적용시킨 디자인을 만들수 있다.
 1. 설치및 셋팅
 pip install django-bootstrap4 를 통해 설치
