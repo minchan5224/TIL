@@ -33,6 +33,8 @@
 >
 > 12. [Django실습 (14~18강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_12.md)
 >
+> 13. [ㅍ](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_13.md)
+>
 > ---
 ## Pandas
 > ---
