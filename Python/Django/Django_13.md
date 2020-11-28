@@ -12,9 +12,10 @@
 >> - U pdate 수정하고
 >>
 >> - D elete 삭제하고.
+>
 > why?. 장고는 CRUD에 각각의 view(class)를 지원해줘서.
 >
-> 또한 이 작업들에 최적화 되어있는 도구들을 지원해준다 
+> 또한 이 작업들에 최적화 되어있는 도구들을 지원해준다.
 > - Class Based View(CBV = 클래스 기반.) (반대 -> Function Based View(FBV = 함수기반.))
 >
 > CRUD는 거의 모든것에 적용가능(여러 종류의 게시판, 회원가입 등등.)
@@ -316,9 +317,9 @@
 >> ```
 >>
 >>
->> ![mypage](./image/Django13/Django_13_1.PNG)
+>> ![mypage](./image/Django13/Django_13_2.PNG)
 >>
->> 그림의 빨간 사각형에 있는 text는 {{ request.get_full_path }}를 이용해 출력했다.
+>> 그림의 빨간 사각형에 있는 text는 ```{{ request.get_full_path }}```를 이용해 출력했다.
 >>
 >> 여러 곳에 응용할 수 있을것같다
 >
