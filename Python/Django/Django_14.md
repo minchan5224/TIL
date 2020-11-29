@@ -73,7 +73,7 @@
 >> {% endblock %}
 >> ```
 > 5. ```self.fields['username'].disabled = True``` 'username' 비활성
->> ![changeinfo]()
+>> ![changeinfo](./image/Django14/Django_14_1.png)
 >> 
 >> 사진과 같이 지금은 아이디와 비밀번호 둘다 수정이 가능하다. 
 >> 
@@ -99,7 +99,7 @@
 >> ```
 >> 위와 같이 파일을 작성 하였다.
 >> 
->> 이후 viwes.py에서 아래와 같이 적용 시킨다.
+>> 이후 viwes.py에서 아래와 같이 적용 시킨다.            ~~```* ``````**```~~
 >> 
 >> ```Python
 >> from accountapp.forms import AccountUpdateForm
@@ -110,7 +110,7 @@
 >>     ...
 >> ```
 >> 아래 그림과 같이 아이디 부분이 비활성화 된것을 확인할 수 있다.
->> ![changeinfo_2]()
+>> ![changeinfo_2](./image/Django14/Django_14_1.png)
 > 
 ### 2. DeleteView기반 회원탈퇴 구현
 > 1.Views.py에 AccountDeleteView 생성
