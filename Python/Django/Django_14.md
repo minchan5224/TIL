@@ -74,6 +74,7 @@
 >> ```
 > 5. ```self.fields['username'].disabled = True``` 'username' 비활성
 >> ![changeinfo]()
+>> 
 >> 사진과 같이 지금은 아이디와 비밀번호 둘다 수정이 가능하다. 
 >> 
 >> 이는 원하지 않는 상황이다 그러므로 수정하기 위해 다음 과정을 진행한다.
@@ -111,57 +112,55 @@
 >> 아래 그림과 같이 아이디 부분이 비활성화 된것을 확인할 수 있다.
 >> ![changeinfo_2]()
 > 
-26강 - DeleteView기반 회원탈퇴 구현
-1.Views.py에 AccountDeleteView 생성
-```Python
-from django.views.generic import DeleteView
-
-...
-
-class AccountDeleteView(DeleteView):
-    model = User
-    success_url = reverse_lazy('accountapp:login')
-    template_name = 'accountapp/delete.html'
-```
-
-2. urls.py에 경로(라우팅) 추가
-```Python
-from accountapp.views import AccountDeleteView
-
-...
-
-urlpatterns = [
-    ...
-    path('delete/<int:pk>', AccountDeleteView.as_view(), name='delete'),
-]
-````
-
-3. delete.html 작성
-```html
-{% extends 'base.html' %}
-{% load bootstrap4 %}
-
-{% block content %}
-
-    <div style="text-align: center; max-width: 500px; margin: 4rem auto;">
-        <div class="mb-4"><!--margin-bottom-->
-            <h4>회 원 탈 퇴</h4>
-        </div>
-        <form action="{% url 'accountapp:delete' pk=user.pk %}" method="post">
-            {% csrf_token %}
-              <input type="submit" class="btn btn-danger rounded-pill col-6 mt-3">
-        </form>
-    </div>
-
-{% endblock %}
-```
-
-4. detail.html에 delete버튼 추가.
-```html
-            <a href="{% url 'accountapp:delete' pk=user.pk %}">
-                <p>
-                    탈 퇴
-                </p>
-            </a>
-```
-정보수정 버튼 아래에 추가.
+### 2. DeleteView기반 회원탈퇴 구현
+> 1.Views.py에 AccountDeleteView 생성
+>> ```Python
+>> from django.views.generic import DeleteView
+>> 
+>> ...
+>> 
+>> class AccountDeleteView(DeleteView):
+>>     model = User
+>>     success_url = reverse_lazy('accountapp:login')
+>>     template_name = 'accountapp/delete.html'
+>> ```
+>> 
+> 2. urls.py에 경로(라우팅) 추가
+>> ```Python
+>> from accountapp.views import AccountDeleteView
+>> 
+>> ...
+>> 
+>> urlpatterns = [
+>>     ...
+>>     path('delete/<int:pk>', AccountDeleteView.as_view(), name='delete'),
+>> ]
+>> ```
+> 3. delete.html 작성
+>> ```html
+>> {% extends 'base.html' %}
+>> {% load bootstrap4 %}
+>> 
+>> {% block content %}
+>> 
+>>     <div style="text-align: center; max-width: 500px; margin: 4rem auto;">
+>>         <div class="mb-4"><!--margin-bottom-->
+>>             <h4>회 원 탈 퇴</h4>
+>>         </div>
+>>         <form action="{% url 'accountapp:delete' pk=user.pk %}" method="post">
+>>             {% csrf_token %}
+>>               <input type="submit" class="btn btn-danger rounded-pill col-6 mt-3">
+>>         </form>
+>>     </div>
+>> 
+>> {% endblock %}
+>> ```
+> 4. detail.html에 delete버튼 추가.
+>> ```html
+>>             <a href="{% url 'accountapp:delete' pk=user.pk %}">
+>>                 <p>
+>>                     탈 퇴
+>>                 </p>
+>>             </a>
+>> ```
+>> 정보수정 버튼 아래에 추가.
