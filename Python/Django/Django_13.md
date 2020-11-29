@@ -240,6 +240,8 @@
 >> ```Python
 >> class AccountDetailView(DetailView):
 >>     model = User
+>>     context_object_name = 'target_user' # 탬플릿에서 사용하는 user의 객체 이름을 target_user로 다르게 설정해줌
+>>     # 로그인 한 상태에서 자신의 페이지로 들어와 정보를 볼 수 있었지만 이제 다른사람이 그 페이지에 들어가더라도 정상적으로 열람 가능하다.
 >>     template_name = 'accountapp/detail.html'
 >> ```
 >>
