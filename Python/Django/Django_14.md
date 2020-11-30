@@ -1,5 +1,5 @@
 # Django 실습
-##### Date 2020_11_28
+##### Date 2020_11_29
 ---
 ### 1. UpdateView를 이용한 비밀번호 변경 구현
 > 1. Views.py에 AccountUpdateView 생성
