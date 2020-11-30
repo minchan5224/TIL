@@ -247,7 +247,7 @@
 >     return decorated
 > ```
 > 작성이 끝나면 views.py로 돌아와 
-> ```from accountapp.decoratots import account_ownership_required```
+> ```from accountapp.decorators import account_ownership_required```
 > 를 통해 작성한 커스텀 데코레이터를 import한 뒤
 > ```Python
 > @method_decorator(account_ownership_required, 'get')
