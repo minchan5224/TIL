@@ -108,7 +108,7 @@
 > 
 > ![detail](./image/Django17/Django_17_1.png)
 > 
-> 짜자잔..
+> 짜자잔...
 > 
 # 끝! 
 오늘은 [36강](https://www.youtube.com/watch?v=E4d0vV9DBy4&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=37) 까지 학습을 진행 하였다.
