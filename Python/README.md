@@ -41,7 +41,9 @@
 >
 > 16. [Django실습 (33~35강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_16.md)
 >
-> 17. [Django실습 (36~강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_17.md)
+> 17. [Django실습 (36강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_17.md)
+>
+> 18. [Django실습 (37강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_18.md)
 >
 > ---
 ## Pandas
