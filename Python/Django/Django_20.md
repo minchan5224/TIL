@@ -1,5 +1,5 @@
 # Django 실습
-##### Date 2020_12_7
+##### Date 2020_12_8
 ---
 1. 모바일 디버깅, 반응형 레이아웃 
 ###### [39강](https://www.youtube.com/watch?v=qvLYJBzcD_I&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=40)
@@ -279,3 +279,6 @@
 > 
 > 조심히 다녀오겠습니다.
 > 
+# 끝!
+오늘은 [40강](https://www.youtube.com/watch?v=ISwzXvwvBxQ&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=41)의 학습을 진행 하였다.
+## 참고한 영상 : [실용주의 프로그래머의 작정하고 장고! Django로 Pinterest 따라하기](https://www.youtube.com/playlist?list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo)
