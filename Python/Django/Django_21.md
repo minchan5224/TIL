@@ -98,4 +98,4 @@
 > accoutnapp에도 지금과 같은 과정으로 DetailView를 수정해준다.
 >
 > 결과!
-![]()
+![account_project](./image/Django21/Django_21_1.png)
