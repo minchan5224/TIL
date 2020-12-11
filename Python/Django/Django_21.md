@@ -1,5 +1,5 @@
 # Django 실습
-##### Date 2020_12_9 ~ 
+##### Date 2020_12_9
 ---
 ### 1. [MultipleObjectMixin을 통한 ProjectApp 마무리](https://www.youtube.com/watch?v=O9T5I8OKRps&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=42)
 > articleapp의 models.py의 ```class Article(models.Model):```에 
@@ -98,4 +98,8 @@
 > accoutnapp에도 지금과 같은 과정으로 DetailView를 수정해준다.
 >
 > 결과!
-![account_project](./image/Django21/Django_21_1.png)
+> ![account_project](./image/Django21/Django_21_1.png)
+> 
+# 끝!
+오늘은 [41강](https://www.youtube.com/watch?v=O9T5I8OKRps&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=42)의 학습을 진행 하였다.
+## 참고한 영상 : [실용주의 프로그래머의 작정하고 장고! Django로 Pinterest 따라하기](https://www.youtube.com/playlist?list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo)
