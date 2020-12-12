@@ -65,7 +65,7 @@
 > 
 > 위 코드를 추가한다. ```required=False``` 옵션을 통해 가능하다.
 > 
-### 2. 정리 및 다듬기(https://www.youtube.com/watch?v=H9wS7PUJx4o&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=46)
+### 2. [정리 및 다듬기](https://www.youtube.com/watch?v=H9wS7PUJx4o&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=46)
 > 1. 지금은 게시물 작성시 프로젝트를 고를때 '프로젝트명'이 아닌 ```Project object(1)```과 같이
 > 
 > 알아보기 힘들게 출력된다 이를 수정한다.
@@ -85,7 +85,7 @@
 > 
 > ![project_name](./image/Django23/Django_23_2.png)
 > 
-> 2. subscription쪽에서 로그인을 하지 않았을 때 발생하는 오류를 수정한다.[영상보기](https://www.youtube.com/watch?> v=H9wS7PUJx4o&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=46&t=170)
+> 2. subscription쪽에서 로그인을 하지 않았을 때 발생하는 오류를 수정한다.[영상보기](https://www.youtube.com/watch?v=H9wS7PUJx4o&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=46&t=170)
 > 
 > views.py(projectapp)내부 ```class ProjectDetailView```의 ```def get_context_data```를 수정한다.
 > 
