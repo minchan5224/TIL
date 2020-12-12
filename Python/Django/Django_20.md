@@ -1,8 +1,7 @@
 # Django 실습
 ##### Date 2020_12_8
 ---
-1. 모바일 디버깅, 반응형 레이아웃 
-###### [39강](https://www.youtube.com/watch?v=qvLYJBzcD_I&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=40)
+### 1. 모바일 디버깅, 반응형 레이아웃 [39강](https://www.youtube.com/watch?v=qvLYJBzcD_I&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=40)
 > 모바일에서 보기 좋은 사이즈로 제공하기 위해 아래의 코드를 head.html에 추가한다.
 > ```<meta charset="UTF-8">```의 아래에
 > ```
@@ -37,7 +36,7 @@
 >     }
 > }
 > ```
-2. ProjectApp (게시판) 구현[40강](https://www.youtube.com/watch?v=ISwzXvwvBxQ&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=41)
+### 2. ProjectApp (게시판) 구현[40강](https://www.youtube.com/watch?v=ISwzXvwvBxQ&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=41)
 > ```python manage.py startapp projectapp```명령어를 통해 projectapp생성
 > 
 > settings.py에 projectapp등록
@@ -280,5 +279,5 @@
 > 조심히 다녀오겠습니다.
 > 
 # 끝!
-오늘은 [40강](https://www.youtube.com/watch?v=ISwzXvwvBxQ&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=41)의 학습을 진행 하였다.
+오늘은 [40강](https://www.youtube.com/watch?v=ISwzXvwvBxQ&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=41)까지 학습을 진행 하였다.
 ## 참고한 영상 : [실용주의 프로그래머의 작정하고 장고! Django로 Pinterest 따라하기](https://www.youtube.com/playlist?list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo)
