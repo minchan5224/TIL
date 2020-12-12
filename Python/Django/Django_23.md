@@ -1,167 +1,163 @@
 # Django 실습
-##### Date 2020_12_11
+##### Date 2020_12_12
 ---
-1. RedirectView을 통한 SubscribeApp시작
-> ```python manage.py startapp subscribeapp``` 명령어를 통해 app생성
+### 1. WYSIWYG 적용
+> What You See Is What You Get
 > 
-> settings.py 와 urls.py(backend_study/)에 등록
+> 보는대로 글이 써진다.
 > 
-> subscribeapp에 urls.py  임시 작성.
+> 지금은 일반적인 텍스트로만 이루어진다.
 > 
-> views.py 임시 작성
+> 굵게, 언더라인, 색상등 세부 설정을 할 수 있도록 변경한다.
 > 
-> models.py 작성
+> 오픈소스를 사용할 것이다.[Medium Editor github](https://github.com/yabwe/medium-editor)
+> 
+> articleapp의 forms.py를 수정한다.
+> ```class ArticleCreationForm(ModelForm):``` 의 내부에 아래 코드를 작성한다.
 > ```Python
-> from django.db import models
-> from django.contrib.auth.models import User
-> from projectapp.models import Project
-> 
-> class Subscription(models.Model):
->     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='subscription')
->     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='subscription')
-> 
->     class Meta:
->         unique_together = ('user', 'project')
+>     content = forms.CharField(widget=forms.Textarea(attrs={'class': 'editable text-left',
+>                                                           'style': 'height: auto;'}))
 > ```
 > 
-> 작성이 끝나면 ```python manage.py makemigrations```와```python manage.py migrate```명령어를 통해 등록한다.
-> 
-> views.py 작성
-> ```Python
-> from django.shortcuts import render, get_object_or_404
-> from django.urls import reverse
-> 
-> from django.views.generic import RebirectView
-> 
-> from django.utils.decorators import method_decorator
-> from django.contrib.auth.decorators import login_required
-> 
-> from subscribeapp.models import Subscription
-> from projectapp.models import Project
-> 
-> @method_decorator(login_required, 'get')
-> class SubscriptionView(RebirectView):
-> 
->     def get_redirect_url(self, *args, **kwargs):
->         return reverse('projectapp:detail', kwargs={'pk': self.request.GET.get('project_pk')})
-> 
->     def get(self, requset, *args, **kwargs):
->         project = get_object_or_404(Project, pk = self.request.GET.get('project_pk'))
->         # project_pk가진 Project가 없다면 404  오류를 출력해라.
->         user = self.requset.user
-> 
->         subscription = Subscription.object.filter(user=user, project=project)
-> 
->         if subscription.exists():
->             subscription.delete()
->         else:
->             Subscription(user=user, project=project).save()
-> 
->         return super(SubscriptionView, self).get(requset, *args, **kwargs)
-> ```
-> projectapp의 detail.html 에 구독 버튼 추가.
-> - 아래에서 완성된 코드로 올린다.
-> 
-> projectapp의 views.py에 구독 버튼 클릭시 이벤트 처리 작성.
-> ```Python
->     def get_context_data(self, **kwargs):
->         project = self.object
->         user = self.requset.user
-> 
->         if user.is_authenticated: # 유저가 로그인 중이라면
->             subscription = Subscription.objects.filter(user=user, project=project)
->         
->         object_list = Article.objects.filter(project=self.get_object())
->         # 현재의 프로젝트에 속한 아티클들만 필터링해서 가져옴
->         return super(ProjectDetailView, self).get_context_data(object_list=object_list, subscription=subscription, **kwargs)
-> ```
-> ProjectDetailVie클래스의 get_context_data를 위와같이 수정한다.
-> 
-> 마지막으로 projectapp의 detail.html에 구독 취소 버튼을 추가하여 완성 시킨다.
-> 
-> ```Python
->         <div class="text-center mb-5">
->             {% if user.is_authenticated %}
->                 {% if not subscription %}<!--구독 안했을 때.-->
->                 <a href="{% url 'subscribeapp:subscribe' %}?project_pk={{ target_project.pk }}"
->                    class="btn btn-primary rounded-pill px-4"><!--구독 하기-->
->                     Subscribe
->                 </a>
->                 {% else %}<!--구독 했을 때.-->
->                 <a href="{% url 'subscribeapp:subscribe' %}?project_pk={{ target_project.pk }}"
->                    class="btn btn-dark rounded-pill px-4"><!--구독 취소-->
->                     Unsubscribe
->                 </a>
->                 {% endif %}
->             {% endif %}
->         </div>
-> ```
-> 출력 화면은 아래와 같다.
-> 
-> ![un_subscrip](./image/Django22/Django_22_1.png)
-> 
-2. Field Lookup을 사용한 구독 페이지 구현
-> 지금가지 사용했던 (pk="", user="")이 방식은 AND func방식이였다.
-> 
-> 이번엔 OR func, WHERE func 에 대해 알아본다.
-> 1. Find user Subscripted projects
->>  - 유저가 구독하고 있는 프로젝트들 확인
-> 
-> 2. Find article in projects
->>  - 그 프로젝트들 안에 있는 모든 게시글들을 가져오는것.
->  
-> (pk="", user="")이 방식이 아닌 (project__in=projects) 이 방식을 사용할 것이다.
-> 
-> 위의 방식은 Django에서 Field Lookups 라고 한다. [영상보기](https://www.youtube.com/watch?v=F0gpmEXVEEU&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=44&t=167)
-> 
-> 일단 subscribeapp의 views.py에 기능을 추가한다.
-> ```Python
-> @method_decorator(login_required, 'get')
-> class SubscriptionListView(ListView):
->     model = Article
->     context_object_name = 'article_list'
->     template_name = 'subscribeapp/list.html'
->     paginate_by = 5
->     # article 전부를 가져오는 것이 아닌 특정 조건(구독여부)를 만족하는 aarticle을 가져올 것
->     # 따라서 쿼리셋관련 함수를 새로 작성할 것이다.
->     def get_queryset(self):
->         projects = Subscription.objects.filter(user=self.request.user).values_list('project')
->         # values_list : 값들을 리스트화 시킨다.
->         # 따라서 projects에는 구독한모든 프로젝트가 리스트 형식으로 담긴다.
->         article_list = Article.objects.filter(project__in=projects)
->         return article_list
-> ``` 
-> 위와같이 새 클래스를 작성한다.
-> 
-> 다음으론 list.html을 간단하게 작성한다.
+> 그리고 사용할 위치(나의 경우는 articleapp의 create.html의)에 아래 코드들을 작성한다.
 > ```html
-> {% extends 'base.html' %}
+> <!-- {% block content %} 바로 아래 -->
+> <script src="//cdn.jsdelivr.net/npm/medium-editor@5.23.2/dist/js/medium-editor.min.js"></script>
+> <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@5.23.2/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">\
 > 
-> {% block content %}
+> <!-- {% endblock %}의 바로 위 -->
+> <script>var editor = new MediumEditor('.editable');</script>
+> ```
 > 
->     <div>
->         {% include 'snippets/list_bs.html' with article_list=article_list %}
->     </div>
+> 이렇게 한다면 create에서 작성할때 옵션을 추가 할 수 있다.
+> 
+> 하지만 아직은  detail에서 게시물을 볼때 html태그가 달려있는 상태로 출력이 되는것을 확인 할 수 있다.
+> 
+> 정상적인 출력을 위해 detail.html을 수정한다.
+> 
+> 이전에 ```{{ target_article.content }}```로 작성된 부분을 아래와 같이 수정한다
+> 
+> ```html
+> <!-- <p>태그 삭제함 바로<div>로 감싸짐 -->
+> <div class="text-left">
+>     {{ target_article.content | safe }}
+> </div>
+> ```
+> 간단하다.
+> 
+> update에도 detail에 추가하였던 코드를 같은 위치에 추가 하였다.
+> 
+> 정상적으로 작동한다.
+> 
+> - 사랑해요 오픈소스
+> 
+> ![wysiwyg](./image/Django23/Django_23_1.png)
+> 
+> 또한 지금은 무조건 프로젝트를 골라 주어야한다.
+> 
+> 프로젝트를 정하지 않고도 작성 가능하도록 수정한다.
+> 
+> articleapp의 forms.py를 수정한다.
+> 
+> ```class ArticleCreationForm(ModelForm):```의 ```content```아래에
+> 
+> ```project = forms.ModelChoiceField(queryset=Project.objects.all(), required=False)```
+> 
+> 위 코드를 추가한다. ```required=False``` 옵션을 통해 가능하다.
+> 
+### 2. 정리 및 다듬기(https://www.youtube.com/watch?v=H9wS7PUJx4o&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=46)
+> 1. 지금은 게시물 작성시 프로젝트를 고를때 '프로젝트명'이 아닌 ```Project object(1)```과 같이
+> 
+> 알아보기 힘들게 출력된다 이를 수정한다.
+> 
+> 처음으론 projectapp의 models.py에 아래의 내용을 추가한다.
+> 
+> ```Python
+> class Project(models.Model):
 >     
-> {% endblock %}
+>     ...
+>     
+>     def __str__(self):
+>         return f'{self.pk} : {self.title}'
+>         # f''를 사용하면  ''안의 변수를 직접 출력한다.
+>         # project.pk : project.title
 > ```
-> 출력 화면은 아래와 같다.
 > 
-> ![sub_art](./image/Django22/Django_22_2.png)
+> ![project_name](./image/Django23/Django_23_2.png)
 > 
-> 41강에서 ```templates/snippets/```의 경로에 list_bs.html을 작성 하였다 이를 이용하여 위와같이 간단히 구현이 가능한다.
+> 2. subscription쪽에서 로그인을 하지 않았을 때 발생하는 오류를 수정한다.[영상보기](https://www.youtube.com/watch?> v=H9wS7PUJx4o&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=46&t=170)
 > 
-> 마지막으로 header.html의 nav부분을 아래와 같이 수정하였다
+> views.py(projectapp)내부 ```class ProjectDetailView```의 ```def get_context_data```를 수정한다.
+> 
+> ```Python
+> if user.is_authenticated:
+>     subscription = Subscription.objects.filter(user=user, project=project)
+>     
+> # 위의 if문은 원래 있던 내용. 아래의 else를 if 문 바로 아래에 추가 하였다.
+> 
+> else:
+>     subscription = None
+> ```
+> 
+> 3. accountapp의 hello_world를 삭제한다.
+> migration관련 파일은 삭제하면 안된다.
+> ```%%%%_initial.py``` 혹은 ```__init__.py```
+> 
+> 4. home 주소를 정해준다.
+> main인 폴더의 urls에 path를 아래와 같이 추가해 준다.
+> ```Python
+> from articleapp.views import ArticleListView
+> 
+> path('', ArticleListView.as_view(), name='home'),
+> # 주소창에 사이트의 주소만 적었을때 articleapp의 list.html로 연결해주고 name는 home로
+> # 원래는 https://study-min-223.run.goorm.io/articles/list/ 로 접속 했다면
+> # 지금은 https://study-min-223.run.goorm.io 로 접속하면 home고 list.html이 출력
+> ```
+> 
+> 5. Mypage의 버튼들을 정리.
+> [Google Material icons](https://material.io/resources/icons/?style=baseline), [Google Material icons Github](https://github.com/google/material-design-icons)
+> - 구글에서 제공하는 무료 아이콘
+> 사용하기 위해 head.html에 아래 코드를 추가한다.(나는 구글 폰트 아래에 추가했다.)
 > ```html
->             <a href="{% url 'subscribeapp:list' %}" class="BS_header_nav">
->                 <span>Subscription</span>
->             </a> | 
->             {% if not user.is_authenticated %}<!--인증부분 위에 추가함-->
+>     <!-- GOOGLE MATERIAL ICON -->
+>     <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
 > ```
-> 출력 화면은 아래와 같다.
 > 
-> ![nav_bar](./image/Django22/Django_22_3.png)
->  
+> 다음으로는 accountapp의 detail.html을 수정한다
+> ```
+>         <!-- 프로필 수정 -->
+>             <a class="material-icons"
+>                style="box-shadow: 0 0 4px #ccc; border-radius: 10rem; padding: .4rem;"
+>                href="{% url 'profileapp:update' pk=target_user.profile.pk %}">
+>                <!-- box-shadow: 위치 위치 크기 색상 -->
+>                <!--타겟 유저의 프로파일의 pk를 pk로 넘겨준다.-->
+>                 edit
+>             </a>
+>             
+>         <!-- 회원 정보 수정 -->
+>             <a class="material-icons"
+>                style="box-shadow: 0 0 4px #ccc; border-radius: 10rem; padding: .4rem;"
+>                href="{% url 'accountapp:update' pk=user.pk %}">
+>                 settings
+>             </a>
+>             
+>         <!-- 회원 탈퇴 -->
+>             <a class="material-icons"
+>                style="box-shadow: 0 0 4px red; border-radius: 10rem; padding: .4rem;"
+>                href="{% url 'accountapp:delete' pk=user.pk %}">
+>                 cancel
+>             </a>
+> ```
+> 위의 코드와 같이 수정하였다.
+> 
+> <a>태그로 감사진 text를 통해 아이콘이 결정된다. 위쪽에 Google Material icons를 눌러 들어가서
+> 
+> 원하는 것이 있다면 그 이름으로 바꾸어 사용하자.
+> 
+> ![account_deatil](./image/Django23/Django_23_3.png)
+> 
+> 깔끔하게 바뀌었다.
+> 
 # 끝!
-오늘은 [43강](https://www.youtube.com/watch?v=F0gpmEXVEEU&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=44)의 학습을 진행 하였다.
+오늘은 [45강](https://www.youtube.com/watch?v=H9wS7PUJx4o&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=46)의 학습을 진행 하였다.
 ## 참고한 영상 : [실용주의 프로그래머의 작정하고 장고! Django로 Pinterest 따라하기](https://www.youtube.com/playlist?list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo)
