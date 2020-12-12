@@ -1,7 +1,7 @@
 # Django 실습
 ##### Date 2020_12_11
 ---
-1. RedirectView을 통한 SubscribeApp시작
+### 1. RedirectView을 통한 SubscribeApp시작
 > ```python manage.py startapp subscribeapp``` 명령어를 통해 app생성
 > 
 > settings.py 와 urls.py(backend_study/)에 등록
@@ -100,7 +100,7 @@
 > 
 > ![un_subscrip](./image/Django22/Django_22_1.png)
 > 
-2. Field Lookup을 사용한 구독 페이지 구현
+### 2. Field Lookup을 사용한 구독 페이지 구현
 > 지금가지 사용했던 (pk="", user="")이 방식은 AND func방식이였다.
 > 
 > 이번엔 OR func, WHERE func 에 대해 알아본다.
