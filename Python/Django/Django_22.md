@@ -163,5 +163,5 @@
 > ![nav_bar](./image/Django22/Django_22_3.png)
 >  
 # 끝!
-오늘은 [43강](https://www.youtube.com/watch?v=F0gpmEXVEEU&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=44)의 학습을 진행 하였다.
+오늘은 [43강](https://www.youtube.com/watch?v=F0gpmEXVEEU&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=44)까지 학습을 진행 하였다.
 ## 참고한 영상 : [실용주의 프로그래머의 작정하고 장고! Django로 Pinterest 따라하기](https://www.youtube.com/playlist?list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo)
