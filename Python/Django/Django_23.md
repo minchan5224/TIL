@@ -38,7 +38,7 @@
 > 이전에 ```{{ target_article.content }}```로 작성된 부분을 아래와 같이 수정한다
 > 
 > ```html
-> <!-- <p>태그 삭제함 바로<div>로 감싸짐 -->
+> <!-- <p> 태그 삭제함 바로 <div> 로 감쌈 -->
 > <div class="text-left">
 >     {{ target_article.content | safe }}
 > </div>
@@ -79,7 +79,7 @@
 >     
 >     def __str__(self):
 >         return f'{self.pk} : {self.title}'
->         # f''를 사용하면  ''안의 변수를 직접 출력한다.
+>         # f''를 사용하면  ''안의 변수를 직접 출력
 >         # project.pk : project.title
 > ```
 > 
