@@ -55,6 +55,8 @@
 >
 > 23. [Django실습 (44~45강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_23.md)
 >
+> 23. [Django프로젝트 "01" (회원가입, 로그인 ~ )](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_24.md)
+>
 > ---
 ## Pandas
 > ---
