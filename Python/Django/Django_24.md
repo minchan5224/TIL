@@ -4,33 +4,32 @@
 하지만 내일은 알바...
 ---
 1. models.py 작성
-
-```Python
-from django.db import models
-
-# Create your models here.
-
-class User(models.Model): #장고에서 제공하는 models.Model를 상속받아야한다.
-    username = models.CharField(max_length=20,verbose_name = 'ID')
-    # verbose_name  관리자페이지에서 보여지는 이름
-    password = models.CharField(max_length=20,verbose_name = 'PW')
-    registered_dttm = models.DateTimeField(auto_now_add=True,verbose_name='RegistrationTime') 
-    # 저장되는 시점의 시간을 자동으로 삽입해준다.
-
-    # class Meta:
-    #     db_table = 'test_user'
-    # 테이블명 지정 설정을 안하면 자동으로 클래스명+app이름과 같은 형식으로 이름 설정
-```
-
-2. 마이그레이션 파일 생성및 마이그레이션 DB에 반영
-```python manage.py makemigrations``` 생성
-
-```python manage.py migrate``` 반영
-
-3. admin에 Model Class 등록및 슈퍼계정 생성
-작성한 model클래스를 등록해 admin에서 사용하기 위해서
-
-같은 폴더의 admin.py에 아래 내용을 작성한다.
+> ```Python
+> from django.db import models
+> 
+> # Create your models here.
+> 
+> class User(models.Model): #장고에서 제공하는 models.Model를 상속받아야한다.
+>     username = models.CharField(max_length=20,verbose_name = 'ID')
+>     # verbose_name  관리자페이지에서 보여지는 이름
+>     password = models.CharField(max_length=20,verbose_name = 'PW')
+>     registered_dttm = models.DateTimeField(auto_now_add=True,verbose_name='RegistrationTime') 
+>     # 저장되는 시점의 시간을 자동으로 삽입해준다.
+> 
+>     # class Meta:
+>     #     db_table = 'test_user'
+>     # 테이블명 지정 설정을 안하면 자동으로 클래스명+app이름과 같은 형식으로 이름 설정
+> ```
+> 
+> 2. 마이그레이션 파일 생성및 마이그레이션 DB에 반영
+> ```python manage.py makemigrations``` 생성
+> 
+> ```python manage.py migrate``` 반영
+> 
+> 3. admin에 Model Class 등록및 슈퍼계정 생성
+> 작성한 model클래스를 등록해 admin에서 사용하기 위해서
+> 
+> 같은 폴더의 admin.py에 아래 내용을 작성한다.
 ```Python
 from django.contrib import admin
 from .models import User
