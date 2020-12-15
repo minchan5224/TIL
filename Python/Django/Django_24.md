@@ -164,5 +164,3 @@
 >     path('success/', AccountSuccessView.as_view(), name='success'),
 > ] 
 > ```
-> 
-> 
