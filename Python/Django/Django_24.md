@@ -179,3 +179,13 @@
 그래서 이번엔 사용한 적이 아직 없는 쿠키와 세션을 이용해서 구현할 것이다.
 
 물론 그건 내일부터.. 오늘은 이만..
+
+pip install django-bootstrap4을 통해 부트스트랩 설치
+```Python
+INSTALLED_APPS = [
+    '...',
+    'bootstrap4',
+    '...',
+]
+```
+을 통해 등록
