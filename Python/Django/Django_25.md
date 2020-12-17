@@ -337,3 +337,4 @@ urlpatterns = [
 오늘은 이만 정리하도록 하겠습니다. 안녕★
 
 내일은 이제 Article 과 Comments를 진행 해보도록 하겠습니다.
+
