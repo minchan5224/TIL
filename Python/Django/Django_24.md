@@ -97,6 +97,8 @@
 > 무식해 보여도 난 이게 가장 받아들이가 편하다.
 > 
 > ```Python
+> from django.views import View
+> 
 > class AccountLoginView(View):
 >     def post(self, request):
 >         login_user_id = request.POST.get('username',None)
