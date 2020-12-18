@@ -312,9 +312,9 @@
 >> ```
 >> 이번에도 같은 설정을 할 것이지만 이번엔 media설정이다.[강의 영상보기](https://www.youtube.com/watch?v=bh57RDikHNI&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=30&t=301)
 >> ```Python
->> MEDIA_URL = '/static/'
+>> MEDIA_URL = '/maida/'
 >> # 주소창에 maida 이하의 경로로 접근을 해야지 실제 media 파일에 접근이 가능하다
->> MEDIA_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+>> MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 >> # media 파일을 서버에 올렸을 때 어느 경로에 지정이 될것인지
 >> # 그 경로의 root(바닥)에 있는 경로가 어디가 될것인지에 대한 정보.
 >> ```
