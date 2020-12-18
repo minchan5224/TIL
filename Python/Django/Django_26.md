@@ -1,3 +1,10 @@
+# Django 프로젝트
+##### Date 2020_12_18
+오늘은 이전에 사용했던 것들에서 많이 달라지지 않았습니다.
+
+그래도 구독기능 응용해서 좋아요 싫어요 내일 구현해 볼게요
+---
+
 1. deleteView 생성했음.
 ```
 <input type="submit" class="btn btn-danger rounded-pill col-6 mt-3" onclick="return confirm('정말 삭제 하시겠습니까?');">
