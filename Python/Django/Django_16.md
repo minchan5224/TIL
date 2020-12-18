@@ -194,7 +194,7 @@
 > from django.contrib.auth.models import User
 > from django.db import models
 > 
-> class Aricle(models.Model):
+> class Article(models.Model):
 >     writer = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='article', null=True)
 >     # on_delete=models.SET_NULL 회원 탈퇴시 게시글이 사라지는 것이 아닌 주인이 없는 게시글로 되도록
 >     # related_name='article'  user.article로 사용하는 것이 더 직관적이기 때문에.
