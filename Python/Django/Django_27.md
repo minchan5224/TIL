@@ -148,38 +148,86 @@ def comment_ownership_required(func):
 ```
 #### detail.html
 ```html
- {% for comment in comments %}   
-    <div style="border: 1px solid; text-align: left; padding: 4%; margin: 1rem 0; border-radius: 1rem; border-color: #bbb;">
-        <div style="">
-            <strong >
+<!--버튼 클릭시 보이기 숨기기 기능 구현.-->
+<script>
+    function SettingFunction(idMyDiv){
+        var objDiv = document.getElementById(idMyDiv);
+        if(objDiv.style.display=="block"){ objDiv.style.display = "none"; }
+        else{ objDiv.style.display = "block"; }
+    }
+</script>
+<style>
+    .hide_show_setting{color:black;margin-bottom:30px}
+    .hide_show_setting button {cursor:pointer;padding:.4rem;border-radius: 10rem; outline:0;box-shadow: 0 0 4px;}
+    .hide_show_setting .blind_view{}
+    .hide_show_setting_view { display:none; }
+</style>
+
+{% for comment in comments %}   
+    <div style=" padding: 4%; margin: 1rem 0; border-radius: 1rem; background-color: #edfcf8">
+        {% if  comment.writer == user %}<!--작성자랑 리퀘스트 보낸사람이 같을때-->
+        <div class="comment_setting_inner" ><!--버튼 생성(누르면 삭제 버튼 나오게)-->
+            <div class="hide_show_setting">
+                <strong style=" text-align: left;">
+                    <a href="{% url 'accountapp:detail' pk=comment.writer.pk %}">
+                        {{ comment.writer.profile.nickname }}
+                    </a>
+                </strong>
+                <div style="text-align: right; margin: -1.6rem 0">
+                    <a href="#" onclick="SettingFunction('{{comment.pk}}'); return false;" class="blind_view">
+                        <h6 class="material-icons"><!--버튼 아이콘-->
+                            more_horiz
+                        </h6>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% else %}<!--리퀘스트 보낸게 작성자가 아닐때 닉네임출력-->
+            <strong style=" text-align: left;">
                 <a href="{% url 'accountapp:detail' pk=comment.writer.pk %}">
                     {{ comment.writer.profile.nickname }}
                 </a>
             </strong>
-            <h6 style="text-align: right; font-size: small;">
-                {{ comment.create_at }}
-            </h6>
-
-        </div>
-        <div style="margin: 1rem 1rem; word-wrap:break-word;">
+        {% endif %}
+        <div style="margin: 1rem 1rem; word-wrap:break-word; "><!--댓글 내용 출력-->
             {{ comment.content|linebreaksbr }}
         </div>
-        {% if  comment.writer == user %}
-        <div style="text-align: right">
-            <a href="{% url 'commentapp:delete' pk=comment.pk %}"class="btn btn-danger rounded-pill">
-                삭제
-            </a>
+        <div style="text-align: right; font-size: small;"><!--작성일-->
+            <h6 style="font-size: small;">
+                {{ comment.create_at }}
+            </h6>
+            <div class="comment_setting_view" id="{{comment.pk}}"><!--위에서 버튼 눌렀을때 숨겨져있던 버튼이 보여지는 부분-->
+                <a href="{% url 'commentapp:delete' pk=comment.pk %}"class="btn btn-outline-danger rounded-pill" style="font-size: small;">
+                    삭제
+                </a>
+            </div>
         </div>
+        {% if comment.recomment.count != 0 %}<!--대댓글이 있다면. 실행-->
+            <div class="recomment_view_setting_inner" ><!--버튼 보이기 감추기 구현-->
+                <div class="hide_show_setting">
+                    <a href="#" onclick="SettingFunction('RecommentsDiv'); return false;" class="blind_view">
+                        <h6 class="material-icons" style="font-size: 0.6em; text-decoration:underline;">
+                            답글 더보기<!--대댓글이 있다면 더보기 버튼 활성화. 누르면 대댓글 나옴-->
+                        </h6>
+                    </a>
+                </div>
+                <div class="recomments_setting_view" id="RecommentsDiv" style="text-align: right; font-size: 0.8em;"><!--대댓글가져오는 부분-->
+                    <div style="margin-top: -3rem;">
+                        {% for recomment in comment.recomment.all %}
+                        <!--target_article.comment.all = target_article에 외래키로 연결되어 있는 댓글을 전부 가져온다.-->
+                        {% include 'recommentapp/detail.html' with recomment=recomment %}
+                        {% endfor %}
+                        <!--안에 있는 article을 현재 있는target_article과 동기화 시킨다.-->
+                        {% include 'recommentapp/create.html' with article=target_comment %}
+                    </div>
+                </div>
+            </div>
+            
         {% endif %}
-        <div style="margin-top: 3rem;">
-                {% for recomment in comment.recomment.all %}
-                <!--target_article.comment.all = target_article에 외래키로 연결되어 있는 댓글을 전부 가져온다.-->
-                {% include 'recommentapp/detail.html' with recomment=recomment %}
-                {% endfor %}
-                <!--안에 있는 article을 현재 있는target_article과 동기화 시킨다.-->
-                {% include 'recommentapp/create.html' with article=target_comment %}
-        </div>
+        
     </div>
+
+
 {% endfor %}
 ```
 #### delete.html
@@ -334,28 +382,63 @@ def Recomment_ownership_required(func):
 ```
 #### detail.html
 ```html
-<div style="border: 1px solid; text-align: left; padding: 4%; margin: 1rem 0; border-radius: 1rem; border-color: #bbb;">
-    <div style="">
+<!--버튼 클릭시 보이기 숨기기 기능 구현.-->
+
+<style>
+    .hide_show_setting{color:black;margin-bottom:30px}
+    .hide_show_setting button {cursor:pointer;padding:.4rem;border-radius: 10rem; outline:0;box-shadow: 0 0 4px;}
+    .hide_show_setting .blind_view{}
+    .hide_show_setting_view { display:none; }
+</style>
+
+
+<div style="float: left; width: 10%;"> <!--대댓글 화살표-->
+    <h5 class="material-icons" style="border-radius: 10rem; padding: .4rem; margin-top: 1rem; margin-right: 1rem;"><!--subdirectory_arrow_right-->
+    subdirectory_arrow_right
+    </h5>
+</div>
+    
+<div style="text-align: left; padding: 4%; margin: 1rem 0; border-radius: 1rem; float: left; width: 90%;background-color: #e0faf3">
+    {% if  recomment.writer == user %}<!--작성자랑 리퀘스트 보낸사람이 같을때-->
+        <div class="recomment_setting_inner" ><!--버튼 생성(누르면 삭제 버튼 나오게)-->
+            <div class="hide_show_setting">
+                <strong style=" text-align: left;">
+                    <a href="{% url 'accountapp:detail' pk=recomment.writer.pk %}">
+                        {{ recomment.writer.profile.nickname }}
+                    </a>
+                </strong>
+                <div style="text-align: right; margin: -1.6rem 0">
+                    <a href="#" onclick="SirenFunction('{{recomment.pk}}'); return false;" class="blind_view">
+                        <h6 class="material-icons"><!--버튼 아이콘-->
+                            more_horiz
+                        </h6>
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% else %}<!--리퀘스트 보낸게 작성자가 아닐때 닉네임출력-->
+    <div>
         <strong >
             <a href="{% url 'accountapp:detail' pk=recomment.writer.pk %}">
                 {{ recomment.writer.profile.nickname }}
             </a>
         </strong>
-        <h6 style="text-align: right; font-size: small;">
-            {{ recomment.create_at }}
-        </h6>
-        {{recomment}}
-    </div>
-    <div style="margin: 1rem 1rem; word-wrap:break-word;">
-        {{ recomment.content|linebreaksbr }}
-    </div>
-    {% if  recomment.writer == user %}
-    <div style="text-align: right">
-        <a href="{% url 'recommentapp:delete' pk=recomment.pk %}"class="btn btn-danger rounded-pill">
-            삭제
-        </a>
     </div>
     {% endif %}
+    <div style="margin: 1rem 1rem; word-wrap:break-word;"><!--댓글 내용 출력-->
+        {{ recomment.content|linebreaksbr }}
+    </div>
+    <div>
+        <h6 style="text-align: right; font-size: 0.8em;"><!--작성일-->
+            {{ recomment.create_at }}
+        </h6>
+        <div class="hide_show_setting_view" id="{{recomment.pk}}" style="text-align: right;"><!--위에서 버튼 눌렀을때 숨겨져있던 버튼이 보여지는 부분-->
+            <a href="{% url 'recommentapp:delete' pk=recomment.pk %}"class="btn btn-outline-danger rounded-pill" style="font-size: 0.8em;">
+                삭제
+            </a>
+        </div>
+    </div>
+
 </div>
 ```
 #### delete.html
@@ -382,93 +465,75 @@ def Recomment_ownership_required(func):
 ### 3. articleapp
 #### views.py
 ```Python
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
-from django.views import View
-from django.views.generic import DetailView, DeleteView
-from django.contrib.auth.models import User
 
-from django.contrib.auth.hashers import make_password, check_password
-from django.contrib import auth # 로그인
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic import ListView
 
-from django.contrib.auth.decorators import login_required
+from articleapp.forms import ArticleCreationForm
+from articleapp.models import Article
+
 from django.utils.decorators import method_decorator
-from accountapp.decorators import account_ownership_required
+from django.contrib.auth.decorators import login_required
+from articleapp.decorators import article_ownership_required
+from django.utils import timezone
 
-has_ownership = [account_ownership_required, login_required]
-# 본인확인, 로그인 여부 확인 과정
-# 리스트로 담아서 사용 가능하다.
-
-class AccountCreateView(View):
-    def post(self, request):
-        user_id = request.POST.get('username',None)
-        password = request.POST.get('password',None)
-        re_password = request.POST.get('re_password',None)
-
-        if User.objects.filter(username = user_id).exists() == True:
-            message = "이미 존재하는 아이디입니다."
-
-        elif password != re_password:
-            message = "비밀번호가 다릅니다."
-
-        elif user_id == '' or password == '':
-            message = "모든 내용을 입력하세요."
-
-        else:
-            User.objects.create(username = user_id, password = make_password(password))
-            return render(request, 'accountapp/success.html')
-
-        return render(request, 'accountapp/create.html', {'message': message})
-
-    def get(self, request):
-        return render(request, 'accountapp/create.html')
-
-
-class AccountSuccessView(View):
-    model = User
-    template_name = 'accountapp/success.html'
-    def get(self, request):
-        return render(request, 'accountapp/success.html')
-
-class AccountDetailView(DetailView):
-    model = User
-    context_object_name = 'target_user' # 탬플릿에서 사용하는 user의 객체 이름을 target_user로 다르게 설정해줌
-    # 로그인 한 상태에서 자신의 페이지로 들어와 정보를 볼 수 있었지만 이제 다른사람이 그 페이지에 들어가더라도 정상적으로 열람 가능하다.
-    template_name = 'accountapp/detail.html'
+from commentapp.forms import CommentCreationForm
+from django.views.generic.edit import FormMixin
 
 
 @method_decorator(login_required, 'get')
 @method_decorator(login_required, 'post')
-class AccountUpdateView(View):
-    model = User
-    def post(self, request):
-        request_user = self.request.user
-        origin_password = request.POST.get('origin-password', None)
-        new_password = request.POST.get('password', None)
-        re_password = request.POST.get('password2', None)
-        if check_password(origin_password, request_user.password):
-            if new_password == re_password:
-                request_user.set_password(new_password)
-                request_user.save()
-                return HttpResponseRedirect(reverse('accountapp:success'))
-            else:
-                message = "새로운 비밀번호를 확인해주세요."
-        elif origin_password == None or new_password == None or re_password == None :
-            message = "모든 정보를 입력해야 합니다.bin()"
-        else:
-            message = "현재 사용중인 비밀번호를 확인해주세요."
-        return render(request, 'accountapp/update.html', {'message': message})
-    def get(self, request):
-        return render(request, 'accountapp/update.html')
+class ArticleCreateView(CreateView):
+    model = Article
+    form_class = ArticleCreationForm
+    template_name = 'articleapp/create.html'
+
+    def form_valid(self, form):
+        temp_article = form.save(commit=False) # 임시저장
+        temp_article.writer = self.request.user # 지금 리퀘스트를 보낸 사람을 writer로 저장
+        temp_article.created_at = timezone.localtime()
+        temp_article.save() #저장
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('articleapp:detail', kwargs={'pk': self.object.pk})
+
+class ArticleDetailView(DetailView, FormMixin):
+    # FormMixin을 이용해 다중 상속을 받는다.
+    model = Article
+    context_object_name = 'target_article'
+    template_name = 'articleapp/detail.html'
+    form_class = CommentCreationForm
+    # 필요한 form을 가져온다.
 
 
-@method_decorator(has_ownership, 'get')
-@method_decorator(has_ownership, 'post')
-class AccountDeleteView(DeleteView):
-    model = User
-    success_url = reverse_lazy('accountapp:login')
-    template_name = 'accountapp/delete.html'
+@method_decorator(article_ownership_required, 'get')
+@method_decorator(article_ownership_required, 'post')
+class ArticleUpdateView(UpdateView):
+    model = Article
+    form_class = ArticleCreationForm
+    template_name = 'articleapp/update.html'
+    context_object_name = 'target_article'
+
+    def get_success_url(self):
+        return reverse('articleapp:detail', kwargs={'pk': self.object.pk})
+
+@method_decorator(article_ownership_required, 'get')
+@method_decorator(article_ownership_required, 'post')
+class ArticleDeleteView(DeleteView):
+    model = Article
+    context_object_name = 'target_article'
+    success_url = reverse_lazy('articleapp:list')
+    template_name = 'articleapp/delete.html'
+
+class ArticleListView(ListView):
+    model = Article
+    context_object_name = 'article_list'
+    template_name = 'articleapp/list.html'
+    paginate_by = 25
+    # 하나의 페이지에 몇개의 객체를 보여줄 것인지
+    # Pagination을 하면 page_obj를 사용할 수 있다.
 ```
 #### detail.html
 ```html
@@ -478,13 +543,6 @@ class AccountDeleteView(DeleteView):
 
 {% block content %}
 
-<script>
-    function SirenFunction(idMyDiv){
-        var objDiv = document.getElementById(idMyDiv);
-        if(objDiv.style.display=="block"){ objDiv.style.display = "none"; }
-        else{ objDiv.style.display = "block"; }
-    }
-</script>
 <style>
     .articl_setting{color:black;margin-bottom:30px}
     .articl_setting button {cursor:pointer;padding:.4rem;border-radius: 10rem; outline:0;box-shadow: 0 0 4px;}
@@ -505,7 +563,7 @@ class AccountDeleteView(DeleteView):
             <div class="articl_setting_inner"style="text-align: right;">
                 <div class="articl_setting" style="text-align: right; margin-top: 1rem;">
                     {{ target_article.writer.profile.nickname }}
-                    <a href="#" onclick="SirenFunction('ArticlDiv'); return false;" class="blind_view">
+                    <a href="#" onclick="SettingFunction('ArticlDiv'); return false;" class="blind_view">
                         <h6 class="material-icons" style="font-size: medium; box-shadow: 0 0 4px #ccc; border-radius: 10rem; padding: .4rem;">
                             more_vert
                         </h6>
@@ -532,7 +590,7 @@ class AccountDeleteView(DeleteView):
             
             
             
-            <div style="border: 1px solid; text-align: left; padding: 4%; margin: 2rem 0; border-radius: 1rem; border-color: #bbb;">
+            <div style="text-align: left; padding: 4%; margin: 2rem 0; border-radius: 1rem; background-color: #f6fefc; font-size: 1em;">
                 
                 {% if target_article.comment.count == 0 %}
                         첫 댓글을 작성하세요!
@@ -553,17 +611,17 @@ class AccountDeleteView(DeleteView):
 ### 4. 버튼 누르면 내용나오는것 구현
 ```
     <script>
-    function SirenFunction(idMyDiv){
+    function ExFunction("내가 원하는 div id"){
          var objDiv = document.getElementById(idMyDiv);
          if(objDiv.style.display=="block"){ objDiv.style.display = "none"; }
           else{ objDiv.style.display = "block"; }
     }
     </script>
-    <style>
+    <style> 그냥 스타일 설정부분
         .comment_setting{color:#934545;margin-bottom:30px}
         .comment_setting button {cursor:pointer;padding:.4rem;border-radius: 10rem; outline:0;box-shadow: 0 0 4px;}
         .comment_setting .blind_view{font-size:1.14em;font-weight:bold;margin-top:-3px;text-decoration:underline}
-        .setting_view { display:none; }
+        .setting_view { display:none; } 초기값
     </style>
     <div class="con_inner">
         <div class="comment_setting">
@@ -573,8 +631,39 @@ class AccountDeleteView(DeleteView):
                 </h6>
             </a>
         </div>
-        <div class="setting_view" id="SirenDiv">
+        <div class="setting_view" id="내가 원하는 div id"> 위에서 선언한 ExFunction의 파라미터로 id를 전달하여 사용한다.
             내용보기
         </div>
     </div>
+```
+
+난 base.html에 스크립트 작성하여 어디서든 함수만 호출해서 사용하도록 하였다
+
+base.html의 내용은 아래와 같다
+```html
+<!DOCTYPE html>
+<html lang="ko">
+
+{% include 'head.html' %}
+
+<body style="background-color: #f5feff">
+    <!--버튼 클릭시 보이기 숨기기 기능 구현.-->
+    <script>
+    function SettingFunction(idMyDiv){
+        var objDiv = document.getElementById(idMyDiv);
+        if(objDiv.style.display=="block"){ objDiv.style.display = "none"; }
+        else{ objDiv.style.display = "block"; }
+    }
+    </script>
+    
+    {% include 'header.html' %}
+    
+    {% block content %}
+    {% endblock %}
+
+    {% include 'footer.html' %}
+    
+</body>
+</html>
+
 ```
