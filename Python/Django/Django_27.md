@@ -14,7 +14,9 @@
 댓글은 commentapp. 대댓글은 recommentapp으로 만들었습니다.
 
 여기서 각각의 코드는 아래와 같이 작성하였습니다.
+
 1. commentapp
+### .py 파일
 #### models.py
 ```Python
 from django.contrib.auth.models import User
@@ -92,4 +94,88 @@ class CommentDetailView(ListView):
     context_object_name = 'target_comment'
     template_name = 'commentapp/detail.html'
     paginate_by = 2
+```
+#### decoratorys.py
+```Python
+from django.http import HttpResponseForbidden
+from commentapp.models import Comment
+
+def comment_ownership_required(func):
+    def decorated(request, *args, **kwargs):
+        comment = Comment.objects.get(pk=kwargs['pk'])
+        # 요청을 받으며 pk로 받은 값을 가지고 있는 User.objects가 profile이 된다.
+        if not comment.writer == request.user: #그 article request의 profile이 아니라면
+            return HttpResponseForbidden() #권한없음 창 띄움.
+        return func(request, *args, **kwargs)
+    return decorated
+```
+### .html 파일
+#### create.html
+```html
+from django.http import HttpResponseForbidden
+from commentapp.models import Comment
+
+def comment_ownership_required(func):
+    def decorated(request, *args, **kwargs):
+        comment = Comment.objects.get(pk=kwargs['pk'])
+        # 요청을 받으며 pk로 받은 값을 가지고 있는 User.objects가 profile이 된다.
+        if not comment.writer == request.user: #그 article request의 profile이 아니라면
+            return HttpResponseForbidden() #권한없음 창 띄움.
+        return func(request, *args, **kwargs)
+    return decorated
+```
+#### detail.html
+```html
+ {% for comment in comments %}   
+    <div style="border: 1px solid; text-align: left; padding: 4%; margin: 1rem 0; border-radius: 1rem; border-color: #bbb;">
+        <div style="">
+            <strong >
+                <a href="{% url 'accountapp:detail' pk=comment.writer.pk %}">
+                    {{ comment.writer.profile.nickname }}
+                </a>
+            </strong>
+            <h6 style="text-align: right; font-size: small;">
+                {{ comment.create_at }}
+            </h6>
+
+        </div>
+        <div style="margin: 1rem 1rem; word-wrap:break-word;">
+            {{ comment.content|linebreaksbr }}
+        </div>
+        {% if  comment.writer == user %}
+        <div style="text-align: right">
+            <a href="{% url 'commentapp:delete' pk=comment.pk %}"class="btn btn-danger rounded-pill">
+                삭제
+            </a>
+        </div>
+        {% endif %}
+        <div style="margin-top: 3rem;">
+                {% for recomment in comment.recomment.all %}
+                <!--target_article.comment.all = target_article에 외래키로 연결되어 있는 댓글을 전부 가져온다.-->
+                {% include 'recommentapp/detail.html' with recomment=recomment %}
+                {% endfor %}
+                <!--안에 있는 article을 현재 있는target_article과 동기화 시킨다.-->
+                {% include 'recommentapp/create.html' with article=target_comment %}
+        </div>
+    </div>
+{% endfor %}
+```
+#### delete.html
+```html
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+
+    <div style="text-align: center; max-width: 500px; margin: 4rem auto;">
+        <div class="mb-4">
+            <h4>댓글 삭제 : {{ target_comment.content }}</h4>
+        </div>
+        <form action="{% url 'commentapp:delete' pk=target_comment.pk %}" method="post">
+            {% csrf_token %}
+              <input type="submit" class="btn btn-danger rounded-pill col-6 mt-3">
+        </form>
+    </div>
+
+{% endblock %}
 ```
