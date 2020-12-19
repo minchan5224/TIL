@@ -112,17 +112,29 @@ def comment_ownership_required(func):
 ### .html 파일
 #### create.html
 ```html
-from django.http import HttpResponseForbidden
-from commentapp.models import Comment
+{% load bootstrap4 %}
 
-def comment_ownership_required(func):
-    def decorated(request, *args, **kwargs):
-        comment = Comment.objects.get(pk=kwargs['pk'])
-        # 요청을 받으며 pk로 받은 값을 가지고 있는 User.objects가 profile이 된다.
-        if not comment.writer == request.user: #그 article request의 profile이 아니라면
-            return HttpResponseForbidden() #권한없음 창 띄움.
-        return func(request, *args, **kwargs)
-    return decorated
+{% block content %}
+    <div style="text-align: center; max-width: 500px; margin: 4rem auto;">
+        <div class="mb-4">
+        </div>
+        <form action="{% url 'commentapp:create' %}" method="post">
+            {% csrf_token %}
+            <textarea name="content" cols="40" rows="10" class="form-control" placeholder="댓글을 작성하세요."
+                       title="" required="" id="id_content" style="margin-top: 1rem; margin-bottom: 1rem; height: 4rem; white-space: pre-line;"></textarea>
+            
+            {% if user.is_authenticated %}
+            <input type="submit" class="btn btn-dark rounded-pill col-6 mt-3">
+            {% else %}
+            <a herf="{% url 'accountapp:login' %}?next={{ request.path }}" class="btn btn-dark rounded-pill col-6 mt-3">
+                Login
+            </a>
+            {% endif %}
+            <input type="hidden" name="article_pk" value="{{ article.pk }}">
+            <!--이름과 값이 article_pk인 인자를 숨겨서 보내준다.-->
+        </form>
+    </div>
+{% endblock %}
 ```
 #### detail.html
 ```html
