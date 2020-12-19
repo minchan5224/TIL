@@ -379,3 +379,33 @@ def Recomment_ownership_required(func):
 
 {% endblock %}
 ```
+
+
+### 4. 버튼 누르면 내용나오는것 구현
+```
+    <script>
+    function SirenFunction(idMyDiv){
+         var objDiv = document.getElementById(idMyDiv);
+         if(objDiv.style.display=="block"){ objDiv.style.display = "none"; }
+          else{ objDiv.style.display = "block"; }
+    }
+    </script>
+    <style>
+        .comment_setting{color:#934545;margin-bottom:30px}
+        .comment_setting button {cursor:pointer;padding:.4rem;border-radius: 10rem; outline:0;box-shadow: 0 0 4px;}
+        .comment_setting .blind_view{font-size:1.14em;font-weight:bold;margin-top:-3px;text-decoration:underline}
+        .setting_view { display:none; }
+    </style>
+    <div class="con_inner">
+        <div class="comment_setting">
+            <a href="#" onclick="SirenFunction('SirenDiv'); return false;" class="blind_view">
+                <h6 class="material-icons" style="">
+                more_horiz
+                </h6>
+            </a>
+        </div>
+        <div class="setting_view" id="SirenDiv">
+            내용보기
+        </div>
+    </div>
+```
