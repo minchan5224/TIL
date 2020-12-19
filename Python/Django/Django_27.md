@@ -379,7 +379,176 @@ def Recomment_ownership_required(func):
 
 {% endblock %}
 ```
+### 3. articleapp
+#### views.py
+```Python
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.urls import reverse, reverse_lazy
+from django.views import View
+from django.views.generic import DetailView, DeleteView
+from django.contrib.auth.models import User
 
+from django.contrib.auth.hashers import make_password, check_password
+from django.contrib import auth # 로그인
+
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from accountapp.decorators import account_ownership_required
+
+has_ownership = [account_ownership_required, login_required]
+# 본인확인, 로그인 여부 확인 과정
+# 리스트로 담아서 사용 가능하다.
+
+class AccountCreateView(View):
+    def post(self, request):
+        user_id = request.POST.get('username',None)
+        password = request.POST.get('password',None)
+        re_password = request.POST.get('re_password',None)
+
+        if User.objects.filter(username = user_id).exists() == True:
+            message = "이미 존재하는 아이디입니다."
+
+        elif password != re_password:
+            message = "비밀번호가 다릅니다."
+
+        elif user_id == '' or password == '':
+            message = "모든 내용을 입력하세요."
+
+        else:
+            User.objects.create(username = user_id, password = make_password(password))
+            return render(request, 'accountapp/success.html')
+
+        return render(request, 'accountapp/create.html', {'message': message})
+
+    def get(self, request):
+        return render(request, 'accountapp/create.html')
+
+
+class AccountSuccessView(View):
+    model = User
+    template_name = 'accountapp/success.html'
+    def get(self, request):
+        return render(request, 'accountapp/success.html')
+
+class AccountDetailView(DetailView):
+    model = User
+    context_object_name = 'target_user' # 탬플릿에서 사용하는 user의 객체 이름을 target_user로 다르게 설정해줌
+    # 로그인 한 상태에서 자신의 페이지로 들어와 정보를 볼 수 있었지만 이제 다른사람이 그 페이지에 들어가더라도 정상적으로 열람 가능하다.
+    template_name = 'accountapp/detail.html'
+
+
+@method_decorator(login_required, 'get')
+@method_decorator(login_required, 'post')
+class AccountUpdateView(View):
+    model = User
+    def post(self, request):
+        request_user = self.request.user
+        origin_password = request.POST.get('origin-password', None)
+        new_password = request.POST.get('password', None)
+        re_password = request.POST.get('password2', None)
+        if check_password(origin_password, request_user.password):
+            if new_password == re_password:
+                request_user.set_password(new_password)
+                request_user.save()
+                return HttpResponseRedirect(reverse('accountapp:success'))
+            else:
+                message = "새로운 비밀번호를 확인해주세요."
+        elif origin_password == None or new_password == None or re_password == None :
+            message = "모든 정보를 입력해야 합니다.bin()"
+        else:
+            message = "현재 사용중인 비밀번호를 확인해주세요."
+        return render(request, 'accountapp/update.html', {'message': message})
+    def get(self, request):
+        return render(request, 'accountapp/update.html')
+
+
+@method_decorator(has_ownership, 'get')
+@method_decorator(has_ownership, 'post')
+class AccountDeleteView(DeleteView):
+    model = User
+    success_url = reverse_lazy('accountapp:login')
+    template_name = 'accountapp/delete.html'
+```
+#### detail.html
+```html
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+
+{% block content %}
+
+<script>
+    function SirenFunction(idMyDiv){
+        var objDiv = document.getElementById(idMyDiv);
+        if(objDiv.style.display=="block"){ objDiv.style.display = "none"; }
+        else{ objDiv.style.display = "block"; }
+    }
+</script>
+<style>
+    .articl_setting{color:black;margin-bottom:30px}
+    .articl_setting button {cursor:pointer;padding:.4rem;border-radius: 10rem; outline:0;box-shadow: 0 0 4px;}
+    .articl_setting .blind_view{font-size:1.5em}
+    .articl_view { display:none; }
+</style>
+
+    <div>
+        <div style="text-align: center; max-width: 500px; margin: 2rem auto;">
+            <h1>
+                {{ target_article.title }}
+            </h1>
+            <div style=" margin-top: 2rem">
+                <h6 style="text-align: right; font-size: small;">
+                    {{ target_article.created_at }}
+                </h6>
+            </div>
+            <div class="articl_setting_inner"style="text-align: right;">
+                <div class="articl_setting" style="text-align: right; margin-top: 1rem;">
+                    {{ target_article.writer.profile.nickname }}
+                    <a href="#" onclick="SirenFunction('ArticlDiv'); return false;" class="blind_view">
+                        <h6 class="material-icons" style="font-size: medium; box-shadow: 0 0 4px #ccc; border-radius: 10rem; padding: .4rem;">
+                            more_vert
+                        </h6>
+                    </a>
+                </div>
+                <div class="articl_view" id="ArticlDiv" style="text-align: right;">
+                    <a href="{% url 'articleapp:update' pk=target_article.pk %}" class="btn btn-outline-primary rounded-pill col-2.3" style="font-size: small;">
+                        게시물 수정
+                    </a>
+                    <a href="{% url 'articleapp:delete' pk=target_article.pk %}" class="btn btn-outline-danger rounded-pill col-2.3" style="font-size: small;">
+                        게시물 삭제
+                    </a>
+                </div>
+            </div>
+            
+            
+            <img style="width:100%; border-radius: 1rem; margin: 2rem 0" src="{{ target_article.image.url }}" alt="">
+            
+            <div style="text-align: left; margin-top: 1rem;">
+                <p>
+                    {{ target_article.content }}
+                </p>
+            </div>
+            
+            
+            
+            <div style="border: 1px solid; text-align: left; padding: 4%; margin: 2rem 0; border-radius: 1rem; border-color: #bbb;">
+                
+                {% if target_article.comment.count == 0 %}
+                        첫 댓글을 작성하세요!
+                {% else %}
+                <!--target_article.comment.all = target_article에 외래키로 연결되어 있는 댓글을 전부 가져온다.-->
+                {% include 'commentapp/detail.html' with comments=target_article.comment.all %}
+                <!--안에 있는 article을 현재 있는target_article과 동기화 시킨다.-->
+                {% endif %}
+                {% include 'commentapp/create.html' with article=target_article %}
+                
+            </div>            
+        </div>
+    </div>
+
+{% endblock %}
+```
 
 ### 4. 버튼 누르면 내용나오는것 구현
 ```
