@@ -15,7 +15,7 @@
 
 여기서 각각의 코드는 아래와 같이 작성하였습니다.
 
-1. commentapp
+### 1. commentapp
 ### .py 파일
 #### models.py
 ```Python
@@ -202,7 +202,7 @@ def comment_ownership_required(func):
 {% endblock %}
 ```
 
-2. recommentapp
+### 2. recommentapp
 ### .py 파일
 #### models.py
 ```Python
