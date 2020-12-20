@@ -61,6 +61,8 @@
 >
 > 26. [Django프로젝트 "03" (프로필, 게시물)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_26.md)
 >
+> 27. [Django프로젝트 "04" (댓글, 대댓글, html디자인)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_27.md)
+>
 > ---
 ## Pandas
 > ---
