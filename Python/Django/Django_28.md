@@ -29,3 +29,5 @@ function RecommendFunction(idMyDiv){
 기본적인 함수는 위와 같구 ```ButtonSetting.innerHTML = "댓글 더보기";```이 뭐냐면
 
 ButtonSetting라는 아이디를 가진 태그의 텍스트를 "댓글 더보기" 바꾸겠다 입니다. 쉬워요;;
+
+그리고 각 html에서 함수를 이용하기 위한 id들은 text와 pk등으로 구성된 이름으로 새로 만들었습니다.
