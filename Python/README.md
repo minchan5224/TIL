@@ -63,6 +63,8 @@
 >
 > 27. [Django프로젝트 "04" (댓글, 대댓글, html디자인)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_27.md)
 >
+> 28. [Django프로젝트 "05" (구독, 프로젝트, 지하철aip이식)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_28.md)
+>
 > ---
 ## Pandas
 > ---
