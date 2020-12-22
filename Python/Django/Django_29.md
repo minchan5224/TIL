@@ -1,7 +1,7 @@
 # Django 프로젝트
 ##### Date 2020_12_22
 
-마무리...
+마무리... [코드 보러가기](https://github.com/minchan5224/DjangoProject)
 
 ---
 ```html
@@ -97,3 +97,5 @@ urls.py는 ```path('subway/', SubwayTimeView.as_view(), name='subway'),```처럼
 역시 배운것은 응용을 여러가지로 해야하는것 같다. 
 
 오늘은 여기까지.
+
+[코드 보러가기](https://github.com/minchan5224/DjangoProject)
