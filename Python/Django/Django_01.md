@@ -123,6 +123,5 @@
 >
 > ![pycharm-venv-setting-win](./image/Django01/Django_01_7.png)
 >
->
 > # 끝!
 > # 참고한 블로그 : [예제로 배우는 파이썬 프로그래밍](http://pythonstudy.xyz/)
