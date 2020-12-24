@@ -1,5 +1,5 @@
 # Django 실습
-##### Date 2020_12_9
+##### Date 2020_12_09
 ---
 ### 1. [MultipleObjectMixin을 통한 ProjectApp 마무리](https://www.youtube.com/watch?v=O9T5I8OKRps&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=42)
 > articleapp의 models.py의 ```class Article(models.Model):```에 
