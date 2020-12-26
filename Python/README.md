@@ -67,6 +67,8 @@
 >
 > 29. [Django프로젝트 "06" (이미지 클릭(원본 이미지),지하철aip이식, 버그 수정)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_29.md)
 > - [코드 보러가기](https://github.com/minchan5224/DjangoProject)
+> 
+> 30. [Django실습 (46강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_30.md)
 >
 > ---
 ## Pandas
