@@ -1,101 +1,28 @@
-# Django 프로젝트
-##### Date 2020_12_22
+작정하고 장고 46강 - Why Docker? 서비스 배포로 들어가며
 
-마무리... [코드 보러가기](https://github.com/minchan5224/DjangoProject)
+https://www.youtube.com/watch?v=PqMKZ-taMvI&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=46
 
----
-```html
-<style>
-    h2 {
-     /* position the text */
-        position: absolute;
-        left: 0px;
-        display: none;
-        width: 100%;
-        text-align: center;
-        margin: 0;
-        height: 65%;
-        top: 65%;
-    }
+이제부턴 장고보다는 도커에 초점을 맞추어 배포를 어떻게 더 쉽게 하는지, 유지보수를 더 쉽게 하는지.
 
-    img:hover + h2 {
-        display: block;
-    }
+지금까지 장고 내부의 여러 app들을 만들었다.
+ - Django container를 만들기 위해.
 
-    img:hover {
-        opacity: 0.5;
-    }
-</style>
-<div style="margin-top: 2rem;">
-    <a href="{{ target_article.image.url }}" target="_blank">
-        <img style="width:100%; border-radius: 1rem; margin: 2rem 0" src="{{ target_article.image.url }}" alt="">
-        <h2>
-            <strong>
-                원본을 보려면 클릭 하세요.
-            </strong>
-        </h2>
-    </a>
-</div>
-```
-이미지 위에 커서를 올리면 반투명 해지고 텍스트를 출력하는 코드
+Django container를 만든것을 기반으로 Docker안에 하나의 컨테이너로서 소스들을 넣을 것이다.
 
-해당 코드를 이용하여 articles/list에서는 각각의 article의 title를 제공하고
+이 도커 시스템을 VULTR라는 가상 서버 시스템을 빌려 서비스 할것이다.(나는 아직 구름 사용)
 
-articles/detail에서는 "원본을 보려면 클릭 하세요." 텍스트를 출력한고 클릭시 원본 이미지를 새탭으로 출력한다.
+왜 도커를 쓰는가.
+- Docker is Everywhere : 이미 많은 곳에서 사용중이며 필수적인 요소로 자리잡고있다.
 
-### 지하철 시간표 api 이식
+- Docker is FAST : 빠르다!
 
-subway_time.py파일을 가져왔고 POST가 들어왔을때 응답하도록 작성 하였다.
+Docker란?
+- 기존과 다른 가상화(Virtualization) 기반(기존 가상화에 비해 속도가 매우 빠르다.)
+>> RedHat과 AWS에서는 아래 그림과 같이 표현한다.
+[]()
+- 컨테이너 개념을 이용해 일반 OS를 사용하는 것과 큰 차이가 없을 정도로 속도가 빨라졌다.
 
-임시로 다른 app에 작성을 하였지만
+- 같은 환경의 격리된 컨테이너를 사용할 수 있다.
 
-startapp을 통하여 subwayapp을 만들어 옮길 예정이다.
-
-views.py
-```Python
-from "views.py가 존재하는 경로상"app import subway_time
-from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse
-from pytz import timezone
-from datetime import datetime
-
-
-@method_decorator(csrf_exempt, name='dispatch') # 이거 없으면 csrf관련 오류가 발생한다. 이쪽에서만 csrf를 해제해준다.
-class SubwayTimeView(View):
-    template_name = 'articlelikeapp/subway.html'
-    def post(self, request):
-        content = self.request.body
-        content = json.loads(content)
-        content = content['userRequest']
-        content = content['utterance']
-        KST = datetime.now(timezone('Asia/Seoul'))
-        dataSend = subway_time.main_service(content, KST)
-        return JsonResponse(dataSend)
-```
-위와같이 viwes.py를 작성하고 template은 혹시몰라 그냥 아래와 같이 작성하였다.
-```html
-{% extends 'base.html' %}
-{% load bootstrap4 %}
-
-{% block content %}
-{% csrf_token %}
-{% endblock %}
-```
-딱히 뭐 들어있는 것도 없다.
-urls.py는 ```path('subway/', SubwayTimeView.as_view(), name='subway'),```처럼 간단히 작성하면 끝이다.
-
-이제 진짜 끝이다.
-
-영상을 보고 배우고 처음 시작한 Django프로젝트였다.
-
-처음엔 2주 가량 걸릴것이라 생각했다. 
-
-하다보니 하루에 8~10시간은 앉아서 계속 여러 방법을 사용해보고 생각해본것 같다.
-
-4일? 5일? 정도 재미있었다. 
-
-역시 배운것은 응용을 여러가지로 해야하는것 같다. 
-
-오늘은 여기까지.
-
-[코드 보러가기](https://github.com/minchan5224/DjangoProject)
+- 한번의 환경설정 작업(image)을 거치면 컨테이너를 이용해 구축이 용이해진다.
+>> class와 instance의 관계와 비슷
