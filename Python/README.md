@@ -4,6 +4,8 @@
 >> ###### [세부항목 보기](https://github.com/minchan5224/TIL/tree/main/Python#django)
 > ### 2. Pandas 파일
 >> ###### [세부항목 보기](https://github.com/minchan5224/TIL/tree/main/Python#pandas)
+> ### 3. Stock Auto 파일
+>> ###### [세부항목 보기](https://github.com/minchan5224/TIL/tree/main/Python/#stock)
 > ---
 ## Django
 > ---
@@ -74,5 +76,10 @@
 ## Pandas
 > ---
 > 0. [Pandas 란](https://github.com/minchan5224/TIL/blob/main/Python/Pandas/Pandas_00.md)
+>
+> ---
+## Stock Auto
+> ---
+> 1. [Stock Auto 환경 구성](https://github.com/minchan5224/TIL/blob/main/Python/Stock/Stock_00.md)
 >
 > ---
