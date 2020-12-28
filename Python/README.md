@@ -5,7 +5,7 @@
 > ### 2. Pandas 파일
 >> ###### [세부항목 보기](https://github.com/minchan5224/TIL/tree/main/Python#pandas)
 > ### 3. Stock Auto 파일
->> ###### [세부항목 보기](https://github.com/minchan5224/TIL/tree/main/Python/#stock)
+>> ###### [세부항목 보기](https://github.com/minchan5224/TIL/tree/main/Python#stock-auto)
 > ---
 ## Django
 > ---
