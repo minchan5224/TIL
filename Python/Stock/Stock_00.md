@@ -57,10 +57,11 @@ slack.chat.post_message('#stock','종목명 : '+name+'\n매도호가 : '+str(off
 ```
 위의 코드는 삼성전자의 현재가(매도호가)를 slack-bot를 이용해 채팅창으로 전송하는 코드이다.
 
+아래의 코드는  종목코드별 리스트를 획득하여 각각의 자료를 출력하고
+
+마지막에 전체 수량을 출력한다.
 ```Python
 import win32com.client
- 
- 
 # 연결 여부 체크
 objCpCybos = win32com.client.Dispatch("CpUtil.CpCybos")
 bConnect = objCpCybos.IsConnect
@@ -90,6 +91,6 @@ for i, code in enumerate(codeList2):
  
 print("거래소 + 코스닥 종목코드 ",len(codeList) + len(codeList2))
 ```
-
+오늘은 여기까지만.
 > # 끝!
 > # 참고한 곳 : [조코딩 : 파이썬 주식 투자 자동화](https://www.youtube.com/playlist?list=PLU9-uwewPMe0fB60VIMuKFV7gPDXmyOzp)
