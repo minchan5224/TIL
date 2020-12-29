@@ -82,4 +82,6 @@
 > ---
 > 1. [Stock Auto 환경 구성](https://github.com/minchan5224/TIL/blob/main/Python/Stock/Stock_00.md)
 >
+> 2. [자동 구매, 크레온 자동 실행 등 한 것 설명](https://github.com/minchan5224/TIL/blob/main/Python/Stock/Stock_01.md)
+>
 > ---
