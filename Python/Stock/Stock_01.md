@@ -1,96 +1,47 @@
 # Stock Auto
-##### Date 2020_12_28
+##### Date 2020_12_29
 ---
-오늘은 환경설정과 크레온 계좌를 만들었다.
+오늘은 본격적인 구매 자동화 코드를 학습했다.
 
-PC를 바꾼뒤 구름만 사용하였기에 아직 VS코드를 설치하지 않아서 다시 깔아줬다.
+어제와 마찬가지로 조코딩 영상을 보고 학습했다. 궁금하다면 영상을 보고 따라하기를 추천한다.
 
-크레온에서 제공하는 API를 이용해 간단한 예제를 확인, 실행 하였고
+왠지 코드는 여기 올리면 안될것 같으니 안올리겠다.
 
-slack를 이용한 봇생성과 메시지 전송(POST)까지 진행 하였다.\
+조코딩님은 출판사의 허락을 받고 한거니.. 난 아니고..
 
-내일은 본격적으로 자동화 코드를 구현하고 
+기본적인 메커니즘은 어제의 저가와 고가 사이의 변동폭을 이용해 구매시점을 판단하는 것이다.
 
-마무리 할 것이다.
+그리고 그래프상 5일 이동평균가, 10일 이동평균가와 현재 그래프의 위치를 비교해 현재 그래프가 위에 있을대 구매 하는 메커니즘 이라 이해 하였다.
 
-```Python
-import win32com.client
-from slacker import Slacker
+구매 수량은 사용자가 설정한 종목 코드의 갯수에 따라 정해지고
 
-slack = Slacker('자신의 토큰을 입력한다.') # OAuth 토큰
+계좌에 들어있는 금액/종목 코드의 갯수 를 연산하여
 
-# 연결 여부 체크
-objCpCybos = win32com.client.Dispatch("CpUtil.CpCybos")
-bConnect = objCpCybos.IsConnect
-if (bConnect == 0):
-    print("PLUS가 정상적으로 연결되지 않음. ")
-    exit()
- 
-# 현재가 객체 구하기
-objStockMst = win32com.client.Dispatch("DsCbo1.StockMst")
-objStockMst.SetInputValue(0, 'A005930')   #종목 코드 - 삼성전자
-objStockMst.BlockRequest()
- 
-# 현재가 통신 및 통신 에러 처리 
-rqStatus = objStockMst.GetDibStatus()
-rqRet = objStockMst.GetDibMsg1()
-print("통신상태", rqStatus, rqRet)
-if rqStatus != 0:
-    exit()
- 
-# 현재가 정보 조회
-name= objStockMst.GetHeaderValue(1)  # 종목명
+각 종목마다 사용할 수 있는 금액이 정해진다.
 
-offer = objStockMst.GetHeaderValue(16)  #매도호가
+또한 구매 방식으로는
+- IOC 방식 : 체결 후 남은 수량 취소
 
-exFlag = objStockMst.GetHeaderValue(58) #예상체결가 구분 플래그
- 
- 
-if (exFlag == ord('0')):
-    Stock_Market_Status = "동시호가와 장중 이외의 시간"
-elif (exFlag == ord('1')) :
-    Stock_Market_Status = "동시호가 시간"
-elif (exFlag == ord('2')):
-    Stock_Market_Status = "장중 또는 장종료"
- 
-slack.chat.post_message('#stock','종목명 : '+name+'\n매도호가 : '+str(offer)+'\n시장 상태 : '+Stock_Market_Status)
-```
-위의 코드는 삼성전자의 현재가(매도호가)를 slack-bot를 이용해 채팅창으로 전송하는 코드이다.
+- FOK 방식 : 전량 체결되지 않으면 주문 자체를 취소
 
-아래의 코드는  종목코드별 리스트를 획득하여 각각의 자료를 출력하고
+위의 두가지 방식이 있다. 우리는 FOK방식을 사용하고
 
-마지막에 전체 수량을 출력한다.
-```Python
-import win32com.client
-# 연결 여부 체크
-objCpCybos = win32com.client.Dispatch("CpUtil.CpCybos")
-bConnect = objCpCybos.IsConnect
-if (bConnect == 0):
-    print("PLUS가 정상적으로 연결되지 않음. ")
-    exit()
- 
-# 종목코드 리스트 구하기
-objCpCodeMgr = win32com.client.Dispatch("CpUtil.CpCodeMgr")
-codeList = objCpCodeMgr.GetStockListByMarket(1) #거래소
-codeList2 = objCpCodeMgr.GetStockListByMarket(2) #코스닥
- 
- 
-print("거래소 종목코드", len(codeList))
-for i, code in enumerate(codeList):
-    secondCode = objCpCodeMgr.GetStockSectionKind(code)
-    name = objCpCodeMgr.CodeToName(code)
-    stdPrice = objCpCodeMgr.GetStockStdPrice(code)
-    print(i, code, secondCode, stdPrice, name)
- 
-print("코스닥 종목코드", len(codeList2))
-for i, code in enumerate(codeList2):
-    secondCode = objCpCodeMgr.GetStockSectionKind(code)
-    name = objCpCodeMgr.CodeToName(code)
-    stdPrice = objCpCodeMgr.GetStockStdPrice(code)
-    print(i, code, secondCode, stdPrice, name)
- 
-print("거래소 + 코스닥 종목코드 ",len(codeList) + len(codeList2))
-```
+- 최유리 방식 : 당장 가장 유리하게 매매할 수 있는 가격
+
+- 최우선 방식 : 우선 대기하면서 가장 적절한 가격을 찾는다.(매매가 될수도 안될수도 있다.)
+
+위 두가지 방식중엔 최유리 방식을 사용한다.
+
+오늘 나는 15원의 이득을 보았으며
+
+매일 오전 8시 30분엔 크레온 플러스 자동 실행 스크립트를 작동 시키고
+
+매일 오전 8시 40분엔 자동 거래 코드를 작동 시킨다.
+
+거래는 9시 5분 부터 15시 15분 까지 진행하며
+
+매일 15시 15분엔 일괄 매도를 실행하고 프로그램을 종료한다.
+
 오늘은 여기까지만.
 > # 끝!
 > # 참고한 곳 : [조코딩 : 파이썬 주식 투자 자동화](https://www.youtube.com/playlist?list=PLU9-uwewPMe0fB60VIMuKFV7gPDXmyOzp)
