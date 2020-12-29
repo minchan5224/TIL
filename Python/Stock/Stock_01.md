@@ -1,5 +1,6 @@
 # Stock Auto
 ##### Date 2020_12_29
+[영상보기](https://www.youtube.com/watch?v=5bTxyBeOVkA&list=PLU9-uwewPMe0fB60VIMuKFV7gPDXmyOzp&index=4)
 ---
 오늘은 본격적인 구매 자동화 코드를 학습했다.
 
