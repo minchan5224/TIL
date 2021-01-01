@@ -7,6 +7,7 @@
 > 사용자가 입력한 키워드로 구글 뉴스를 클리핑 하는 함수를 작성 하였다.
 > ```Python
 > parse.quote(search_keyword) # 개인적으로 가장 중요한 부분이라고 생각한다.
+> parse.unquote(search_keyword) # 디코딩은 뭐 앞에 un붙이면 된다.
 > ```
 > 위 코드는 사용자가 입력한 str변수를 url인코딩 시켜준다. 
 >
