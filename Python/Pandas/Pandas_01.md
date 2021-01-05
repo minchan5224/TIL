@@ -32,5 +32,17 @@
 > ```
 > 위와 같이 사용하면 된다.
 > 
+> ### 그래프를 그림 파일로 저장하기.
+> ```Python
+> import pandas as pd
+> import matplotlib.pyplot as plt
+> 
+> df = pd.read_csv('저장경로/파일명.확장자', '옵션'='값') #옵션은 여러개 가능
+> # csv는 그냥 예시로 작성한거 상관 없음
+> boxplot = df.plot(kind='box)
+> # 박스그래프도 그냥 예시로 작성한것 상관 없음
+> plt.savefig('경로/저장하고자 하는 파일명.확장자')
+> # 이부분이 이미지로 저장하는 부분, 가장 중요
+> ```
 > # 끝!
 > # 학습에 이용한 책 : [실무자를 위한 파이선 100제](http://www.infopub.co.kr/new/include/detail.asp?sku=05000268)
