@@ -77,6 +77,8 @@
 > ---
 > 0. [Pandas 란](https://github.com/minchan5224/TIL/blob/main/Python/Pandas/Pandas_00.md)
 >
+> 0. [실무자를 위한 파이선 100제_Pandas](https://github.com/minchan5224/TIL/blob/main/Python/Pandas/Pandas_01.md)
+> 
 > ---
 ## Stock Auto
 > ---
