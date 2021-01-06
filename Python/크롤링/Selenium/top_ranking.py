@@ -89,6 +89,7 @@ def item_code_extraction(tyr_extraction_urls):
 def category_item_code(top_item_urls, c_name):
     '''
     카테고리별 상위 11개 상품 정보 획득
+    selenium 
     '''
     item_link = []
     img_link = []
@@ -176,6 +177,6 @@ def main():
                 if category_names[i][j] == '&':
                     category_names[i] = category_names[i][:j]+'n'+category_names[i][j+1:]
 
-    excel_create(top_lists, category_names)
+    excel_create(top_lists, category_names) 
     
 main() 
