@@ -19,16 +19,11 @@ screenshot_name = './screenshot/test_'
 img_down_route = './image/'
 search_day = "%Y/%m/%d"
 
-# def excel_process():
-#     # 엑셀을 읽어 온다.
-#     col = ['A', 'B', 'C', 'D', 'E', 'F']
-#     wb = load_workbook(filename = "./excel/output.xlsx")
-#     # 엑셀 시트를 active한다.
-#     ws = wb[wb.sheetnames[0]]
-#     for i in col:
-#         ws.column_dimensions[i].width = 50
 
 def excel_create(top_list, category_name):
+    '''
+    엑셀 파일로 저장하기.
+    '''
     KST = datetime.now(timezone('Asia/Seoul'))
     s_time = KST.strftime(search_day)
     alarm = ''
@@ -58,6 +53,9 @@ def excel_create(top_list, category_name):
     create_ex.to_excel('./excel/output.xlsx')
     
 def down_img(img_urls, img_codes):
+    '''
+    이미지 다운로드
+    '''
     img_r = []
     for i, j in zip(img_urls, img_codes):
         if not os.path.exists(img_down_route+j+'.jpg'):
@@ -76,6 +74,9 @@ def use_pd_excel(item_link):
     ft.close()
 
 def item_code_extraction(tyr_extraction_urls):
+    '''
+    상품코드 추출
+    '''
     slash_num = 0
     ext_i_codes = []
     tmp = ''
@@ -94,7 +95,10 @@ def item_code_extraction(tyr_extraction_urls):
                         tmp += j
     return ext_i_codes
 
-def category_item_code(top_item_urls, c_name): #카테고리별 상위 11개 상품 정보 획득
+def category_item_code(top_item_urls, c_name):
+    '''
+    카테고리별 상위 11개 상품 정보 획득
+    '''
     item_link = []
     img_link = []
     item_name = []
@@ -147,7 +151,10 @@ def category_item_code(top_item_urls, c_name): #카테고리별 상위 11개 상
 
     
         
-def top_category(top_rank_url): #top_9 카테고리 url 획득
+def top_category(top_rank_url):
+    '''
+    top_9 카테고리 url 획득
+    '''
     top_url = []
     top_name = []
     try : 
@@ -181,9 +188,3 @@ def main():
     excel_create(top_lists, category_names)
     
 main() 
-# excel_process()
-# d = {'a':[]}
-# print(d)
-# l = [2, 3, 4]
-# d['a']+=l
-# print(d)
