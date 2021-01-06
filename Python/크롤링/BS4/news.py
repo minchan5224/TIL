@@ -1,11 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Jan  1 14:57:20 2021
-
-@author: Administrator
-
-bs4 구글 뉴스 클리핑하기 1~2.
-"""
 
 import requests
 from urllib import parse
@@ -68,8 +61,4 @@ def google_newsclipping(limit=5):
 
 news = google_newsclipping()
 print(news)
-# print(news['title'])
-# print(news.keys())
 
-# for i in news.keys():
-#     print(i)
