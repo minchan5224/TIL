@@ -64,15 +64,6 @@ def down_img(img_urls, img_codes):
             
     return img_r
 
-def use_pd_excel(item_link):
-    requ = item_link[0]
-    response_body = request.urlopen(requ).read()
-    soup = (BeautifulSoup(response_body, 'html.parser'))
-    # soup = soup.find('h1',class_='product-title-text')
-    ft = open(top_url_txt[:-5]+'aas.txt', mode='w', encoding='utf-8')
-    ft.write(str(soup.prettify())+'\n\n\n')
-    ft.close()
-
 def item_code_extraction(tyr_extraction_urls):
     '''
     상품코드 추출
