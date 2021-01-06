@@ -144,7 +144,7 @@ def category_item_code(top_item_urls, c_name):
         
 def top_category(top_rank_url):
     '''
-    top_9 카테고리 url 획득
+    top_9 카테고리 url 획득 
     '''
     top_url = []
     top_name = []
