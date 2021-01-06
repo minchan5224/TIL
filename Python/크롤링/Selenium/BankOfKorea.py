@@ -1,39 +1,13 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Jan  1 17:39:01 2021
-
-@author: Administrator
-
-14~15 예제 작성.
-
-"""
 
 from selenium import webdriver
 from bs4 import BeautifulSoup
 import time
 
-def download_bok_statistics():
-    """
-    100대 통계지표 엑셀 다운로드
-    """
-    driver = webdriver.Chrome("../chromedriver_win32/chromedriver")
-    driver.implicitly_wait(3)
-    driver.get("https://ecos.bok.or.kr/jsp/vis/keystat/#/key/")
-    
-    excel_download = driver.find_element_by_css_selector('img[alt="download"]')
-    driver.implicitly_wait(3)
-    
-    excel_download.click()
-    time.sleep(5)
-    
-    driver.close()
-    print("파일 다운로드 중")
-
-    return None
-
 def download_bok_statistics_by_keyword():
     """
-    통계지표 키워드 입력하여 csv파일로 저장
+    통계지표 키워드 입력하여 csv파일로 저장,
+    책을 통한 실습.
     """
     item_found = 0
     while not item_found:
@@ -98,4 +72,3 @@ def download_bok_statistics_by_keyword():
 
 result = download_bok_statistics_by_keyword()
 print(result)
-# download_bok_statistics()
