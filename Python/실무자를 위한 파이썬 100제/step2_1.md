@@ -20,3 +20,19 @@
 > ```"결과를 담을 변수명" = Counter("등장 횟수 구할 변수를 담은것")``` 과 같이 사용합니다.
 >
 > 음 그리곤 워드클라우드를 작성하면 끝입니다.
+>
+```Python
+"워드클라우드에 담을 딕셔너리 형식 변수" = dict("위에서 사용한 결과를 담은 변수명".most_common("구할 갯수"))
+wordcloud = WordCloud(font_path=('폰트 경로'),
+                      background_color='white',
+                      width=1200,
+                      height=800).generate_from_frequencies("앞에서 구한 워드클라우드에 담을 딕셔너리 형식 변수")
+
+fig = plt.figure()
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis('off')
+
+plt.savefig('저장할 경로/파일명.확장자')
+```
+>
+> 위와 같이 한다면 당신도 워드크라우드를 사용할 수 있습니다.
