@@ -1,4 +1,98 @@
-전체 코드는 아래와 같다
+> 일단 처음으로는 신문 기사들의 리스트를 획득하는 함수이다.
+```Python
+def get_article_list(url, page_num):
+    '''
+    url = 신문사의 url
+    전달받은 url을 이용해 신문 기사들의 세부 링크 리스트를 획득한다.
+    '''
+    now = datetime.datetime.now()
+    today = now.strftime('%d')
+    
+    article_link = []
+    search_url = url+str(page_num)
+
+    resp = requests.get(search_url)
+    html_src = resp.text
+    soup = BeautifulSoup(html_src, 'html.parser')
+    
+    list_main = soup.find('main', attrs={'class':'list'})
+    
+    article_list = list_main.find_all('li', attrs={'class':'list'})
+    # 기사들이 리스트로 제공되는 페이지에서 기사들의 정보 수집
+    # print(news_items)
+    for curt_article in article_list: 
+        if today != curt_article.find('time').getText()[8:10]: #오늘 기사가 아니라면.(기사 작성일 설정 가능.)
+            if article_link == []: # 반환할 기사가 없다면.
+                return False
+        else :
+            article_link.append(curt_article.find('a').get('href')) # 수집한 기사들의 정보에서 기사 링크 획득
+    
+    return article_link
+```
+> 리스트에서 필요한 링크만 추출하여 리스트 형식으로 반환한다.
+>
+> 다음으로는 리스트 형식으로 전달받은 링크를 이용해 기사의 세부내용을 추출하는 부분이다.
+```Python
+def get_article_text(url, article_urls):
+    '''
+    url = 신문사의 url
+    article_urls = 기사의 세부 링크
+    전달받은 파라미터를 이용해 기사의 내용을 가공하여 획득한다.
+    '''
+    now = datetime.datetime.now()
+    today = now.strftime('%Y_%m_%d')
+    
+    for article_url in article_urls:
+
+        item_resp = requests.get(url+article_url) # 해당 기사 페이지 정보 습득
+        item_html_src = item_resp.text # 해당 기사 페이지 정보 습득
+        item_soup = BeautifulSoup(item_html_src, 'html.parser') # 해당 기사 페이지 정보 습득
+        
+        item_articles = item_soup.find('article', attrs={'class':'view'}) # 기사 페이지에서 타이틀과 기사내용 정보 습득
+        item_article = item_articles.find_all('p') # p테그로 감싸진 것이 기사의 내용
+        p_tag_text = ''
+        
+        for p_tag in item_article: # 각각의 p테그로 감싸진 기사를 필요한 정보만 붙여서 습득
+            if '아이뉴스' in str(p_tag.text):
+                p_tag_text += p_tag.text[str(p_tag.text).find(']')+2:]
+                '''
+                신문사, 기자이름 삭제
+                text에 아이뉴스가 포함되어 있을 때
+                ".find(']')"를 이용해 처음 발견되는 ']'의 위치를 반환받는다.
+                슬라이싱을 이용해 ']'포함 뒤의 공백까지 삭제한다.
+                '''
+            else :
+                p_tag_text += p_tag.text
+
+        with open('../article/'+str(today)+'.txt', 'a', -1, 'utf-8') as f:
+            f.writelines(p_tag_text+'\n') # 합쳐진 기사 내용을 txt에 작성.
+```
+> 한 페이지의 기사 리스트의 링크에서 전부 내용을 추출하면 txt파일에 내용을 쓴다.
+>
+> 다음으로는 신문기사를 조건에 맞게 반복하여 습득하도록 제어한 부분이다.
+```Python
+def news_crawling_start():
+    '''
+    임시로 작성한 함수, 파라미터 필요 X(임시니깐)
+    get_article_list()함수 작동 후 get_article_text() 함수 작동
+    get_article_list()에서 False 반환받으면 끝남.
+    '''
+    base_url = "http://www.inews24.com"
+    list_url = "/list/inews?page="
+    page_num = 0
+    while True:
+        
+        page_num += 1
+        temp = get_article_list(base_url+list_url, page_num)
+        if temp != False:
+            print(str(page_num)+"페이지 시작")
+            get_article_text(base_url, temp)
+        else :
+            print('끝')
+            break
+```
+>
+> 전체 코드는 아래와 같다
 ```Python
 import requests
 # from selenium import webdriver
@@ -123,3 +217,6 @@ def top_50_keyword():
     with open('../article/2021_01_08_top50.json', 'a', -1, 'utf-8') as f:
         json.dump(json_out, f, ensure_ascii=False, indent="\t")
 ```
+> 해당 웹 페이지의 robots.txt를 먼저 확인하고 크롤링을 진행 하였다. [보기](http://www.inews24.com/robots.txt)
+>
+> 전부 허용이길래 진행했다.
