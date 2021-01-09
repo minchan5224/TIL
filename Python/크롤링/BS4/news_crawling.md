@@ -241,3 +241,4 @@ def top_50_keyword():
 >
 ![2021_01_08_2](./BS4_img/2021_01_08_2.jpg)
 >
+![news_json](./BS4_img/news_json.png)
