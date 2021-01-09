@@ -1,5 +1,5 @@
 전체 코드는 아래와 같다
-'''Python
+```Python
 import requests
 # from selenium import webdriver
 from bs4 import BeautifulSoup
@@ -122,4 +122,4 @@ def top_50_keyword():
     
     with open('../article/2021_01_08_top50.json', 'a', -1, 'utf-8') as f:
         json.dump(json_out, f, ensure_ascii=False, indent="\t")
-'''
+```
