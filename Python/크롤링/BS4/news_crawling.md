@@ -220,3 +220,15 @@ def top_50_keyword():
 > 해당 웹 페이지의 robots.txt를 먼저 확인하고 크롤링을 진행 하였다. [보기](http://www.inews24.com/robots.txt)
 >
 > 전부 허용이길래 진행했다.
+> 
+> 테스트 하였을때 12페이지? 정도의 기사가 나온것으로 확인했다.
+>
+> 전체 기사의 내용을 konlpy를 이용해 명사들만 추출하여 각각의 명사의 출현 횟수를 토대로 top 50의 키워드를 json 파일로 저장하였다.
+>
+> 또한 wordcloud를 이용해 워드클라우드 이미지도 생성 하였다.
+>
+> konlpy의 경우 2가지의 클래스를 사용하였다.Mecab Class과 Hannanum Class이다. [설명보기](https://konlpy-ko.readthedocs.io/ko/v0.4.3/morph/)
+>
+> 성능에서는 확실히 Mecab이 뛰어난것 같다. 하지만 그거슨 윈도우에서 사용 할 수 없다.. 흑흑
+>
+> 난 우분투 환경과 윈도우 환경에서 테스트 해봤다.
