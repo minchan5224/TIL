@@ -96,6 +96,7 @@
 >>
 >> 2. [뉴스 크롤링, 텍스트 분석, 워드클라우드](https://github.com/minchan5224/TIL/blob/main/Python/%ED%81%AC%EB%A1%A4%EB%A7%81/BS4/news_crawling.md)
 >>
+>> ---
 > ### 2. Selenium
 >> 1. [파이썬 100제 selenium 사용예시](https://github.com/minchan5224/TIL/blob/main/Python/%ED%81%AC%EB%A1%A4%EB%A7%81/Selenium/BankOfKorea.py)
 >>
