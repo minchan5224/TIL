@@ -89,3 +89,10 @@
 > ---
 ## 크롤링
 > ---
+> ### 1. BS4
+>> 1. [news.py](https://github.com/minchan5224/TIL/blob/main/Python/%ED%81%AC%EB%A1%A4%EB%A7%81/BS4/news.py)
+>>
+>> 2. [뉴스 크롤링, 텍스트 분석, 워드클라우드](https://github.com/minchan5224/TIL/blob/main/Python/%ED%81%AC%EB%A1%A4%EB%A7%81/BS4/news_crawling.md)
+>>
+> ### 2. Selenium
+>>
