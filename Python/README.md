@@ -97,4 +97,9 @@
 >> 2. [뉴스 크롤링, 텍스트 분석, 워드클라우드](https://github.com/minchan5224/TIL/blob/main/Python/%ED%81%AC%EB%A1%A4%EB%A7%81/BS4/news_crawling.md)
 >>
 > ### 2. Selenium
+>> 1. [파이썬 100제 selenium 사용예시](https://github.com/minchan5224/TIL/blob/main/Python/%ED%81%AC%EB%A1%A4%EB%A7%81/Selenium/BankOfKorea.py)
 >>
+>> 2. [알리익스프레스 로그인 예시](https://github.com/minchan5224/TIL/blob/main/Python/%ED%81%AC%EB%A1%A4%EB%A7%81/Selenium/login_test.py)
+>>
+>> 3. [알리익스프레스 상위 9개 카테고리의 상위 11개 상품정보 엑셀로 저장, 이미지 다운](https://github.com/minchan5224/TIL/blob/main/Python/%ED%81%AC%EB%A1%A4%EB%A7%81/Selenium/top_ranking.py)
+>---
