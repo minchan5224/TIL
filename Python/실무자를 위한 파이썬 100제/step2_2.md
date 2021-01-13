@@ -30,10 +30,14 @@
 > ```
 >
 > 배경이 없는 이미지와 배경을 흰색으로 지정한 이미지로 테스트를 했다.
-> ![image_bg](./image/step2_2/image_bg.png)
 > 
-
+> ![image_bg](./image/step2_2/image_bg.png) "차이를 확인 할 수 있다."
+>
+> 크게 봤을땐 두 이미지의 차이점이 보이지 않는다.
+>
 > <img src="./image/step2_2/test_image.png" width="400" height="200">
-
+>
+> 하지만 결과물을 본다면 배경이 투명한(없는) 이미지와 배경이 흰색인 이미지가 결과가 다르다.
+>
 > <img src="./image/step2_2/result.jpg" width="600" height="600">
 
