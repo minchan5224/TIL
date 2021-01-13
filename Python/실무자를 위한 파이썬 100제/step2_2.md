@@ -30,3 +30,6 @@
 > ```
 >
 > 배경이 없는 이미지와 배경을 흰색으로 지정한 이미지로 테스트를 했다.
+> ![image_bg](./image/step2_2/image_bg.png)
+> ![test_image](./image/step2_2/test_image.png)
+> ![result](./image/step2_2/result.jpg)
