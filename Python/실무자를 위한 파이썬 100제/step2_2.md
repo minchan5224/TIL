@@ -33,8 +33,7 @@
 > ![image_bg](./image/step2_2/image_bg.png)
 > 
 
-> <img src="./image/step2_2/test_image.png" width="600" height="300">
+> <img src="./image/step2_2/test_image.png" width="400" height="200">
 
-> ![test_image](./image/step2_2/test_image.png){: width="300" height="300"}
-> ![result](./image/step2_2/result.jpg){: width="300" height="300"}
+> <img src="./image/step2_2/result.jpg" width="400" height="200">
 
