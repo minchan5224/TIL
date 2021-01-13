@@ -34,3 +34,4 @@
 > 
 > ![test_image](./image/step2_2/test_image.png){: width="300" height="300"}
 > ![result](./image/step2_2/result.jpg){: width="300" height="300"}
+<img src="./image/step2_2/test_image.png" width="300" height="300">
