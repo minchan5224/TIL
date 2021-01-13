@@ -32,6 +32,7 @@
 > 배경이 없는 이미지와 배경을 흰색으로 지정한 이미지로 테스트를 했다.
 > ![image_bg](./image/step2_2/image_bg.png)
 > 
+<img src="./image/step2_2/test_image.png" width="600" height="300">
 > ![test_image](./image/step2_2/test_image.png){: width="300" height="300"}
 > ![result](./image/step2_2/result.jpg){: width="300" height="300"}
 <img src="./image/step2_2/test_image.png" width="300" height="300">
