@@ -38,8 +38,8 @@
 > <br>
 > <br>
 > <br>
-> <br>
 > <img src="./image/step2_2/test_image.png" width="400" height="200">
+> <br>
 > <br>
 > <br>
 >
