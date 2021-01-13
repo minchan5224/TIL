@@ -35,5 +35,5 @@
 
 > <img src="./image/step2_2/test_image.png" width="400" height="200">
 
-> <img src="./image/step2_2/result.jpg" width="600" height="300">
+> <img src="./image/step2_2/result.jpg" width="600" height="500">
 
