@@ -39,5 +39,5 @@
 >
 > 하지만 결과물을 본다면 배경이 투명한(없는) 이미지와 배경이 흰색인 이미지가 결과가 다르다.
 >
-> <img src="./image/step2_2/result.jpg" width="600" height="600">
+> <img src="./image/step2_2/result.png" width="600" height="600">
 
