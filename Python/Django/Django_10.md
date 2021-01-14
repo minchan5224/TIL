@@ -1,7 +1,7 @@
 # Django 실습
 ##### Date 2020_11_24
 ---
-<!--### 1. 기본적인 환경 설정
+### 1. 기본적인 환경 설정
 > 영상을 보고 필요한 부분은 따라서 진행한다.
 >
 > 영상에선 파이참을 이용하여 git와 연결시켜 실습을 진행하지만
@@ -229,4 +229,4 @@
 >
 # 끝! 
 오늘은 [10강](https://www.youtube.com/watch?v=D3DMvHsn9Ss&list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo&index=10) 까지 학습을 진행 하였다.
-## 참고한 영상 : [실용주의 프로그래머의 작정하고 장고! Django로 Pinterest 따라하기](https://www.youtube.com/playlist?list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo)-->
+## 참고한 영상 : [실용주의 프로그래머의 작정하고 장고! Django로 Pinterest 따라하기](https://www.youtube.com/playlist?list=PLQFurmxCuZ2RVfilzQB5rCGWuODBf4Qjo)
