@@ -33,7 +33,7 @@
 > plt.show()
 > ```
 > 
-> 생각보다 간단했다. 결과는 아래 이미지다.
+> 생각보다 간단했다. 저장한 그래프는 아래의 이미지와 같다.(클릭하면 원본)
 > <br><br>
 > <img src="./image/step3_1/google_trend_Apple ICar.png" width="600" height="300">
 >
@@ -60,7 +60,71 @@
 > # 그래프를 이미지로 저장하는 부분은 파일명을 지정하는 것 외에는 전부 동일하기에 생략한다.
 > ```
 > 
-> 결과는 아래 이미지다.
+> 저장한 그래프는 아래의 이미지와 같다.(클릭하면 원본)
 > <br><br>
 > <img src="./image/step3_1/google_trend_by_region_Sweet Home.png" width="600" height="300">
 >
+> 다음은 복수의 키워드를 이용하여 기간동안 검색량을 하나의 그래프로 출력한다.
+> ```Python
+> keyword1 = "intel"
+> keyword2 = "amd"
+> period = "today 5-y" # 검색기간은 최근 5년
+> 
+> # Google trend 접속, 데이터 획득
+> trend_obj = TrendReq()
+> trend_obj.build_payload(kw_list=[keyword1, keyword2], timeframe=period) # kw_list는 최대 5개
+> # 각각 키워드의 검색량 획득
+> trend_df = trend_obj.interest_over_time()
+> 
+> # 그래프 출력
+> plt.style.use("ggplot")
+> plt.figure(figsize=(14,10))
+> trend_df[keyword1].plot()
+> trend_df[keyword2].plot() # 각각의 키워드의 검색량을 이용해 그래프 생성
+> plt.title("Google Trend %s and %s" %(keyword1, keyword2), size=15)
+> plt.legend(loc="best")
+>
+> # 그래프 파일 저장 생략
+> ```
+> 
+> 저장한 그래프는 아래의 이미지와 같다.(클릭하면 원본)
+> <br><br>
+> <img src="./image/step3_1/Google_Trend_intel_and_amd.png" width="600" height="300">
+>
+> 마지막은 키워드에 대한 추천 검색어를 습득하고 습득한 검색어를 이용해 그래프를 생성하는 것이다.
+> ```Python
+> trend_obj = TrendReq() # 접속
+> 
+> keyword = "apple"
+> suggested_keywords = trend_obj.suggestions(keyword) # 키워드에 대한 추천 검색어 습득
+> ```
+> 
+> suggested_keywords에 담긴 값은 아래 이미지와 같다.
+> 
+> <img src="./image/step3_1/suggested_keywords.png" width="800" height="100">
+>
+> ```Python
+> new_keyword = suggested_keywords[3]['title'] # 3번째에 들어있는 iPhone 획득
+> 
+> period = "now 7-d"
+> trend_obj.build_payload(kw_list=[new_keyword], timeframe=period) # new_keyword의 지정한 기간동안 검색량 획득
+> 
+> trend_df = trend_obj.interest_by_region() # 지역별 검색량 획득
+> trend_top30 = trend_df.sort_values(by=new_keyword, ascending=False).head(30) # top30 획득
+> 
+> # 그래프 출력
+> plt.style.use("ggplot")
+> plt.figure(figsize=(15,15))
+> trend_top30[new_keyword].plot(kind='bar')
+> plt.title("Google Trend by Region", size=15)
+> plt.legend(labels=[new_keyword], loc="upper right")
+>
+> # 그래프 파일 저장 생략
+> ```
+> 
+> 저장한 그래프는 아래의 이미지와 같다.(클릭하면 원본)
+> <br><br>
+> <img src="./image/step3_1/google_trend_by_region_iPhone.png" width="600" height="300">
+>
+> 
+> 오늘은 여기까지..
