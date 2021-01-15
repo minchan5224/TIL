@@ -35,7 +35,7 @@
 > 
 > 생각보다 간단했다. 결과는 아래 이미지다.
 > <br><br>
-> <img src="./image/step3_1/google_trend_Apple ICar.png" width="400" height="200">
+> <img src="./image/step3_1/google_trend_Apple ICar.png" width="600" height="300">
 >
 > 다음은 지역(region)별 키워드의 검색량을 비교한다.
 > ```Python
@@ -62,5 +62,5 @@
 > 
 > 결과는 아래 이미지다.
 > <br><br>
-> <img src="./image/step3_1/google_trend_by_region_Sweet Home.png" width="400" height="200">
+> <img src="./image/step3_1/google_trend_by_region_Sweet Home.png" width="600" height="300">
 >
