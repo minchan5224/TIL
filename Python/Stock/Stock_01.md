@@ -44,5 +44,7 @@
 매일 15시 15분엔 일괄 매도를 실행하고 프로그램을 종료한다.
 
 오늘은 여기까지만.
+
+당분간은 안돌리고 멈춰둬야할듯..
 > # 끝!
 > # 참고한 곳 : [조코딩 : 파이썬 주식 투자 자동화](https://www.youtube.com/playlist?list=PLU9-uwewPMe0fB60VIMuKFV7gPDXmyOzp)
