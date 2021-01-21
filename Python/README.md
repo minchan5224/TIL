@@ -31,33 +31,33 @@
 >
 > 9. [Static 파일](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_09.md)
 >
-> 10. ~~[Django실습 (1~10강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_10.md)
+> 10. ~~[Django실습 (1~10강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_10.md)~~
 >
-> 11. [Django실습 (11~13강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_11.md)
+> 11. ~~[Django실습 (11~13강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_11.md)~~
 >
-> 12. [Django실습 (14~18강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_12.md)
+> 12. ~~[Django실습 (14~18강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_12.md)~~
 >
-> 13. [Django실습 (20~24강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_13.md)
+> 13. ~~[Django실습 (20~24강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_13.md)~~
 >
-> 14. [Django실습 (25~29강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_14.md)
+> 14. ~~[Django실습 (25~29강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_14.md)~~
 >
-> 15. [Django실습 (30~32강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_15.md)
+> 15. ~~[Django실습 (30~32강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_15.md)~~
 >
-> 16. [Django실습 (33~35강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_16.md)
+> 16. ~~[Django실습 (33~35강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_16.md)~~
 >
-> 17. [Django실습 (36강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_17.md)
+> 17. ~~[Django실습 (36강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_17.md)~~
 >
-> 18. [Django실습 (37강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_18.md)
+> 18. ~~[Django실습 (37강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_18.md)~~
 >
-> 19. [Django실습 (38강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_19.md)
+> 19. ~~[Django실습 (38강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_19.md)~~
 >
-> 20. [Django실습 (39~40강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_20.md)
+> 20. ~~[Django실습 (39~40강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_20.md)~~
 >
-> 21. [Django실습 (41강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_21.md)
+> 21. ~~[Django실습 (41강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_21.md)~~
 >
-> 22. [Django실습 (42~43강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_22.md)
+> 22. ~~[Django실습 (42~43강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_22.md)~~
 >
-> 23. [Django실습 (44~45강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_23.md)~~
+> 23. ~~[Django실습 (44~45강)](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_23.md)~~
 >
 > 24. ~~[Django프로젝트 "01" (회원가입, 로그인 ~ )](https://github.com/minchan5224/TIL/blob/main/Python/Django/Django_24.md)~~ 다시..
 >
