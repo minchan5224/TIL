@@ -1,44 +1,62 @@
-### 파이썬으로 워드파일 작성하기.
-> 2021/1/20
+### 파이썬으로 PDF파일의 TEXT수집하기.
+> 2021/1/22
 >
-> 필드를 이용해 워드의 내용을 자동으로 채운다! 
+> PDF파일의 TEXT를 수집한다.
 ---
-> 이건 쫌 많이 유용하다고 생각한다.
+> 이것도 은근히 사용할 일이 많을 것이라 생각한다.
 >
-> 뭐 고객에게 주문 영수증 발급? 등 비슷한 문서작업을 자동으로 처리하는것이 가능하다.
+> 뭐.. 논문이나.. PDF로 저장한 이력서? 포트폴리오? 에서 회사에서 원하는 키워드가 적혀있는지 판단해 서류를 검증?
 >
-> 하지만 모든 문서작업이 그렇듯 사용할 양식은 직접 구성하고 필드를 배치해야한다.
->
-> 그 다음부턴 엑셀이든 json이든 데이터를 이용해 해당 파일을 알맞게 작성이 가능해진다.
+> 음... 더 다양한것이 지금은 생각이 안나지만 사용할 곳은 많을 것으로 생각된다.
 >
 > ```Python
-> from mailmerge import MailMerge # word파일을 사용하기 위해
-> from datetime import datetime as dt # 현재 시간을 받오기 위해
-> import pandas as pd # 엑셀을 읽어와 데이터프레임 단위로 사용하기 위해
+> # pip install PyPDF2, pip install pdfminer.six 를 적힌 순서대로 하라고함.. (PyPDF2먼저, pdfminer.six는 그다음)
+> import PyPDF2
+> from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
+> from pdfminer.converter import TextConverter
+> from pdfminer.layout import LAParams
+> from pdfminer.pdfpage import PDFPage
+> from io import StringIO
 > 
-> template_filename = 'fax_cover_template.docx' # 사용할 word 파일 명
-> document = MailMerge("../data/"+template_filename) # word 파일 양식을 읽어온다.
+> # PyPDF2로 페이지 수 계산
+> filename = "north_korea_economic_growth.pdf"
+> fp = open("../data/"+filename, 'rb')
+> total_pages = PyPDF2.PdfFileReader(fp).numPages
+> print(total_pages)
+> fp.close()
 > 
-> respondents_filename = 'fax_respondents_list.xlsx' # 데이터를 이용할 엑셀 명
-> respondents = pd.read_excel("../data/"+respondents_filename) # 사용할 엑셀을 읽어온다.
-> 
-> respondents_list = [] # 엑셀에서 읽어온 데이터를 딕셔너리로 옮겨담은뒤 순서대로 적재할 리스트.
-> 
-> today = '%s년 %s월 %s일'%(dt.now().year, dt.now().month, dt.now().day) # 현재 시간 사용 양식에 맞게 획득
-> 
-> for index in respondents.index:
->     new_respondent = {} # 임시로 저정할 딕셔너리
->     new_respondent['name'] = respondents.loc[index, 'name'] # 각각의 엑셀 필드별 데이터를 적절한 딕셔너리 key에 적재한다.
->     new_respondent['fax'] = respondents.loc[index, 'fax']
->     new_respondent['phone'] = respondents.loc[index, 'phone']
->     new_respondent['date'] = today
->     new_respondent['title'] = respondents.loc[index, 'title']
->     new_respondent['memo'] = respondents.loc[index, 'memo']
->     respondents_list.append(new_respondent) # 완성된 딕셔너리를 리스트에 적재한다.
+> # pdfminer로 페이지별 텍스트 수집
+> page_text = {} # 각 페이지 번호를 key로 사용하고 텍스트를 value 로 저장할 딕셔너리
+> for page_no in range(total_pages):
+>     rsrcmgr = PDFResourceManager() # pdf리소스 매니저 객체
+>     retstr = StringIO() # str을 파일처럼 정리, pdf파일 내용을 담는다.
+>     codec = 'utf-8'
+>     laparms = LAParams() # 분석을 위한 파라미터 설정
+>     device = TextConverter(rsrcmgr, retstr, codec = codec, laparams=laparms)
+>     fp = open("../data/"+filename, 'rb')
+>     password = None
+>     maxpages = 0
+>     interpreter = PDFPageInterpreter(rsrcmgr, device) # PDF 인터프리터 생성.
+>     caching = True
+>     pagenos = [page_no]
 >     
-> document.merge_templates(respondents_list, separator='page_break') # 정리된 리스트를 이용해 word파일을 작성한다.
-> output_filename = 'fax_dover_multi_pages_excel_data.docx' # 내보낼 워드 파일명 지정.
-> document.write("../output/"+output_filename)# 작성한 word파일을 저장한다.
+>     for page in PDFPage.get_pages(fp, pagenos, maxpages=maxpages, password=password,
+>                                   caching=caching, check_extractable=True):
+>         # PDFMiner 라이브러리의 PDFPage 모듈을 이용해 각 페이지에서 텍스트 추출
+>         # get_pages()함수에 사용할 변수는 위에서 만들어둔 값들을 사용
+>         
+>         interpreter.process_page(page) # PDF인터프리터(번역기) 객체에 process_page() 메소드 적용함
+>         # 각 페이지의 문자열이 파일 형태로 변환되어 StringIO(=retstr) 객체로 저장
+>         
+>         
+>     page_text[page_no] = retstr.getvalue()
+>     # StringIO(=retstr)의 값을 value에 저장한다 key는 page_no 다.
+>     
+>     
+>     fp.close()
+>     device.close()
+>     retstr.close()
+>     # 사용 끝났으니 파일, 디바이스(텍스트변환기), StringIO객체를 닫는다.
 > ```
 >
 > 실습 과정은 워드파일에 하나의 데이터를 작성하는 것
