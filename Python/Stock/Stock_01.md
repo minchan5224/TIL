@@ -2,7 +2,7 @@
 ##### Date 2020_12_29
 [영상보기](https://www.youtube.com/watch?v=5bTxyBeOVkA&list=PLU9-uwewPMe0fB60VIMuKFV7gPDXmyOzp&index=4)
 ---
-오늘은 본격적인 구매 자동화 코드를 학습했다.
+오늘은 본격적인 구매 자동화 코드를 학습했다...
 
 어제와 마찬가지로 조코딩 영상을 보고 학습했다. 궁금하다면 영상을 보고 따라하기를 추천한다.
 
