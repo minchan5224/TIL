@@ -26,6 +26,7 @@
 > 
 > <img src="./image/step4_5/email_code.png">
 > 
+> 250 은 요청된 메일 동작 확인, 완료를 나타내며 221은 <도메인>서비스 종료된 전송 채널을 의미한다. [SMTP 응답 코드 보기](https://jybaek.tistory.com/624)
 > <img src="./image/step4_5/email_auto.png">
 
 >
