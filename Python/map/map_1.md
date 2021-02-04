@@ -66,7 +66,7 @@
 > ws = wb.create_sheet(index=0, title='Chart') # Chart라는 이름의 시트 생성
 > wb.remove(wb['Sheet']) # 기본적으로 생성되어있던 Sheet 객체 삭제
 > ws.column_dimensions['B'].width = name_len # 엑셀의 행 너비 조절하는 코드, 문자열중 가장 긴것의 길이로 이용함
-> ws.column_dimensions['C'].width = address_len
+> ws.column_dimensions['C'].width = address_len # ['C']는 엑셀 열번호 A B C D ...
 > ws.column_dimensions['E'].width = open_time_len
 > ws.column_dimensions['F'].width = latitude_len
 > ws.column_dimensions['G'].width = hardness_len
