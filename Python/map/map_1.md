@@ -67,9 +67,9 @@
 > wb.remove(wb['Sheet']) # 기본적으로 생성되어있던 Sheet 객체 삭제
 > ws.column_dimensions['B'].width = name_len # 엑셀의 행 너비 조절하는 코드, 문자열중 가장 긴것의 길이로 이용함
 > ws.column_dimensions['C'].width = address_len # ['C']는 엑셀 열번호 A B C D ...
-> ws.column_dimensions['E'].width = open_time_len
-> ws.column_dimensions['F'].width = latitude_len
-> ws.column_dimensions['G'].width = hardness_len
+> ws.column_dimensions['E'].width = open_time_len # 개방시간
+> ws.column_dimensions['F'].width = latitude_len # 위도 
+> ws.column_dimensions['G'].width = hardness_len # 경도
 > 
 > for row in dataframe_to_rows(df2, index=True, header=True): # 행 단위로 반복문 수행 (년도별 매출, 영업이익, 자산총계 등)
 >     if len(row) > 1:
