@@ -1,1 +1,69 @@
-start
+### 멀티캠퍼스 인공지능 자연어처리[NLP]기반 기업 데이터 분석.
+- 3주차 3일 (5/26)
+
+SQL 기초.
+---
+> ## 1. 기초 쿼리 실습.
+>> ``` MySQL
+>> use w3schools;
+>> 
+>> SELECT *
+>> FROM Customers
+>> ORDER BY CustomerName ASC;
+>> 
+>> SELECT CustomerName, Country FROM Customers;
+>> 
+>> SELECT * FROM Customers;
+>> 
+>> SELECT DISTINCT Country From Customers;
+>> 
+>> select * from customers where country = 'France';
+>> 
+>> select * from customers where ContactName like 'Mar%';
+>> 
+>> select * from customers where ContactName like '%et';
+>> 
+>> select * from customers where country = 'France' and CustomerName like 'La%';
+>> 
+>> select * from customers where country = 'Germany' or CustomerName like 'Ma%';
+>> 
+>> select * from customers where Not country = 'France';
+>> 
+>> select * from customers where country in ('France', 'spain');
+>> 
+>> select ProductName, price from products where price >= 15 and price <= 20;
+>> 
+>> select ProductName, price from products where ProductID in (select ProductID from products where price >= 15 and price <= 20);
+>> 
+>> select ProductName, price from products where price between 15 and 20;
+>> 
+>> select * from customers where PostalCode IS NULL;
+>> 
+>> select * from customers where PostalCode IS NOT NULL;
+>> 
+>> select * from customers order by CustomerName asc;
+>> 
+>> select * from products order by Price desc;
+>> 
+>> select * from customers order by CustomerName asc, Country desc;
+>> 
+>> select * from customers where country = 'UK' LIMIT 3;
+>> 
+>> select *
+>> ,
+>> CASE
+>> 	when price > 50 then '고'
+>>     when price >= 30 then '중'
+>>     else '저'
+>> end as 'Category'
+>> from products;
+>> 
+>> select COUNT(*) as country_count from customers where country = 'France';
+>> 
+>> select avg(price) as '평균' from products;
+>> 
+>> select sum(Quantity) from order_details;
+>> 
+>> select min(price) from products;
+>> select max(price) from products
+>> ```
