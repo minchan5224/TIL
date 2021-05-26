@@ -5,7 +5,7 @@ SQL 기초.
 
 ---
 > ## 1. 기초 쿼리 실습.
->> ```MySQL
+>> ``` SQL
 >> use w3schools;
 >> 
 >> SELECT *
