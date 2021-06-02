@@ -9,3 +9,6 @@
 > - 레지파토리 생성완료
 >
 > [git bash설치(윈도우)](https://git-scm.com/book/ko/v2/%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-Git-%EC%84%A4%EC%B9%98)
+> - 가능하면 vscode로 하라하심
+
+
