@@ -43,6 +43,10 @@
 > - 간단한 계산기..
 >> ```Python
 >> class FourCal:
+>>     def __init__(self, first, second):
+>>         self.first = first
+>>         self.second = second
+>>         
 >>     def setdata(self, first, second):
 >>         self.first = first
 >>         self.second = second
@@ -61,5 +65,18 @@
 >>     
 >>     def div(self):
 >>         result = self.first / self.second
+>>         return result
+>> 
+>> class MoreFourCal(FourCal):# 상속받음
+>>     def pow(self):
+>>         result = self.first ** self.second
+>>         return result
+>> 
+>> class SafeFourCal(FourCal):# 상속받음
+>>     def div(self): # 부모 클래스가 가지고있던 함수를 재정의함(메서드 오버라이딩)
+>>         if self.second != 0:
+>>             result = self.first / self.second
+>>         else :
+>>             result = 0
 >>         return result
 >> ```
