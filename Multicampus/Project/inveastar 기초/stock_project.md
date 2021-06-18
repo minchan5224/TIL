@@ -40,3 +40,26 @@
 > 만드는 것도 크게 어렵지는 않아서 다행.
 >  
 > 그리고 클래스 기초 다시 수업.
+> - 간단한 계산기..
+>> ```Python
+>> class FourCal:
+>>     def setdata(self, first, second):
+>>         self.first = first
+>>         self.second = second
+>>     
+>>     def add(self):
+>>         result = self.first + self.second
+>>         return result
+>>     
+>>     def sub(self):
+>>         result = self.first - self.second
+>>         return result
+>>     
+>>     def mul(self):
+>>         result = self.first * self.second
+>>         return result
+>>     
+>>     def div(self):
+>>         result = self.first / self.second
+>>         return result
+>> ```
